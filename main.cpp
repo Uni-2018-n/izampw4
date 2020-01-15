@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+void bla();
 
 
 int skadudle(){
@@ -8,4 +9,8 @@ int skadudle(){
 
 int main(){
   return 0;
+}
+
+void bla(){
+	cout<<"skipapap";
 }
