@@ -11,6 +11,9 @@ int main(){
   return 0;
 }
 
+int nothing(){
+  return -1;
+}
 void bla(){
 	cout<<"skipapap";
 }
