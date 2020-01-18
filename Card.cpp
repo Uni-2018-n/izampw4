@@ -1,30 +1,22 @@
-#include "Card.hpp"
+#include<iostream>
+#include"Card.hpp"
+using namespace std;
 
-Card::Card(string nam, int cos):
-name(nam), cost(cos){
-  isTapped=0;
+ public Card::Card(){
+  name="KOSTANTINOS";
+  int cost=0;
+  bool IsTapped=false;
 }
 
-////////////////////GreenCard
-GreenCard::GreenCard(string nam, int cos):
-Card(nam, cos){
-  attackBonus =0;
-  defenceBonus=0;
-  minimumHonour=0;
-  cardText ="random for now";
-  effectBonus=0;
-  effectCost=0;
-  durability=0;
-}
-
-Black::Black():public Card(){
+public Black::Black():Card(){
   IsRevealed=false;
   attack=0;
   defense=0;
   honor=0;
 }
 
-Stronghold::Stronghold():public Card(){
+public Stronghold::Stronghold():Card(){
   honor=0;
   money=69;
   InitialDefense=0;
+}
