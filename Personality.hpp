@@ -1,8 +1,8 @@
 #include "Card.hpp"
 
-class Personalitie:public BlackCard{
+class Personalities:public BlackCard{
 private:
 
 public:
-  Personalitie(string nam, personalities type);
+  Personalities(string nam, personalities type);
 };
