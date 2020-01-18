@@ -17,14 +17,22 @@ Card(nam, cos){
   durability=0;
 }
 
-Black::Black():public Card(){
+Black::Black(string nam, int cos):
+Card(nam, cos){
   IsRevealed=false;
   attack=0;
   defense=0;
   honor=0;
 }
 
-Stronghold::Stronghold():public Card(){
-  honor=0;
-  money=69;
-  InitialDefense=0;
+Holding::Holding(string nam, int cos):
+Black(nam, cos){
+
+}
+
+// Stronghold::Stronghold():
+// Card(){
+//   honor=0;
+//   money=69;
+//   InitialDefense=0;
+// }

@@ -33,27 +33,35 @@ class Item:public Follower{//eksoplismos prosopikothtas
 };
 
 class Black:public Card{
-  Black();
+private:
   bool IsRevealed;
   int attack;
   int defense;
   int honor;
+public:
+  Black(string nam, int cos);
 };
 
 class Personality:public Black{
+private:
+
+public:
   Personality();
-
-
 };
 
 class Holding:public Black{
-  Holdin();
+private:
+
+public:
+  Holding(string nam, int cos);
 
 };
 
-class Stronghold:public Black{
-  Stronghold();
-  int honor;
-  int money;
-  int InitialDefense;
-}
+// class Stronghold:public Black{
+// private:
+//   int honor;
+//   int money;
+//   int InitialDefense;
+// public:
+//   Stronghold();
+// };
