@@ -31,11 +31,7 @@ public:
 
 class BlackCard:public Card{
 protected:
-  bool IsRevealed;
-  int attack;
-  int defense;
-  int honor;
-  int harvest;
+  
 public:
   BlackCard(){};
 };

@@ -1,7 +1,8 @@
 #include "Card.hpp"
 
 class Holding:public BlackCard{
-private:
+protected:
+  int harvest;
 
 public:
   Holding(string nam, holdings type);
