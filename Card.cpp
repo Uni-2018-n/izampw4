@@ -1,11 +1,8 @@
-#include<iostream>
-#include"Card.hpp"
-using namespace std;
+#include "Card.hpp"
 
- public Card::Card(){
-  name="KOSTANTINOS";
-  int cost=0;
-  bool IsTapped=false;
+Card::Card(string nam, int cos):
+name(nam), cost(cos){
+  isTapped=0;
 }
 
 ////////////////////GreenCard
