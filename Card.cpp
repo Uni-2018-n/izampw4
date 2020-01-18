@@ -16,3 +16,15 @@ Card(nam, cos){
   effectCost=0;
   durability=0;
 }
+
+Black::Black():public Card(){
+  IsRevealed=false;
+  attack=0;
+  defense=0;
+  honor=0;
+}
+
+Stronghold::Stronghold():public Card(){
+  honor=0;
+  money=69;
+  InitialDefense=0;
