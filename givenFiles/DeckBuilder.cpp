@@ -33,28 +33,28 @@ list<GreenCard *> *DeckBuilder::createFateDeck()
 {
 	int i;
 	for (i = 0; i < NO_FOOTSOLDIER; i++)
-		green->push_back(new Footsoldier("Peasants"));
+		green->push_back(new Follower("Peasants", FOOTSOLDIER));
 	for (i = 0; i < NO_ARCHER; i++)
-		green->push_back(new Archer("Elite Troops"));
+		green->push_back(new Follower("Elite Troops", ARCHER));
 	for (i = 0; i < NO_SIEGER; i++)
-		green->push_back(new Sieger("Immortal Bushi"));
+		green->push_back(new Follower("Immortal Bushi", SIEGER));
 	for (i = 0; i < NO_CAVALRY; i++)
-		green->push_back(new Cavalry("Unicorn Horses"));
+		green->push_back(new Follower("Unicorn Horses", CAVALRY));
 	for (i = 0; i < NO_NAVAL; i++)
-		green->push_back(new Atakebune("Yomi Ships"));
+		green->push_back(new Follower("Yomi Ships", NAVAL));
 	for (i = 0; i < NO_BUSHIDO; i++)
-		green->push_back(new Bushido("7 Samurai"));
+		green->push_back(new Follower("7 Samurai", BUSHIDO));
 
 	for (i = 0; i < NO_KATANA; i++)
-		green->push_back(new Katana("Daijtso"));
+		green->push_back(new Item("Daijtso", KATANA));
 	for (i = 0; i < NO_BOW; i++)
-		green->push_back(new Bow("Yumi"));
+		green->push_back(new Item("Yumi", BOW));
 	for (i = 0; i < NO_SPEAR; i++)
-		green->push_back(new Spear("Kama"));
+		green->push_back(new Item("Kama", SPEAR));
 	for (i = 0; i < NO_NINJATO; i++)
-		green->push_back(new Ninjato("Butterfly Dagger"));
+		green->push_back(new Item("Butterfly Dagger", NINJATO));
 	for (i = 0; i < NO_WAKIZASHI; i++)
-		green->push_back(new Wakizashi("Kusanagi"));
+		green->push_back(new Item("Kusanagi", WAKIZASHI));
 
 	return green;
 }
