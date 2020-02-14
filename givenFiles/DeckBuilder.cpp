@@ -65,31 +65,31 @@ list<BlackCard *> *DeckBuilder::createDynastyDeck()
 	//Create Personalities
 	//NO_DEFENSIVE 10
 	for (i = 0; i < NO_DEFENSIVE; i++)
-		black->push_back(new Defender("Footsoldiers"));
+		black->push_back(new Personalities("Footsoldiers",DEFENDER));
 	//NO_ATTACKING 10
 	for (i = 0; i < NO_ATTACKING; i++)
-		black->push_back(new Attacker("Steadfast bushi"));
+		black->push_back(new Personalities("Steadfast bushi",ATTACKER));
 	//NO_SHOGUN	2
-	black->push_back(new Shogun("Akodo Kaneka"));
-	black->push_back(new Shogun("Isawa Shi en"));
+	black->push_back(new Personalities("Akodo Kaneka",SHOGUN));
+	black->push_back(new Personalities("Isawa Shi en",SHOGUN));
 	//NO_CHANCELLOR 2
-	black->push_back(new Chancellor("Hida Shozen"));
-	black->push_back(new Chancellor("Mirimuto Enishi"));
+	black->push_back(new Personalities("Hida Shoze ",CHANCELLOR));
+	black->push_back(new Personalities("Mirimuto Enishi",CHANCELLOR));
 	//NO_CHAMPION 1
-	black->push_back(new Champion("Hida Kisada"));
+	black->push_back(new Personalities("Hida Kisada",CHAMPION));
 	//Create holdings
 	for (i = 0; i < NO_PLAIN; i++)
-		black->push_back(new Plain("Rice Fields"));
+		black->push_back(new Holdings("Rice Fields",PLAIN));
 	for (i = 0; i < NO_FARMS; i++)
-		black->push_back(new Farmland("Fish Farms"));
+		black->push_back(new Holdings("Fish Farms",FARMLAND));
 	for (i = 0; i < NO_MINE; i++)
-		black->push_back(new Mine("Ashio Copper Mine"));
+		black->push_back(new Holdings("Ashio Copper Mine",MINE));
 	for (i = 0; i < NO_GOLD_MINE; i++)
-		black->push_back(new GoldMine("Konomai Gold Mine"));
+		black->push_back(new Holdings("Konomai Gold Mine",GOLD_MINE));
 	for (i = 0; i < NO_CRYSTAL_MINE; i++)
-		black->push_back(new CrystalMine("Ichinokawa Crystal Mine"));
+		black->push_back(new Holdings("Ichinokawa Crystal Mine",CRYSTAL_MINE));
 	for (i = 0; i < NO_SOLO; i++)
-		black->push_back(new GiftsandFavour("Gifts and Favors"));
+		black->push_back(new Holdings("Gifts and Favors",SOLO));
 
 	return black;
 }
