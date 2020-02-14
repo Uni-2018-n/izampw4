@@ -28,5 +28,4 @@ Holding::Holding(string nam, holdings type){
     cost=12;
     harvestValue=6;
   }
-
 }

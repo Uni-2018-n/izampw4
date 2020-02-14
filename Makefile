@@ -1,4 +1,4 @@
-SOURCE = *.cpp givenFiles/*.cpp
+SOURCE = *.cpp givenFiles/DeckBuilder.cpp
 ITEM = main
 
 run : compile

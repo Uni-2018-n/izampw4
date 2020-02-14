@@ -19,11 +19,11 @@ DeckBuilder::~DeckBuilder()
 		delete *it;
 		it = black->begin();
 	}
-	for (it = green->begin(); it != green->end(); it++)
+	for (it2 = green->begin(); it2 != green->end(); it2++)
 	{
-		green->remove((*it));
-		delete *it;
-		it = green->begin();
+		green->remove((*it2));
+		delete *it2;
+		it2 = green->begin();
 	}
 	delete black;
 	delete green;

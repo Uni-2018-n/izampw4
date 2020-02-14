@@ -27,6 +27,7 @@ protected:
   int effectCost;
 
   string cardText;//nothing happens here
+
 public:
   GreenCard(){};
 };
@@ -35,6 +36,7 @@ public:
 class BlackCard:public Card{
 protected:
   int IsRevealed;
+
 public:
   BlackCard(){};
 };

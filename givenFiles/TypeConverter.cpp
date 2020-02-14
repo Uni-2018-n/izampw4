@@ -4,8 +4,8 @@ TypeConverter::TypeConverter() {}
 
 void TypeConverter::getCorrectType(BlackCard *card, Personality **person, Holding **hold)
 {
-	if (card->getType() == PERSONALITY) {
-		(*person) = getPersonality(card);
+	if (card->getType() == ATTACKER ||) {
+		(*person) = getPersonality(card);//ATTACKER, DEFENDER, SHOGUN, CHANCELLOR, CHAMPION
 		(*hold) = NULL;
 	}
 	else {
@@ -17,7 +17,7 @@ void TypeConverter::getCorrectType(BlackCard *card, Personality **person, Holdin
 void TypeConverter::getCorrectType(GreenCard *card, Follower **follow, Item **item)
 {
 	if (card->getType() == FOLLOWER) {
-		(*follow) = getFollower(card);
+		(*follow) = getFollower(card);//FOOTSOLDIER, ARCHER, SIEGER, CAVALRY, NAVAL, BUSHIDO
 		(*item) = NULL;
 	}
 	else {
