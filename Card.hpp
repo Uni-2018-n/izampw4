@@ -15,6 +15,10 @@ protected:
   bool isTapped;
 public:
   Card(){};
+
+  string getname(){
+    return name;
+  }
 };
 
 class GreenCard:public Card{

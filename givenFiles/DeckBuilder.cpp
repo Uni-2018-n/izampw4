@@ -43,7 +43,7 @@ list<GreenCard *> *DeckBuilder::createFateDeck()
 	for (i = 0; i < NO_NAVAL; i++)
 		green->push_back(new Follower("Yomi Ships", NAVAL));
 	for (i = 0; i < NO_BUSHIDO; i++)
-		green->push_back(new Follower("7 Samurai", BUSHIDO));
+		green->push_back(new Follower("Samurai", BUSHIDO));
 
 	for (i = 0; i < NO_KATANA; i++)
 		green->push_back(new Item("Daijtso", KATANA));
