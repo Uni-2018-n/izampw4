@@ -79,17 +79,17 @@ list<BlackCard *> *DeckBuilder::createDynastyDeck()
 	black->push_back(new Personalities("Hida Kisada",CHAMPION));
 	//Create holdings
 	for (i = 0; i < NO_PLAIN; i++)
-		black->push_back(new Holdings("Rice Fields",PLAIN));
+		black->push_back(new Holding("Rice Fields",PLAIN));
 	for (i = 0; i < NO_FARMS; i++)
-		black->push_back(new Holdings("Fish Farms",FARMLAND));
+		black->push_back(new Holding("Fish Farms",FARMS));
 	for (i = 0; i < NO_MINE; i++)
-		black->push_back(new Holdings("Ashio Copper Mine",MINE));
+		black->push_back(new Holding("Ashio Copper Mine",MINE));
 	for (i = 0; i < NO_GOLD_MINE; i++)
-		black->push_back(new Holdings("Konomai Gold Mine",GOLD_MINE));
+		black->push_back(new Holding("Konomai Gold Mine",GOLD_MINE));
 	for (i = 0; i < NO_CRYSTAL_MINE; i++)
-		black->push_back(new Holdings("Ichinokawa Crystal Mine",CRYSTAL_MINE));
+		black->push_back(new Holding("Ichinokawa Crystal Mine",CRYSTAL_MINE));
 	for (i = 0; i < NO_SOLO; i++)
-		black->push_back(new Holdings("Gifts and Favors",SOLO));
+		black->push_back(new Holding("Gifts and Favors",SOLO));
 
 	return black;
 }
