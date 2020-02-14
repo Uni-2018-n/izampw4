@@ -1,3 +1,5 @@
+#ifndef CARD_HPP
+
 #include <iostream>
 using namespace std;
 
@@ -31,7 +33,10 @@ public:
 
 class BlackCard:public Card{
 protected:
-  
+
 public:
   BlackCard(){};
 };
+
+#define CARD_HPP
+#endif

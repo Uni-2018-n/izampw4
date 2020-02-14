@@ -8,6 +8,6 @@ using namespace std;
 
 
 int main(){
-
+	cout << "skrt" << endl;
 	return 0;
 }
