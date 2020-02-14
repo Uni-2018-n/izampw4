@@ -22,6 +22,7 @@ protected:
   int attackBonus;
   int defenceBonus;
   int minimumHonour;
+
   int effectBonus;
   int effectCost;
 
@@ -33,7 +34,7 @@ public:
 
 class BlackCard:public Card{
 protected:
-
+  int IsRevealed;
 public:
   BlackCard(){};
 };

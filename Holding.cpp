@@ -6,27 +6,27 @@ Holding::Holding(string nam, holdings type){
   IsRevealed = false;
   if(type==SOLO){
     cost=2;
-    harvest=2;
+    harvestValue=2;
   }
   else if(type == PLAIN){
     cost=2;
-    harvest=2;
+    harvestValue=2;
   }
   else if(type==FARMS){
     cost=3;
-    harvest=4;
+    harvestValue=4;
   }
   else if (type==MINE){
     cost=5;
-    harvest=3;
+    harvestValue=3;
   }
   else if (type==GOLD_MINE){
     cost=7;
-    harvest=3;
+    harvestValue=3;
   }
   else if(type==CRYSTAL_MINE){
     cost=12;
-    harvest=6;
+    harvestValue=6;
   }
-  
+
 }

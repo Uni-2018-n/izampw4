@@ -9,11 +9,11 @@
 #include <ctime>
 #include <cstdlib>
 
-#include "Card.hpp"
-#include "Personality.hpp"
-#include "Holding.hpp"
-#include "Follower.hpp"
-#include "Item.hpp"
+#include "../Card.hpp"
+#include "../Personality.hpp"
+#include "../Holding.hpp"
+#include "../Follower.hpp"
+#include "../Item.hpp"
 
 #define DECKSIZE          40
 #define MAXDECKSIZE       60

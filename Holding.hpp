@@ -5,8 +5,9 @@
 
 class Holding:public BlackCard{
 protected:
-  int IsRevealed;
-  int harvest;
+  int harvestValue;
+  Holding* upperHolding;
+  Holding* subHolding;
 
 public:
   Holding(string nam, holdings type);

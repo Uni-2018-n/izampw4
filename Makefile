@@ -1,4 +1,4 @@
-SOURCE = *.cpp
+SOURCE = *.cpp givenFiles/*.cpp
 ITEM = main
 
 run : compile

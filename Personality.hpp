@@ -6,10 +6,12 @@
 
 class Personalities:public BlackCard{
 protected:
-  bool IsRevealed;
   int attack;
   int defense;
   int honor;
+  bool isDead;
+
+  GreenCard* possible_green;
 
 public:
   Personalities(string nam, personalities type);
