@@ -65,18 +65,18 @@ list<BlackCard *> *DeckBuilder::createDynastyDeck()
 	//Create Personalities
 	//NO_DEFENSIVE 10
 	for (i = 0; i < NO_DEFENSIVE; i++)
-		black->push_back(new Personalities("Footsoldiers",DEFENDER));
+		black->push_back(new Personality("Footsoldiers",DEFENDER));
 	//NO_ATTACKING 10
 	for (i = 0; i < NO_ATTACKING; i++)
-		black->push_back(new Personalities("Steadfast bushi",ATTACKER));
+		black->push_back(new Personality("Steadfast bushi",ATTACKER));
 	//NO_SHOGUN	2
-	black->push_back(new Personalities("Akodo Kaneka",SHOGUN));
-	black->push_back(new Personalities("Isawa Shi en",SHOGUN));
+	black->push_back(new Personality("Akodo Kaneka",SHOGUN));
+	black->push_back(new Personality("Isawa Shi en",SHOGUN));
 	//NO_CHANCELLOR 2
-	black->push_back(new Personalities("Hida Shoze ",CHANCELLOR));
-	black->push_back(new Personalities("Mirimuto Enishi",CHANCELLOR));
+	black->push_back(new Personality("Hida Shoze ",CHANCELLOR));
+	black->push_back(new Personality("Mirimuto Enishi",CHANCELLOR));
 	//NO_CHAMPION 1
-	black->push_back(new Personalities("Hida Kisada",CHAMPION));
+	black->push_back(new Personality("Hida Kisada",CHAMPION));
 	//Create holdings
 	for (i = 0; i < NO_PLAIN; i++)
 		black->push_back(new Holding("Rice Fields",PLAIN));

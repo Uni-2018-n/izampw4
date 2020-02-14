@@ -4,7 +4,7 @@
 #endif
 
 
-class Personalities:public BlackCard{
+class Personality:public BlackCard{
 protected:
   int attack;
   int defense;
@@ -14,5 +14,5 @@ protected:
   GreenCard* possible_green;
 
 public:
-  Personalities(string nam, personalities type);
+  Personality(string nam, personalities type);
 };

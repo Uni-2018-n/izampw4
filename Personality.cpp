@@ -1,6 +1,6 @@
 #include "Personality.hpp"
 
-Personalities::Personalities(string nam, personalities type){
+Personality::Personality(string nam, personalities type){
   name = nam;
   isTapped = false;
   IsRevealed = false;
