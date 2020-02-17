@@ -21,7 +21,7 @@ void fateDeck::printfDeck(){
   cout << (*it)->getname() << endl;
 }
 
-void dynastyDeck::dynastyDeck(){
+dynastyDeck::dynastyDeck(){
   DeckBuilder* deck;
   deck = new DeckBuilder();
   list<BlackCard*>* dynastyDeck=deck->createDynastyDeck();
