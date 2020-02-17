@@ -1,39 +1,23 @@
 #include "Player.hpp"
-#include <iostream>
-#include <list>
-#include "givenFiles/DeckBuilder.hpp"
 
-fateDeck::fateDeck(){
-  DeckBuilder* deck;
-  deck = new DeckBuilder();
-  list<GreenCard*>* fatedeck=deck->createFateDeck();
-  deck->deckShuffler(fatedeck);
-
-}
-
-fateDeck::~fateDeck(){
-  cout<<"destructor for fateDeck"<<endl;
-}
-
-void fateDeck::printfDeck(){
-  list<GreenCard *>::iterator it;
-  for(it = fatedeck->begin(); it != fatedeck->end(); it++)
-  cout << (*it)->getname() << endl;
-}
-
-dynastyDeck::dynastyDeck(){
-  DeckBuilder* deck;
-  deck = new DeckBuilder();
-  list<BlackCard*>* dynastyDeck=deck->createDynastyDeck();
+Player::Player(DeckBuilder* deck){
+  fateDeck = deck->createFateDeck();
+  deck->deckShuffler(fateDeck);
+  dynastyDeck = deck->createDynastyDeck();
   deck->deckShuffler(dynastyDeck);
+  cout << "Constructor Player" << endl;
 }
 
-dynastyDeck::~dynastyDeck(){
-  cout<<"destructor for dynasty"<<endl;
-};
+Player::~Player(){
+  cout << "Destructor Player" << endl;
+}
 
-void dynastyDeck::printdDeck(){
+void Player::print_decks(){
+  list<GreenCard *>::iterator it;
+  for(it = fateDeck->begin(); it != fateDeck->end(); it++)
+  cout << (*it)->getname() << endl;
+
   list<BlackCard *>::iterator it2;
-	 for(it2 = dynastydeck->begin(); it2 != dynastydeck->end(); it2++)
-	 cout << (*it2)->getname() << endl;
+  for(it2 = dynastyDeck->begin(); it2 != dynastyDeck->end(); it2++)
+  cout << (*it2)->getname() << endl;
 }
