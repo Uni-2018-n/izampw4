@@ -2,6 +2,7 @@
 
 Follower::Follower(string nam, followers type){
   name = nam;
+  category="follower";
   isTapped = false;
   if(type== FOOTSOLDIER){
     cost= 0;

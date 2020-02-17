@@ -1,7 +1,7 @@
 #include "DeckBuilder.hpp"
 
 using namespace std;
-
+//TODO allakso deckbuilder oste na pernaei san string to eidos kartas
 DeckBuilder::DeckBuilder()
 {
 	black = new list<BlackCard *>();

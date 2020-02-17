@@ -2,6 +2,7 @@
 
 Item::Item(string nam, items type){
   name = nam;
+  category="item";
   isTapped= false;
   if(type == KATANA){
     cost= 0;
