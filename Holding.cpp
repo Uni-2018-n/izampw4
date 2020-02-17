@@ -1,7 +1,8 @@
 #include "Holding.hpp"
 
-Holding::Holding(string nam, holdings type){
+Holding::Holding(string nam,holdings type){
   name = nam;
+  category="holding";
   isTapped = false;
   IsRevealed = false;
   if(type==SOLO){

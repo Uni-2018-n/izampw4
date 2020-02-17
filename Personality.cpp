@@ -2,6 +2,7 @@
 
 Personality::Personality(string nam, personalities type){
   name = nam;
+  category="personality";
   isTapped = false;
   IsRevealed = false;
   if(type == ATTACKER){
