@@ -19,29 +19,6 @@ public:
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //dynastyDeck == class , dynastydeck==deck
 class dynastyDeck{
 public:
