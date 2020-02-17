@@ -1,3 +1,7 @@
+#ifndef _PLAYER_HPP_
+#define _PLAYER_HPP_
+
+
 #include "givenFiles/DeckBuilder.hpp"
 
 
@@ -9,4 +13,7 @@ public:
   Player(DeckBuilder* deck);
   ~Player();
   void print_decks();
-}
+};
+
+
+#endif

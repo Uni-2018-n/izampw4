@@ -1,3 +1,6 @@
+#ifndef _HAND_HPP_
+#define _HAND_HPP_
+
 #include "givenFiles/DeckBuilder.hpp"
 
 
@@ -11,4 +14,5 @@ public:
   Hand();
   void add_to_hand(GreenCard* new_card);
   void add_to_hand(BlackCard* new_card);
-}
+};
+#endif

@@ -9,8 +9,6 @@
 #include <ctime>
 #include <cstdlib>
 
-#include "../Hand.hpp"
-//#include "../Player.hpp"
 #include "../Card.hpp"
 #include "../Personality.hpp"
 #include "../Holding.hpp"
