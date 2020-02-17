@@ -1,4 +1,4 @@
-SOURCE = *.cpp givenFiles/DeckBuilder.cpp	Player.cpp	Card.cpp
+SOURCE = *.cpp givenFiles/DeckBuilder.cpp
 ITEM = main
 
 run : compile

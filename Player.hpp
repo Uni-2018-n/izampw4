@@ -15,5 +15,38 @@ public:
   fateDeck();
   ~fateDeck();
 	list<GreenCard*>* fatedeck;
-  void printDeck();
+  void printfDeck();
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//dynastyDeck == class , dynastydeck==deck
+class dynastyDeck{
+public:
+  dynastyDeck();
+  ~dynastyDeck();
+  list<BlackCard*>* dynastydeck;
+  void printdDeck();
 };
