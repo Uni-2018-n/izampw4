@@ -3,8 +3,10 @@
 Player::Player(DeckBuilder& deck){
   fateDeck = deck.createFateDeck();
   deck.deckShuffler(fateDeck);
+  cout << "test 1"<< endl;
   dynastyDeck = deck.createDynastyDeck();
   deck.deckShuffler(dynastyDeck);
+  provinces = new list<BlackCard *>();
   for(int i=0;i<4;i++){
     provinces->push_back(dynastyDeck->front());
     dynastyDeck->pop_front();

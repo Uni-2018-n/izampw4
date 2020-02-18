@@ -1,6 +1,11 @@
 #include "Hand.hpp"
 
 Hand::Hand(list<GreenCard*>* fateDeck){
+  Followers= new list<GreenCard *>();
+  Items= new list<GreenCard *>();
+  Personalities = new list<BlackCard *>();
+  Holdings= new list<BlackCard *>();
+
   add_to_hand(fateDeck->front());
   fateDeck->pop_front();
   add_to_hand(fateDeck->front());
