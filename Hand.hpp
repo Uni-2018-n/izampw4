@@ -3,7 +3,7 @@
 
 #include "givenFiles/DeckBuilder.hpp"
 
-class Hand{
+class Hand{//TODO must hold 1-6 cards
 private:
   list<GreenCard*>* Followers;
   list<GreenCard*>* Items;
