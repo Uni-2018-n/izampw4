@@ -19,7 +19,7 @@ int main(){
 	//
 	 list<GreenCard*>* tempG=deck->createFateDeck();
 	//
-  Player a(deck);
+  Player a(*deck);
   a.print_decks();
 	// deck->deckShuffler(tempG);
 	//

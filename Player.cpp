@@ -1,10 +1,10 @@
 #include "Player.hpp"
 
-Player::Player(DeckBuilder* deck){
-  fateDeck = deck->createFateDeck();
-  deck->deckShuffler(fateDeck);
-  dynastyDeck = deck->createDynastyDeck();
-  deck->deckShuffler(dynastyDeck);
+Player::Player(DeckBuilder& deck){
+  fateDeck = deck.createFateDeck();
+  deck.deckShuffler(fateDeck);
+  dynastyDeck = deck.createDynastyDeck();
+  deck.deckShuffler(dynastyDeck);
   for(int i=0;i<4;i++){
     provinces->push_back(dynastyDeck->front());
     dynastyDeck->pop_front();

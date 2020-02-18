@@ -1,4 +1,4 @@
-#include "givenFiles/DeckBuilder.hpp"
+#include "Stronghold.hpp"
 
 Stronghold::Stronghold(){
   cout<<" Stronghold created"<< endl;
