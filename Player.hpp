@@ -11,6 +11,7 @@ private:
   Stronghold a;
   list<GreenCard*>* fateDeck;
   list<BlackCard*>* dynastyDeck;
+  list<BlackCard*>* availableDynastyCards;
   list<Provinces*>* provinces;
   Hand* currHand;
   int numOfProv;

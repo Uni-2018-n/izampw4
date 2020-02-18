@@ -5,7 +5,7 @@ using namespace std;
 #include "Card.hpp"
 
 
-//TODO 2.2,STRONGHOLD
+//TODO 1.1, 2.2
 int main(){
 	DeckBuilder* deck= new DeckBuilder();
 	Player player_1(*deck);
