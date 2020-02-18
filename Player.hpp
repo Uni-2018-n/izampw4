@@ -10,13 +10,12 @@ private:
   list<GreenCard*>* fateDeck;
   list<BlackCard*>* dynastyDeck;
   list<BlackCard*>* provinces;
+  Stronghold a;
   int numofprov;
 public:
   Player(DeckBuilder* deck);
   ~Player();
   void print_decks();
 };
-
-class Played
 
 #endif

@@ -5,6 +5,11 @@ Player::Player(DeckBuilder* deck){
   deck->deckShuffler(fateDeck);
   dynastyDeck = deck->createDynastyDeck();
   deck->deckShuffler(dynastyDeck);
+  for(int i=0;i<4;i++){
+    provinces->push_back(dynastyDeck->front());
+    dynastyDeck->pop_front();
+  }
+  numofprov=4;
   cout << "Constructor Player" << endl;
 }
 
