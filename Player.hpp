@@ -9,6 +9,8 @@ class Player{
 private:
   list<GreenCard*>* fateDeck;
   list<BlackCard*>* dynastyDeck;
+  list<BlackCard*>* provinces;
+  int numofprov;
 public:
   Player(DeckBuilder* deck);
   ~Player();
