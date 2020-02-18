@@ -28,3 +28,9 @@ void Player::print_decks(){
   for(it2 = dynastyDeck->begin(); it2 != dynastyDeck->end(); it2++)
   cout << (*it2)->getname() << endl;
 }
+
+void Player::untapEverything(){
+  list<BlackCard *>::iterator it2;
+  for(it2 = provinces->begin(); it2 != provinces->end(); it2++)
+  (*it2)->setIsRevealed(false);
+}

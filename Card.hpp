@@ -1,4 +1,5 @@
 #ifndef CARD_HPP
+#define CARD_HPP
 
 #include <iostream>
 using namespace std;
@@ -16,7 +17,7 @@ protected:
   bool isTapped;
 public:
   Card(){};
-
+  void setIsTapped(bool a);
   string getname(){
     return name;
   }
@@ -47,7 +48,7 @@ protected:
 
 public:
   BlackCard(){};
+  void setIsRevealed(bool a);
 };
 
-#define CARD_HPP
 #endif

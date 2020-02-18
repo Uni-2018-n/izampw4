@@ -17,6 +17,7 @@ public:
   Player(DeckBuilder* deck);
   ~Player();
   void print_decks();
+  void untapEverything();
 };
 
 #endif
