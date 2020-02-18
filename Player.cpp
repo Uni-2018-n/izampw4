@@ -14,9 +14,10 @@ Player::~Player(){
 
 void Player::print_decks(){
   list<GreenCard *>::iterator it;
+  cout<<"######### NOW PRINTING FATE DECK ##########"<<endl;
   for(it = fateDeck->begin(); it != fateDeck->end(); it++)
   cout << (*it)->getname() << endl;
-
+  cout<<"######### NOW PRINTING DYNASTY DECK #########"<<endl;
   list<BlackCard *>::iterator it2;
   for(it2 = dynastyDeck->begin(); it2 != dynastyDeck->end(); it2++)
   cout << (*it2)->getname() << endl;
