@@ -3,7 +3,6 @@
 
 #include "givenFiles/DeckBuilder.hpp"
 
-
 class Hand{
 private:
   list<GreenCard*>* Followers;
@@ -12,8 +11,8 @@ private:
   list<BlackCard*>* Holdings;
 public:
   Hand(list<GreenCard*>* fateDeck);
-  void add_to_hand(GreenCard* new_card);
-  void add_to_hand(BlackCard* new_card);
+  void addToHand(GreenCard* new_card);
+  void addToHand(BlackCard* new_card);
   void print();
 };
 #endif

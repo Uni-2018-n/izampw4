@@ -4,11 +4,10 @@
 #endif
 
 class Holding:public BlackCard{
-protected:
+private:
   int harvestValue;
   Holding* upperHolding;
   Holding* subHolding;
-
 public:
   Holding(string nam, holdings type);
 };

@@ -5,14 +5,12 @@
 
 
 class Personality:public BlackCard{
-protected:
+private:
   int attack;
   int defense;
   int honor;
   bool isDead;
-
-  GreenCard* possible_green;
-
+  GreenCard* possibleGreen;
 public:
   Personality(string nam, personalities type);
 };

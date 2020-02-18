@@ -16,14 +16,10 @@ protected:
   int cost;
   bool isTapped;
 public:
-  Card(){};
+  Card();
   void setIsTapped(bool a);
-  string getname(){
-    return name;
-  }
-  string getCategory(){
-    return category;
-  }
+  string getname();
+  string getCategory();
 };
 
 class GreenCard:public Card{
@@ -35,19 +31,17 @@ protected:
   int effectBonus;
   int effectCost;
 
-  string cardText;//nothing happens here
-
+  string cardText;
 public:
-  GreenCard(){};
+  GreenCard();
 };
 
 
 class BlackCard:public Card{
 protected:
   int IsRevealed;
-
 public:
-  BlackCard(){};
+  BlackCard();
   void setIsRevealed(bool a);
 };
 

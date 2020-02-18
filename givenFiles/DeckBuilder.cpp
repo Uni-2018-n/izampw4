@@ -1,16 +1,13 @@
 #include "DeckBuilder.hpp"
 
 using namespace std;
-//TODO allakso deckbuilder oste na pernaei san string to eidos kartas
-DeckBuilder::DeckBuilder()
-{
+DeckBuilder::DeckBuilder(){
 	black = new list<BlackCard *>();
 	green = new list<GreenCard *>();
 	srand(unsigned(time(NULL)));
 }
 
-DeckBuilder::~DeckBuilder()
-{
+DeckBuilder::~DeckBuilder(){
 	list<BlackCard *>::iterator it;
 	list<GreenCard *>::iterator it2;
 	for (it = black->begin(); it != black->end(); it++)
@@ -29,8 +26,7 @@ DeckBuilder::~DeckBuilder()
 	delete green;
 }
 
-list<GreenCard *> *DeckBuilder::createFateDeck()
-{
+list<GreenCard *> *DeckBuilder::createFateDeck(){
 	int i;
 	for (i = 0; i < NO_FOOTSOLDIER; i++)
 		green->push_back(new Follower("Peasants", FOOTSOLDIER));
@@ -59,8 +55,7 @@ list<GreenCard *> *DeckBuilder::createFateDeck()
 	return green;
 }
 
-list<BlackCard *> *DeckBuilder::createDynastyDeck()
-{
+list<BlackCard *> *DeckBuilder::createDynastyDeck(){
 	int i;
 	//Create Personalities
 	//NO_DEFENSIVE 10
@@ -94,8 +89,7 @@ list<BlackCard *> *DeckBuilder::createDynastyDeck()
 	return black;
 }
 
-void DeckBuilder::deckShuffler(list<BlackCard *> *black)
-{
+void DeckBuilder::deckShuffler(list<BlackCard *> *black){
 	vector<BlackCard *> vect;
 	list<BlackCard *>::iterator it;
 	for (it = black->begin(); it != black->end(); it++)
@@ -110,8 +104,7 @@ void DeckBuilder::deckShuffler(list<BlackCard *> *black)
 		black->push_back((*it2));
 }
 
-void DeckBuilder::deckShuffler(list<GreenCard *> *green)
-{
+void DeckBuilder::deckShuffler(list<GreenCard *> *green){
 	vector<GreenCard *> vect;
 	list<GreenCard *>::iterator it;
 	for (it = green->begin(); it != green->end(); it++)
