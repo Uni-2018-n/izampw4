@@ -5,10 +5,10 @@
 class Stronghold:public BlackCard{
 public:
   Stronghold();
+  void print();
 private:
   int honour=5;
   int defense=5;
   int harvest=5;
 };
-
 #endif

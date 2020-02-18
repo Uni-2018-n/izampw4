@@ -3,7 +3,6 @@
 Player::Player(DeckBuilder& deck){
   fateDeck = deck.createFateDeck();
   deck.deckShuffler(fateDeck);
-  cout << "test 1"<< endl;
   dynastyDeck = deck.createDynastyDeck();
   deck.deckShuffler(dynastyDeck);
   provinces = new list<BlackCard *>();
@@ -29,6 +28,21 @@ void Player::print_decks(){
   list<BlackCard *>::iterator it2;
   for(it2 = dynastyDeck->begin(); it2 != dynastyDeck->end(); it2++)
   cout << (*it2)->getname() << endl;
+}
+
+void Player::printCurrState(){
+  cout << "Stronghold: " << endl;
+  a.print();
+
+  cout << "Provinces: " << numofprov << endl;
+  list<BlackCard *>::iterator it2;
+  for(it2 = provinces->begin(); it2 != provinces->end(); it2++)
+  cout << (*it2)->getname() << "     ";
+  cout << endl;
+
+  cout << "Curr Hand: " << endl;
+  currHand->print();
+
 }
 
 void Player::untapEverything(){

@@ -18,6 +18,7 @@ public:
   ~Player();
   void print_decks();
   void untapEverything();
+  void printCurrState();
 };
 
 #endif

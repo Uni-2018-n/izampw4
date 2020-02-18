@@ -7,34 +7,18 @@ using namespace std;
 
 //TODO 2.2,STRONGHOLD
 int main(){
+	DeckBuilder* deck= new DeckBuilder();
+	Player player_1(*deck);
+	player_1.printCurrState();
 
-	// fateDeck a;
-	// a.printDeck();
+	cout << endl << endl;
 
+	Player player_2(*deck);
+	player_2.printCurrState();
 
-	 DeckBuilder* deck;
-	//
-	 deck = new DeckBuilder();
-	//
-	//
-	 list<GreenCard*>* tempG=deck->createFateDeck();
-	//
-  Player a(*deck);
-  a.print_decks();
-	// deck->deckShuffler(tempG);
-	//
-	//
-	// list<GreenCard *>::iterator it;
-	// for(it = tempG->begin(); it != tempG->end(); it++)
-	// cout << (*it)->getname() << endl;
-	// cout << endl << endl;
-	// list<BlackCard*>* tempB=deck->createDynastyDeck();
-	//
-	// deck->deckShuffler(tempB);
-	//
-	//
-	// list<BlackCard *>::iterator it2;
-	// for(it2 = tempB->begin(); it2 != tempB->end(); it2++)
-	// cout << (*it2)->getname() << endl;
-	// return 0;
+	cout << endl << endl;
+
+	Player player_3(*deck);
+	player_3.printCurrState();
+	return 0;
 }
