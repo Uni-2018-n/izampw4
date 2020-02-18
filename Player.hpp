@@ -3,7 +3,7 @@
 
 
 #include "givenFiles/DeckBuilder.hpp"
-
+#include "Hand.hpp"
 
 class Player{
 private:
@@ -11,6 +11,7 @@ private:
   list<BlackCard*>* dynastyDeck;
   list<BlackCard*>* provinces;
   Stronghold a;
+  Hand* currHand;
   int numofprov;
 public:
   Player(DeckBuilder* deck);

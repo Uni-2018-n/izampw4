@@ -11,7 +11,7 @@ private:
   list<BlackCard*>* Personalities;
   list<BlackCard*>* Holdings;
 public:
-  Hand();
+  Hand(list<GreenCard*>* fateDeck);
   void add_to_hand(GreenCard* new_card);
   void add_to_hand(BlackCard* new_card);
 };

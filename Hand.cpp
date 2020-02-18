@@ -1,7 +1,14 @@
 #include "Hand.hpp"
 
-Hand::Hand(){
-
+Hand::Hand(list<GreenCard*>* fateDeck){
+  add_to_hand(fateDeck->front());
+  fateDeck->pop_front();
+  add_to_hand(fateDeck->front());
+  fateDeck->pop_front();
+  add_to_hand(fateDeck->front());
+  fateDeck->pop_front();
+  add_to_hand(fateDeck->front());
+  fateDeck->pop_front();
 }
 
 void Hand::add_to_hand(GreenCard* new_card){

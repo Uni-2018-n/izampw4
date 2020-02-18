@@ -10,6 +10,7 @@ Player::Player(DeckBuilder* deck){
     dynastyDeck->pop_front();
   }
   numofprov=4;
+  currHand = new Hand(fateDeck);
   cout << "Constructor Player" << endl;
 }
 
