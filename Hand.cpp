@@ -1,7 +1,7 @@
 #include "Hand.hpp"
 
 Hand::Hand(){
-  
+
 }
 
 void Hand::add_to_hand(GreenCard* new_card){

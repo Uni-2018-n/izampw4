@@ -7,17 +7,20 @@ using namespace std;
 
 //TODO 2.2,STRONGHOLD
 int main(){
+
 	// fateDeck a;
 	// a.printDeck();
 
 
-	// DeckBuilder* deck;
+	 DeckBuilder* deck;
 	//
-	// deck = new DeckBuilder();
+	 deck = new DeckBuilder();
 	//
 	//
-	// list<GreenCard*>* tempG=deck->createFateDeck();
+	 list<GreenCard*>* tempG=deck->createFateDeck();
 	//
+  Player a(deck);
+  a.print_decks();
 	// deck->deckShuffler(tempG);
 	//
 	//
