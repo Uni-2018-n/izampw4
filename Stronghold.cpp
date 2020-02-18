@@ -5,7 +5,17 @@ Stronghold::Stronghold(){
 };
 
 void Stronghold::print(){
-  cout << "Honour: " << honour << endl;
-  cout << "Defense: " << defense << endl;
-  cout << "Harvest: " << harvest << endl;
+cout << "(honour: " << honour << ", defense: " << defense << ", harvest: " << harvest << ")" << endl;
+}
+
+int Stronghold::getHonour(){
+  return honour;
+}
+
+int Stronghold::getDefense(){
+  return defense;
+}
+
+int Stronghold::getHarvest(){
+  return harvest;
 }

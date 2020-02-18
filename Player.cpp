@@ -1,15 +1,17 @@
 #include "Player.hpp"
 
 Player::Player(DeckBuilder& deck){
+  honour = a.getHonour();
   fateDeck = deck.createFateDeck();
   deck.deckShuffler(fateDeck);
   dynastyDeck = deck.createDynastyDeck();
   deck.deckShuffler(dynastyDeck);
-  provinces = new list<BlackCard *>();
+  provinces = new list<Provinces *>();
   for(int i=0;i<4;i++){
-    provinces->push_back(dynastyDeck->front());
+    provinces->push_back(new Provinces(*(dynastyDeck->front()), a));
     dynastyDeck->pop_front();
   }
+
   numOfProv=4;
   currHand = new Hand(fateDeck);
   cout << "Constructor Player" << endl;
@@ -20,33 +22,38 @@ Player::~Player(){
 }
 
 void Player::printDecks(){
-  list<GreenCard *>::iterator it;
   cout<<"######### NOW PRINTING FATE DECK ##########"<<endl;
-  for(it = fateDeck->begin(); it != fateDeck->end(); it++)
-  cout << (*it)->getname() << endl;
+  {
+    list<GreenCard *>::iterator it;
+    for(it = fateDeck->begin(); it != fateDeck->end(); it++)
+      cout << (*it)->getName() << endl;
+  }
   cout<<"######### NOW PRINTING DYNASTY DECK #########"<<endl;
-  list<BlackCard *>::iterator it2;
-  for(it2 = dynastyDeck->begin(); it2 != dynastyDeck->end(); it2++)
-  cout << (*it2)->getname() << endl;
+  {
+    list<BlackCard *>::iterator it;
+    for(it = dynastyDeck->begin(); it != dynastyDeck->end(); it++)
+      cout << (*it)->getName() << endl;
+  }
 }
 
 void Player::printCurrState(){
-  cout << "Stronghold: " << endl;
+  cout << "Stronghold: ";
   a.print();
 
   cout << "Provinces: " << numOfProv << endl;
-  list<BlackCard *>::iterator it2;
-  for(it2 = provinces->begin(); it2 != provinces->end(); it2++)
-  cout << (*it2)->getname() << "     ";
+  {
+    list<Provinces *>::iterator it;
+    for(it = provinces->begin(); it != provinces->end(); it++)
+      (*it)->print();
+  }
   cout << endl;
 
   cout << "Curr Hand: " << endl;
   currHand->print();
-
 }
 
 void Player::untapEverything(){
-  list<BlackCard *>::iterator it2;
-  for(it2 = provinces->begin(); it2 != provinces->end(); it2++)
-  (*it2)->setIsRevealed(false);
+  list<Provinces *>::iterator it;
+  for(it = provinces->begin(); it != provinces->end(); it++)
+    (*it)->setIsRevealed(false);
 }

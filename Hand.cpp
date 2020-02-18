@@ -6,14 +6,10 @@ Hand::Hand(list<GreenCard*>* fateDeck){
   Personalities = new list<BlackCard *>();
   Holdings= new list<BlackCard *>();
 
-  addToHand(fateDeck->front());
-  fateDeck->pop_front();
-  addToHand(fateDeck->front());
-  fateDeck->pop_front();
-  addToHand(fateDeck->front());
-  fateDeck->pop_front();
-  addToHand(fateDeck->front());
-  fateDeck->pop_front();
+  for(int i=0;i<4;i++){
+    addToHand(fateDeck->front());
+    fateDeck->pop_front();
+  }
 }
 
 void Hand::addToHand(GreenCard* new_card){
@@ -33,19 +29,29 @@ void Hand::addToHand(BlackCard* new_card){
 }
 
 void Hand::print(){
-  list<GreenCard *>::iterator it2;
-  for(it2 = Followers->begin(); it2 != Followers->end(); it2++)
-  cout << (*it2)->getname() << ", ";
-  list<GreenCard *>::iterator it3;
-  for(it3 = Items->begin(); it3 != Items->end(); it3++)
-  cout << (*it3)->getname() << ", ";
+  {
+  list<GreenCard *>::iterator it;
+  for(it = Followers->begin(); it != Followers->end(); it++)
+  cout << (*it)->getName() << ", ";
+  }
 
-  list<BlackCard *>::iterator it4;
-  for(it4 = Personalities->begin(); it4 != Personalities->end(); it4++)
-  cout << (*it4)->getname() << ", ";
-  list<BlackCard *>::iterator it5;
-  for(it5 = Holdings->begin(); it5 != Holdings->end(); it5++)
-  cout << (*it5)->getname() << ", ";
+  {
+  list<GreenCard *>::iterator it;
+  for(it = Items->begin(); it != Items->end(); it++)
+  cout << (*it)->getName() << ", ";
+  }
+
+  {
+  list<BlackCard *>::iterator it;
+  for(it = Personalities->begin(); it != Personalities->end(); it++)
+  cout << (*it)->getName() << ", ";
+  }
+
+  {
+  list<BlackCard *>::iterator it;
+  for(it = Holdings->begin(); it != Holdings->end(); it++)
+  cout << (*it)->getName() << ", ";
+  }
 
   cout << endl;
 }

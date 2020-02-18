@@ -7,16 +7,24 @@ Card::Card(){
 
 }
 
-string Card::getname(){
-  return name;
+void Card::setIsTapped(bool a){
+  isTapped=a;
 }
 
 string Card::getCategory(){
   return category;
 }
 
-void Card::setIsTapped(bool a){
-  isTapped=a;
+string Card::getName(){
+  return name;
+}
+
+int Card::getCost(){
+  return cost;
+}
+
+bool Card::getIsTapped(){
+  return isTapped;
 }
 
 //////////////////////////////////////////////////GREENCARD
@@ -31,6 +39,10 @@ BlackCard::BlackCard(){
 
 void BlackCard::setIsRevealed(bool a){
   IsRevealed=a;
+}
+
+bool BlackCard::getIsRevealed(){
+  return IsRevealed;
 }
 
 #endif

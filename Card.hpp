@@ -18,8 +18,10 @@ protected:
 public:
   Card();
   void setIsTapped(bool a);
-  string getname();
   string getCategory();
+  string getName();
+  int getCost();
+  bool getIsTapped();
 };
 
 class GreenCard:public Card{
@@ -39,10 +41,11 @@ public:
 
 class BlackCard:public Card{
 protected:
-  int IsRevealed;
+  bool IsRevealed;
 public:
   BlackCard();
   void setIsRevealed(bool a);
+  bool getIsRevealed();
 };
 
 #endif
