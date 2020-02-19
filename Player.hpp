@@ -21,8 +21,11 @@ private:
   list<BlackCard*>* playedPersonalityCards;
   list<BlackCard*>* playedHoldingCards;
 
-
+  int money;//Isos na min xreiazete
   int honour;
+
+  void printHand();
+  void printArmy();
 public:
   Player(DeckBuilder& deck);
   ~Player();
@@ -30,10 +33,13 @@ public:
     return honour < playerObj.honour;
   }
   void printDecks();
+  //Starter Phase
   void untapEverything();//fix this
+  void drawFateCard();
   void revealProvinces();
   void printCurrState();
-  void drawFateCard();
+  //Equip Phase
+  void printOptions();//to print diathesimes kartes kai strato
 };
 
 #endif

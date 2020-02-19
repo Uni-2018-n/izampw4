@@ -86,6 +86,19 @@ void Player::printCurrState(){
   currHand->print();
 }
 
+void Player::printHand(){
+  currHand->print();
+}
+
+void Player::printArmy(){
+  list<BlackCard*>::iterator it;
+  for(it = playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++){
+    cout << (*it)->getName() << "   ";
+  }
+  cout << endl;
+}
+
+
 void Player::untapEverything(){
   {
   list<BlackCard *>::iterator it;
@@ -128,4 +141,12 @@ void Player::drawFateCard(){
   if(currHand->addToHand(fateDeck->front())){
     fateDeck->pop_front();
   }
+}
+
+void Player::printOptions(){
+  cout<<"Printing Hand : "<<endl;
+  printHand();
+  cout<<"Printing Army : "<< endl;
+  printArmy();
+
 }
