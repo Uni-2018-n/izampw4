@@ -40,6 +40,7 @@ public:
   void printCurrState();
   //Equip Phase
   void printOptions();//to print diathesimes kartes kai strato
+  int getCountOfPlayedPersonalityCards();
 };
 
 #endif

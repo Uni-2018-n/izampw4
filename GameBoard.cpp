@@ -61,9 +61,33 @@ void GameBoard::starterPhase(){
 
 /////////////////////////////////////////Equip Phase
 void GameBoard::equipPhase(){
+  int inputHand;
+  int inputArmy;
   list<Player*>::iterator it;
   for(it = players->begin(); it != players->end(); it++){
-    (*it)->printOptions();
+    if((*it)->getCountOfPlayedPersonalityCards() > 0){
+      (*it)->printOptions();
+      cout<<"Choose card to buy or enter 7 to NOT buy any cards"<< endl;
+      cin >> inputHand;
+      while(inputHand > 7){
+        cout << "try again" << endl;
+        cin >> inputHand;
+      }
+      switch (inputHand) {
+        case 7:
+        cout<<"You did not buy any cards"<<endl;
+        break;
+        default:
+          cout << "give input about Personality" << endl;
+          cin >> inputArmy;
+          //TODO make function connect personality with green card and check if greencard can be bought
+          break;
+      }
+
+
+    }else{
+      cout << "No Personalities in the board, equipPhase skiped" << endl;
+    }
 
     cout << endl;
   }

@@ -40,28 +40,29 @@ bool Hand::addToHand(BlackCard* new_card){
 }
 
 void Hand::print(){
+  int count=0;
   {//loop gia oles tis listes ektyponontas mono ta onomata gia twra
   list<GreenCard *>::iterator it;
   for(it = Followers->begin(); it != Followers->end(); it++)
-  cout << (*it)->getName() << ", ";
+  cout <<count++<<":" << (*it)->getName() << ", ";
   }
 
   {
   list<GreenCard *>::iterator it;
   for(it = Items->begin(); it != Items->end(); it++)
-  cout << (*it)->getName() << ", ";
+  cout <<count++<<":"<< (*it)->getName() << ", ";
   }
 
   {
   list<BlackCard *>::iterator it;
   for(it = Personalities->begin(); it != Personalities->end(); it++)
-  cout << (*it)->getName() << ", ";
+  cout << count++ << ":" << (*it)->getName() << ", ";
   }
 
   {
   list<BlackCard *>::iterator it;
   for(it = Holdings->begin(); it != Holdings->end(); it++)
-  cout << (*it)->getName() << ", ";
+  cout << count++ << ":" << (*it)->getName() << ", ";
   }
 
   cout << endl;

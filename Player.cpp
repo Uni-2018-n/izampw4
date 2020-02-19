@@ -2,6 +2,7 @@
 
 Player::Player(DeckBuilder& deck){
   //setters
+  money=a.getMoney();
   honour = a.getHonour();
   fateDeck = deck.createFateDeck();
   deck.deckShuffler(fateDeck);
@@ -91,9 +92,10 @@ void Player::printHand(){
 }
 
 void Player::printArmy(){
+  int count=0;
   list<BlackCard*>::iterator it;
   for(it = playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++){
-    cout << (*it)->getName() << "   ";
+    cout << count++ << ":" << (*it)->getName() << "   ";
   }
   cout << endl;
 }
@@ -149,4 +151,8 @@ void Player::printOptions(){
   cout<<"Printing Army : "<< endl;
   printArmy();
 
+}
+
+int Player::getCountOfPlayedPersonalityCards(){
+  return playedPersonalityCards->size();
 }
