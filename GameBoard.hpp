@@ -7,6 +7,7 @@ class GameBoard{
 private:
   list<Player*>* players;
   int countOfPlayers;
+  void starterPhase();
 public:
   GameBoard(int countOfP);
   ~GameBoard();

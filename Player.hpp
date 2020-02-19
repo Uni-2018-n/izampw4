@@ -13,8 +13,11 @@ private:
   list<BlackCard*>* dynastyDeck;
   list<BlackCard*>* availableDynastyCards;
   list<Provinces*>* provinces;
-  Hand* currHand;
   int numOfProv;
+  Hand* currHand;
+
+  list<GreenCard*>* playedGreenCards;
+  list<BlackCard*>* playedBlackCards;
 
   int honour;
 public:
@@ -22,7 +25,9 @@ public:
   ~Player();
   void printDecks();
   void untapEverything();
+  void revealProvinces();
   void printCurrState();
+  void drawFateCard();
 };
 
 #endif

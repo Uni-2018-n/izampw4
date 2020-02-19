@@ -11,8 +11,9 @@ private:
   list<BlackCard*>* Holdings;
 public:
   Hand(list<GreenCard*>* fateDeck);
-  void addToHand(GreenCard* new_card);
-  void addToHand(BlackCard* new_card);
+  bool addToHand(GreenCard* new_card);
+  bool addToHand(BlackCard* new_card);
+  int currPl();
   void print();
 };
 #endif

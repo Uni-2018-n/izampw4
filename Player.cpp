@@ -7,6 +7,9 @@ Player::Player(DeckBuilder& deck){
   deck.deckShuffler(fateDeck);
   dynastyDeck = deck.createDynastyDeck();
   deck.deckShuffler(dynastyDeck);
+  playedBlackCards = new list<BlackCard*>();
+  playedGreenCards = new list<GreenCard*>();
+
 
   //create provinces, push_back a new province with a black card and stronghold as arguments
   provinces = new list<Provinces *>();
@@ -81,7 +84,34 @@ void Player::printCurrState(){
 }
 
 void Player::untapEverything(){
+  {
+  list<BlackCard *>::iterator it;
+  for(it = playedBlackCards->begin(); it != playedBlackCards->end(); it++)
+    (*it)->setIsTapped(false);
+  }
+  {
+  list<GreenCard *>::iterator it;
+  for(it = playedGreenCards->begin(); it != playedGreenCards->end(); it++)
+    (*it)->setIsTapped(false);
+  }
+}
+
+void Player::revealProvinces(){
+  {
+  list<BlackCard *>::iterator it;
+  for(it = availableDynastyCards->begin(); it != availableDynastyCards->end(); it++)
+    (*it)->setIsRevealed(true);
+  }
+
+  {
   list<Provinces *>::iterator it;
   for(it = provinces->begin(); it != provinces->end(); it++)
-    (*it)->setIsRevealed(false);
+    (*it)->setIsRevealed(true);
+  }
+}
+
+void Player::drawFateCard(){
+  if(currHand->addToHand(fateDeck->front())){
+    fateDeck->pop_front();
+  }
 }

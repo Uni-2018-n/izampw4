@@ -32,5 +32,20 @@ void GameBoard::printGameStatistics(){
 
 void GameBoard::gamePlay(){
   cout<<"Prepare your anus for the game to start"<<endl;
+  starterPhase();
 
+}
+
+
+/////////////////////////////////////////Starter Phase
+void GameBoard::starterPhase(){
+  list<Player*>::iterator it;
+  for(it = players->begin(); it != players->end(); it++){
+    (*it)->untapEverything();
+    (*it)->drawFateCard();
+    (*it)->revealProvinces();
+    (*it)->printCurrState();
+
+    cout << endl;
+  }
 }

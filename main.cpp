@@ -6,8 +6,8 @@ using namespace std;
 //TODO 1.1, 2.2
 int main(){
 
-GameBoard bla(3);
-bla.initializeGameBoard();
-bla.printGameStatistics();
+GameBoard game(3);
+game.initializeGameBoard();
+game.gamePlay();
 
 }
