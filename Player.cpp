@@ -56,6 +56,7 @@ void Player::printDecks(){
   }
 }
 
+//////////////////////////////////////////////Starter Phase
 void Player::printCurrState(){
   cout << "Stronghold: ";
   a.print();
@@ -86,20 +87,6 @@ void Player::printCurrState(){
   cout << "Curr Hand: " << endl;
   currHand->print();
 }
-
-void Player::printHand(){
-  currHand->print();
-}
-
-void Player::printArmy(){
-  int count=0;
-  list<BlackCard*>::iterator it;
-  for(it = playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++){
-    cout << count++ << ":" << (*it)->getName() << "   ";
-  }
-  cout << endl;
-}
-
 
 void Player::untapEverything(){
   {
@@ -145,12 +132,25 @@ void Player::drawFateCard(){
   }
 }
 
+//////////////////////////////////////////////Equip Phase
+void Player::printHand(){
+  currHand->print();
+}
+
+void Player::printArmy(){
+  int count=0;
+  list<BlackCard*>::iterator it;
+  for(it = playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++){
+    cout << count++ << ":" << (*it)->getName() << "   ";
+  }
+  cout << endl;
+}
+
 void Player::printOptions(){
   cout<<"Printing Hand : "<<endl;
   printHand();
   cout<<"Printing Army : "<< endl;
   printArmy();
-
 }
 
 int Player::getCountOfPlayedPersonalityCards(){

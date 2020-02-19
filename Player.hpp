@@ -21,7 +21,7 @@ private:
   list<BlackCard*>* playedPersonalityCards;
   list<BlackCard*>* playedHoldingCards;
 
-  int money;//Isos na min xreiazete
+  int money;
   int honour;
 
   void printHand();
@@ -34,7 +34,7 @@ public:
   }
   void printDecks();
   //Starter Phase
-  void untapEverything();//fix this
+  void untapEverything();
   void drawFateCard();
   void revealProvinces();
   void printCurrState();
