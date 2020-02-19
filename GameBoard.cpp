@@ -32,6 +32,7 @@ void GameBoard::printGameStatistics(){
 
 void GameBoard::gamePlay(){
   cout<<"Prepare your anus for the game to start"<<endl;
+  players->sort();
   starterPhase();
 
 }

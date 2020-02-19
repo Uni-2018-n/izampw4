@@ -26,6 +26,9 @@ private:
 public:
   Player(DeckBuilder& deck);
   ~Player();
+  bool operator <(const Player & playerObj) const{
+    return honour < playerObj.honour;
+  }
   void printDecks();
   void untapEverything();//fix this
   void revealProvinces();
