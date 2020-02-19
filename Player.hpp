@@ -16,15 +16,18 @@ private:
   int numOfProv;
   Hand* currHand;
 
-  list<GreenCard*>* playedGreenCards;
-  list<BlackCard*>* playedBlackCards;
+  list<GreenCard*>* playedFollowerCards;
+  list<GreenCard*>* playedItemCards;
+  list<BlackCard*>* playedPersonalityCards;
+  list<BlackCard*>* playedHoldingCards;
+
 
   int honour;
 public:
   Player(DeckBuilder& deck);
   ~Player();
   void printDecks();
-  void untapEverything();
+  void untapEverything();//fix this
   void revealProvinces();
   void printCurrState();
   void drawFateCard();
