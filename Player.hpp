@@ -16,10 +16,10 @@ private:
   int numOfProv;
   Hand* currHand;
 
-  list<GreenCard*>* playedFollowerCards;
-  list<GreenCard*>* playedItemCards;
-  list<BlackCard*>* playedPersonalityCards;
-  list<BlackCard*>* playedHoldingCards;
+  list<Follower*>* playedFollowerCards;
+  list<Item*>* playedItemCards;
+  list<Personality*>* playedPersonalityCards;
+  list<Holding*>* playedHoldingCards;
 
   int money;
   int honour;

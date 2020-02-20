@@ -10,4 +10,5 @@ private:
   Holding* subHolding;
 public:
   Holding(string nam, holdings type);
+  int getHarvestValue();
 };

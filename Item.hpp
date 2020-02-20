@@ -8,4 +8,5 @@ private:
   int durability;
 public:
   Item(string nam,items type);
+  int getDurability();
 };

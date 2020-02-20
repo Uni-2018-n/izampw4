@@ -1,10 +1,11 @@
 #include "Hand.hpp"
 
 Hand::Hand(list<GreenCard*>* fateDeck){
-  Followers= new list<GreenCard *>();
-  Items= new list<GreenCard *>();
-  Personalities = new list<BlackCard *>();
-  Holdings= new list<BlackCard *>();
+  // GreenCard* temp;
+  Followers= new list<Follower *>();
+  Items= new list<Item *>();
+  Personalities = new list<Personality *>();
+  Holdings= new list<Holding *>();
 
   for(int i=0;i<4;i++){//pros8ese 4 arxikes kartes sto xeri
     if(addToHand(fateDeck->front())){
@@ -14,55 +15,67 @@ Hand::Hand(list<GreenCard*>* fateDeck){
 }
 
 bool Hand::addToHand(GreenCard* new_card){
-  if(currPl() <6){
-    if(new_card->getCategory() == "follower"){//gia to se pia lista na balei thn karta wste na einai omadopoihmenes
-      Followers->push_back(new_card);
+  if(new_card->getCategory() == "follower"){
+    if(currPl() <6){
+      Followers->push_back((Follower*)new_card);
+      return true;
     }else{
-      Items->push_back(new_card);
+      return false;
     }
-    return true;
-  }else{
-    return false;
+  }else if(new_card->getCategory() == "item"){
+    if(currPl() <6){
+      Items->push_back((Item*)new_card);
+      return true;
+    }else{
+      return false;
+    }
   }
+  return false;
 }
 
 bool Hand::addToHand(BlackCard* new_card){
-  if(currPl() <6){
-    if(new_card->getCategory() == "holding"){
-      Holdings->push_back(new_card);
+  if(new_card->getCategory() == "personality"){
+    if(currPl() <6){
+      Personalities->push_back((Personality*)new_card);
+      return true;
     }else{
-      Personalities->push_back(new_card);
+      return false;
     }
-    return true;
-  }else{
-    return false;
+  }else if(new_card->getCategory() == "holding"){
+    if(currPl() <6){
+      Holdings->push_back((Holding*)new_card);
+      return true;
+    }else{
+      return false;
+    }
   }
+  return false;
 }
 
 void Hand::print(){
   int count=0;
   {//loop gia oles tis listes ektyponontas mono ta onomata gia twra
-  list<GreenCard *>::iterator it;
+  list<Follower *>::iterator it;
   for(it = Followers->begin(); it != Followers->end(); it++)
-  cout <<count++<<":" << (*it)->getName() << ", ";
+  cout <<count++<<":" << (*it)->getName() << "(), ";
   }
 
   {
-  list<GreenCard *>::iterator it;
+  list<Item *>::iterator it;
   for(it = Items->begin(); it != Items->end(); it++)
-  cout <<count++<<":"<< (*it)->getName() << ", ";
+  cout <<count++<<":"<< (*it)->getName() << "(durability: " << (*it)->getDurability() << "), ";
   }
 
   {
-  list<BlackCard *>::iterator it;
+  list<Personality *>::iterator it;
   for(it = Personalities->begin(); it != Personalities->end(); it++)
-  cout << count++ << ":" << (*it)->getName() << ", ";
+  cout << count++ << ":" << (*it)->getName() << "(attack: " << (*it)->getAttack() << ", defense: "<< (*it)->getDefense() << ", honor: " << (*it)->getHonor() << "), ";
   }
 
   {
-  list<BlackCard *>::iterator it;
+  list<Holding *>::iterator it;
   for(it = Holdings->begin(); it != Holdings->end(); it++)
-  cout << count++ << ":" << (*it)->getName() << ", ";
+  cout << count++ << ":" << (*it)->getName() << "(harvestValue: " << (*it)->getHarvestValue() << "), ";
   }
 
   cout << endl;
@@ -71,25 +84,25 @@ void Hand::print(){
 int Hand::currPl(){
   int c =0;
   {//loop gia oles tis listes ektyponontas mono ta onomata gia twra
-  list<GreenCard *>::iterator it;
+  list<Follower *>::iterator it;
   for(it = Followers->begin(); it != Followers->end(); it++)
     c++;
   }
 
   {
-  list<GreenCard *>::iterator it;
+  list<Item *>::iterator it;
   for(it = Items->begin(); it != Items->end(); it++)
     c++;
   }
 
   {
-  list<BlackCard *>::iterator it;
+  list<Personality *>::iterator it;
   for(it = Personalities->begin(); it != Personalities->end(); it++)
     c++;
   }
 
   {
-  list<BlackCard *>::iterator it;
+  list<Holding *>::iterator it;
   for(it = Holdings->begin(); it != Holdings->end(); it++)
     c++;
   }

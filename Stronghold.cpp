@@ -1,8 +1,8 @@
 #include "Stronghold.hpp"
 
 Stronghold::Stronghold(){
-  cout<<" Stronghold created"<< endl;
-};
+
+}
 
 void Stronghold::print(){
 cout << "(money :" << money << "honour: " << honour << ", defense: " << defense << ", harvest: " << harvest << ")" << endl;

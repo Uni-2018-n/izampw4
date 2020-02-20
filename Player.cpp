@@ -8,11 +8,11 @@ Player::Player(DeckBuilder& deck){
   deck.deckShuffler(fateDeck);
   dynastyDeck = deck.createDynastyDeck();
   deck.deckShuffler(dynastyDeck);
-  playedPersonalityCards = new list<BlackCard*>();
-  playedHoldingCards = new list<BlackCard*>();
+  playedPersonalityCards = new list<Personality*>();
+  playedHoldingCards = new list<Holding*>();
 
-  playedFollowerCards = new list<GreenCard*>();
-  playedItemCards = new list<GreenCard*>();
+  playedFollowerCards = new list<Follower*>();
+  playedItemCards = new list<Item*>();
 
 
   //create provinces, push_back a new province with a black card and stronghold as arguments
@@ -58,55 +58,57 @@ void Player::printDecks(){
 
 //////////////////////////////////////////////Starter Phase
 void Player::printCurrState(){
-  cout << "Stronghold: ";
+  cout << "//////////Stronghold: ";
   a.print();
-
-  cout << "Top of provinces:" << endl;
+  cout << endl;
+  cout << "//////////Top of provinces:" << endl;
   {
     list<BlackCard*>::iterator it;//print tis kartes poy einai panw apo tis eparxies
     for(it = availableDynastyCards->begin(); it != availableDynastyCards->end(); it++){
       if((*it)->getIsRevealed() == true){//mono an einai revealed
-        cout << (*it)->getName() << "   ";
+        cout << (*it)->getName() << "  |  ";
       }else{
-        cout << "(CARD UNREVEALED)" << "    ";//allios rip
+        cout << "(CARD UNREVEALED)" << "  |  ";//allios rip
       }
     }
-    cout << endl;
+    cout << endl << endl;
   }
-  cout << "Provinces: " << numOfProv << endl;
+  cout << "//////////Provinces: " << numOfProv << endl;
   {
     list<Provinces *>::iterator it;//print ta provinces
     for(it = provinces->begin(); it != provinces->end(); it++)
       if((*it)->getIsRevealed() == true)//2.4 1h par teleytaia protash
         (*it)->print();
       else
-        cout << "(PROVINCE UNREVEALED)    ";
+        cout << "(PROVINCE UNREVEALED)  |  ";
   }
-  cout << endl;
+  cout << endl << endl;
 
-  cout << "Curr Hand: " << endl;
+  cout << "//////////Curr Hand: " << endl;
   currHand->print();
+
+  cout << endl << endl;
 }
 
 void Player::untapEverything(){
   {
-  list<BlackCard *>::iterator it;
+  list<Personality *>::iterator it;
   for(it = playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++)
     (*it)->setIsTapped(false);
   }
   {
-  list<GreenCard *>::iterator it;
+  list<Follower *>::iterator it;
   for(it = playedFollowerCards->begin(); it != playedFollowerCards->end(); it++)
     (*it)->setIsTapped(false);
   }
 
   {
-  list<BlackCard *>::iterator it;
+  list<Holding *>::iterator it;
   for(it = playedHoldingCards->begin(); it != playedHoldingCards->end(); it++)
     (*it)->setIsTapped(false);
   }
   {
-  list<GreenCard *>::iterator it;
+  list<Item *>::iterator it;
   for(it = playedItemCards->begin(); it != playedItemCards->end(); it++)
     (*it)->setIsTapped(false);
   }
@@ -127,9 +129,9 @@ void Player::revealProvinces(){
 }
 
 void Player::drawFateCard(){
-  if(currHand->addToHand(fateDeck->front())){
-    fateDeck->pop_front();
-  }
+    if(currHand->addToHand(fateDeck->front())){
+      fateDeck->pop_front();
+    }
 }
 
 //////////////////////////////////////////////Equip Phase
@@ -139,7 +141,7 @@ void Player::printHand(){
 
 void Player::printArmy(){
   int count=0;
-  list<BlackCard*>::iterator it;
+  list<Personality*>::iterator it;
   for(it = playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++){
     cout << count++ << ":" << (*it)->getName() << "   ";
   }

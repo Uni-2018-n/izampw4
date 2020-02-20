@@ -30,3 +30,7 @@ Holding::Holding(string nam,holdings type){
     harvestValue=6;
   }
 }
+
+int Holding::getHarvestValue(){
+  return harvestValue;
+}

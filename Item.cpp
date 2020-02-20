@@ -46,3 +46,7 @@ Item::Item(string nam, items type){
     durability = 8;
   }
 }
+
+int Item::getDurability(){
+  return durability;
+}

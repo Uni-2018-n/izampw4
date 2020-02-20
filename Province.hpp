@@ -12,6 +12,9 @@ private:
 public:
   Provinces(BlackCard& baseCard, Stronghold& currStronghold);
   void print();
+  int getHonour();
+  int getDefense();
+  int getHarvest();
 };
 
 #endif

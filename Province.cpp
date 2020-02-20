@@ -15,5 +15,17 @@ Provinces::Provinces(BlackCard& baseCard, Stronghold& currStronghold){
 }
 
 void Provinces::print(){
-  cout << getName() << "(honour: " << honour << ", defense: " << defense << ", harvest: " << harvest << ")     ";
+  cout << getName() << "(honour: " << honour << ", defense: " << defense << ", harvest: " << harvest << ")  |  ";
+}
+
+int Provinces::getHonour(){
+  return honour;
+}
+
+int Provinces::getDefense(){
+  return defense;
+}
+
+int Provinces::getHarvest(){
+  return harvest;
 }

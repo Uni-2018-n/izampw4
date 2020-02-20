@@ -33,12 +33,12 @@ void GameBoard::printGameStatistics(){
 void GameBoard::gamePlay(){
   cout<<"Prepare your anus for the game to start"<<endl;
   players->sort();
-  cout << "STARTER PHASE"<< endl;
+  cout << "######################STARTER PHASE#########################"<< endl;
   starterPhase();
 
   cout << endl<<endl;
 
-  cout << "EQUIP PHASE" <<endl;
+  cout << "######################EQUIP PHASE#########################"<< endl;
   equipPhase();
 
   cout << endl<<endl;
@@ -69,7 +69,7 @@ void GameBoard::equipPhase(){
       (*it)->printOptions();
       cout<<"Choose card to buy or enter 7 to NOT buy any cards"<< endl;
       cin >> inputHand;
-      while(inputHand > 7){
+      while(inputHand > 7){//TODO get currHand cardPl
         cout << "try again" << endl;
         cin >> inputHand;
       }
@@ -83,12 +83,9 @@ void GameBoard::equipPhase(){
           //TODO make function connect personality with green card and check if greencard can be bought
           break;
       }
-
-
     }else{
       cout << "No Personalities in the board, equipPhase skiped" << endl;
     }
-
     cout << endl;
   }
 }

@@ -13,4 +13,8 @@ private:
   GreenCard* possibleGreen;
 public:
   Personality(string nam, personalities type);
+  int getAttack();
+  int getDefense();
+  int getHonor();
+  bool getIsDead();
 };

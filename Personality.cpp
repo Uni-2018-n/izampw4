@@ -36,3 +36,19 @@ Personality::Personality(string nam, personalities type){
     honor=12;
   }
 }
+
+int Personality::getAttack(){
+  return attack;
+}
+
+int Personality::getDefense(){
+  return defense;
+}
+
+int Personality::getHonor(){
+  return honor;
+}
+
+bool Personality::getIsDead(){
+  return isDead;
+}

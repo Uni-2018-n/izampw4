@@ -5,10 +5,10 @@
 
 class Hand{//TODO must hold 1-6 cards
 private:
-  list<GreenCard*>* Followers;
-  list<GreenCard*>* Items;
-  list<BlackCard*>* Personalities;
-  list<BlackCard*>* Holdings;
+  list<Follower*>* Followers;
+  list<Item*>* Items;
+  list<Personality*>* Personalities;
+  list<Holding*>* Holdings;
 public:
   Hand(list<GreenCard*>* fateDeck);
   bool addToHand(GreenCard* new_card);
