@@ -32,6 +32,25 @@ GreenCard::GreenCard(){
 
 }
 
+int GreenCard::getAttackBonus(){
+  return attackBonus;
+}
+int GreenCard::getDefenseBonus(){
+  return defenceBonus;
+}
+int GreenCard::getMinimumHonour(){
+  return minimumHonour;
+}
+int GreenCard::getEffectBonus(){
+  return effectBonus;
+}
+int GreenCard::getEffectCost(){
+  return effectCost;
+}
+string GreenCard::getCardText(){
+  return cardText;
+}
+
 //////////////////////////////////////////////////BLACKCARD
 BlackCard::BlackCard(){
 

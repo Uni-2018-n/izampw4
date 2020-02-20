@@ -162,7 +162,7 @@ int Player::getCountOfPlayedPersonalityCards(){
 void Player::equipCardToArmy(int cardIndex, int armyIndex){
   int armyCount=0;
   GreenCard* currCard= currHand->getCardFromIndex(cardIndex);
-  BlackCard* currArmy;
+  Personality* currArmy;
   {
     list<Personality*>::iterator it;
     for(it= playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++){
@@ -172,5 +172,18 @@ void Player::equipCardToArmy(int cardIndex, int armyIndex){
         armyCount++;
     }
   }
-  //set currarmy virables with bonuses
+  if(money >= currCard->getCost()){
+    if(currArmy->getPossibleGreen() == NULL){
+      if(currArmy->getHonor() >= currCard->getMinimumHonour()){
+        money = money -currCard->getCost();
+        currArmy->setAttack(currArmy->getAttack() + currCard->getAttackBonus());
+        currArmy->setDefense(currArmy->getDefense() + currCard->getDefenseBonus());
+        currArmy->setPossibleGreen(*currCard);
+      }else{
+        cout << "Cant play card cause honor of army is not enough" << endl;
+      }
+    }else{
+      cout << "Already played a GreenCard for this Personality" << endl;
+    }
+  }
 }

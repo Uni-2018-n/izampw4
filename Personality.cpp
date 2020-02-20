@@ -2,6 +2,7 @@
 
 Personality::Personality(string nam, personalities type){
   name = nam;
+  possibleGreen= NULL;
   category="personality";
   isTapped = false;
   IsRevealed = false;
@@ -51,4 +52,28 @@ int Personality::getHonor(){
 
 bool Personality::getIsDead(){
   return isDead;
+}
+
+GreenCard* Personality::getPossibleGreen(){
+  return possibleGreen;
+}
+
+void Personality::setPossibleGreen(GreenCard& posGreen){
+  possibleGreen = &posGreen;
+}
+
+void Personality::setAttack(int x){
+  attack = x;
+}
+
+void Personality::setDefense(int x){
+  defense = x;
+}
+
+void Personality::setHonor(int x){
+  honor = x;
+}
+
+void Personality::setIsDead(bool x){
+  isDead = x;
 }

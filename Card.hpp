@@ -36,6 +36,12 @@ protected:
   string cardText;
 public:
   GreenCard();
+  int getAttackBonus();
+  int getDefenseBonus();
+  int getMinimumHonour();
+  int getEffectBonus();
+  int getEffectCost();
+  string getCardText();
 };
 
 
