@@ -80,7 +80,7 @@ void GameBoard::equipPhase(){
         default:
           cout << "give input about Personality" << endl;
           cin >> inputArmy;
-          //TODO make function connect personality with green card and check if greencard can be bought
+          (*it)->equipCardToArmy(inputHand, inputArmy);
           break;
       }
     }else{

@@ -158,3 +158,19 @@ void Player::printOptions(){
 int Player::getCountOfPlayedPersonalityCards(){
   return playedPersonalityCards->size();
 }
+
+void Player::equipCardToArmy(int cardIndex, int armyIndex){
+  int armyCount=0;
+  GreenCard* currCard= currHand->getCardFromIndex(cardIndex);
+  BlackCard* currArmy;
+  {
+    list<Personality*>::iterator it;
+    for(it= playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++){
+        if(armyCount == armyIndex){
+          currArmy = (*it);
+        }
+        armyCount++;
+    }
+  }
+  //set currarmy virables with bonuses
+}

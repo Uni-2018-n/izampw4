@@ -108,3 +108,27 @@ int Hand::currPl(){
   }
   return c;
 }
+
+GreenCard* Hand::getCardFromIndex(int cardIndex){
+  int count=0;
+  {
+    list<Follower*>::iterator it;
+    for(it= Followers->begin(); it != Followers->end(); it++){
+      if(cardIndex == count){
+        return (*it);
+      }
+      count++;
+    }
+  }
+
+  {
+    list<Item*>::iterator it;
+    for(it=Items->begin(); it != Items->end(); it++){
+      if(cardIndex == count){
+        return (*it);
+      }
+      count++;
+    }
+  }
+  return NULL;
+}

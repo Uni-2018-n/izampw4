@@ -41,6 +41,7 @@ public:
   //Equip Phase
   void printOptions();//to print diathesimes kartes kai strato
   int getCountOfPlayedPersonalityCards();
+  void equipCardToArmy(int cardIndex, int armyIndex);
 };
 
 #endif

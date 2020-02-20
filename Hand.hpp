@@ -15,6 +15,7 @@ public:
   bool addToHand(BlackCard* new_card);
   int currPl();
   void print();
+  GreenCard* getCardFromIndex(int cardIndex);
 };
 #endif
 //flex
