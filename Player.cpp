@@ -161,6 +161,7 @@ int Player::getCountOfPlayedPersonalityCards(){
 
 void Player::equipCardToArmy(int cardIndex, int armyIndex){
   int armyCount=0;
+  int response;
   GreenCard* currCard= currHand->getCardFromIndex(cardIndex);
   Personality* currArmy;
   {
@@ -172,6 +173,7 @@ void Player::equipCardToArmy(int cardIndex, int armyIndex){
         armyCount++;
     }
   }
+
   if(money >= currCard->getCost()){
     if(currArmy->getPossibleGreen() == NULL){
       if(currArmy->getHonor() >= currCard->getMinimumHonour()){
@@ -179,6 +181,15 @@ void Player::equipCardToArmy(int cardIndex, int armyIndex){
         currArmy->setAttack(currArmy->getAttack() + currCard->getAttackBonus());
         currArmy->setDefense(currArmy->getDefense() + currCard->getDefenseBonus());
         currArmy->setPossibleGreen(*currCard);
+        if(money >= currCard->getEffectCost()){
+          cout<<"Do you want to upgrade the card for the cost of "<<currCard->getEffectCost() <<" coins?[0=no/1=yes]"<<endl;
+          cin >>response;
+          if(response==1){
+            money=money-currCard->getEffectCost();
+            currArmy->setAttack(currArmy->getAttack() + currCard->getEffectBonus());
+            currArmy->setDefense(currArmy->getDefense() + currCard->getEffectBonus());
+          }
+        }
       }else{
         cout << "Cant play card cause honor of army is not enough" << endl;
       }

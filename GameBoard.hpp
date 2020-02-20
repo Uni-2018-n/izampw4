@@ -16,6 +16,7 @@ public:
   void initializeGameBoard();
   void printGameStatistics();
   void gamePlay();
+
   // void printOptions();//to print diathesimes kartes kai strato
 };
 #endif
