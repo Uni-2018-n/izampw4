@@ -33,6 +33,7 @@ public:
     return honour < playerObj.honour;
   }
   void printDecks();
+
   //Starter Phase
   void untapEverything();
   void drawFateCard();
@@ -43,6 +44,10 @@ public:
   int getCountOfPlayedPersonalityCards();
   void equipCardToArmy(int cardIndex, int armyIndex);
   int getCurrHandPl();
+  int findMine();//tha vriskei mono mines pou den exoun upperholding
+  int findGoldMineWithoutUpper();
+  int findGoldMineWithoutSub();
+  int findCrystalMine();//tha vriskei crystal miens xoris subholding
 };
 
 #endif
