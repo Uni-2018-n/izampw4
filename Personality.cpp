@@ -87,8 +87,8 @@ void Personality::printStats(){
   if(getIsRevealed()){
     cout << getName() << "(" <<
     "attack: " << getAttack() <<
-    "defense: " << getDefense() <<
-    "honor: " << getHonor() << ")";
+    " defense: " << getDefense() <<
+    " honor: " << getHonor() << ")";
   }else{
     cout << "(CARD UNREVEALED)" << "  |  ";
   }

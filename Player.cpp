@@ -9,6 +9,22 @@ Player::Player(DeckBuilder& deck){
   dynastyDeck = deck.createDynastyDeck();
   deck.deckShuffler(dynastyDeck);
   playedPersonalityCards = new list<Personality*>();
+  // Personality* temp= (Personality*)((dynastyDeck->front()));
+  // temp->setIsRevealed(true);
+  // playedPersonalityCards->push_back(temp);
+  // dynastyDeck->pop_front();
+  // temp= (Personality*)((dynastyDeck->front()));
+  // temp->setIsRevealed(true);
+  // playedPersonalityCards->push_back(temp);
+  // dynastyDeck->pop_front();
+  // temp= (Personality*)((dynastyDeck->front()));
+  // temp->setIsRevealed(true);
+  // playedPersonalityCards->push_back(temp);
+  // dynastyDeck->pop_front();
+  // temp= (Personality*)((dynastyDeck->front()));
+  // temp->setIsRevealed(true);
+  // playedPersonalityCards->push_back(temp);
+  // dynastyDeck->pop_front();
   playedHoldingCards = new list<Holding*>();
 
   playedFollowerCards = new list<Follower*>();
@@ -260,6 +276,7 @@ void Player::destroyCards(Provinces* prov){
       }
     }
   }
+  cout << "mphke edw" << endl;
 }
 
 

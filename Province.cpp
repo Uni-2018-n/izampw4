@@ -12,6 +12,7 @@ Provinces::Provinces(BlackCard& baseCard, Stronghold& currStronghold){
   honour = currStronghold.getHonour();
   defense = currStronghold.getDefense();
   harvest = currStronghold.getHarvest();
+  defendingCards= new list<Personality*>();
 }
 
 void Provinces::print(){

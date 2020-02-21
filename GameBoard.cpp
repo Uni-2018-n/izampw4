@@ -109,7 +109,7 @@ void GameBoard::battlePhase(){
 
     list<Personality*>* attackingPersonalityCards= new list<Personality*>();//kartes pou tha xrisimopoithoun gia attack se ena province
 
-    cout << "Player " << playerIndex << ":" << endl;
+    // cout << "Player " << playerIndex << ":" << endl;
     if((*currPlayer)->getCountOfPlayedPersonalityCards() >0){
       list<Personality*>* currPersonalities;
       currPersonalities= (*currPlayer)->getPlayedPersonalityCards();
@@ -123,6 +123,7 @@ void GameBoard::battlePhase(){
           (*it)->printStats();
           currPersonalityCount++;
         }
+        cout << endl;
       }
 
       {//print Provinces of players except currPlayer
@@ -217,7 +218,6 @@ void GameBoard::battlePhase(){
                 cin >> currPersonalityI;
               }
             }while(currPersonalityIsTapped);//if yes repeat the prossess for a diffrent personality card
-
             attackingPersonalityCards->push_back((*currPersonality));
 
 
@@ -239,7 +239,7 @@ void GameBoard::battlePhase(){
         }//os edo exoume total attack kai ti lista me ola ta personalities pou epitithontai
         //currPersonality(to personality poy 8elei na epite8ei o paikths), enemyPlayer(o antipalos poy 8elei na epite8ei o paikths), currEnemyProvince(to province poy 8elei na epite8ei o paikths)
         //HERE START ATTACKING OPTIONS
-        if(totalAttack>totalDefense){
+        if(totalAttack>=totalDefense){
           (*enemyPlayer)->destroyCards(*currEnemyProvince);
           (*enemyPlayer)->destroyProvince(currEnemyProvinceI);
         }
