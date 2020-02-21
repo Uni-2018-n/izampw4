@@ -210,17 +210,33 @@ list<Personality*>* Player::getPlayedPersonalityCards(){
 }
 
 void Player::printProvinces(){
-  list<Provinces*>::iterator it;
-  for(it= provinces->begin(); it != provinces->end(); it++){
-    (*it)->print();
-  }
+  int count=0;
+  list<Provinces *>::iterator it;//print ta provinces
+  for(it = provinces->begin(); it != provinces->end(); it++)
+    if((*it)->getIsRevealed() == true){//2.4 1h par teleytaia protash
+      cout << count << ": ";
+      (*it)->print();
+      count++;
+    }else{
+      cout << count << ": (PROVINCE UNREVEALED)  |  ";
+      count++;
+    }
 }
 
 void Player::printOptionsByEnemys(){
   cout<<"Printing Provinces : "<<endl;
-  printHand();
-  cout<<"Printing Army : "<< endl;
-  printArmy();
+  printProvinces();
+  cout << endl;
+  // cout<<"Printing Army : "<< endl;
+  // printArmy();
+}
+
+int Player::getCountOfProvinces(){
+  return provinces->size();
+}
+
+list<Provinces*>* Player::getProvinces(){
+  return provinces;
 }
 
 

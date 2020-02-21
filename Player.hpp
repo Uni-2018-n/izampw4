@@ -48,6 +48,8 @@ public:
   //Battle Phase
   list<Personality*>* getPlayedPersonalityCards();
   void printOptionsByEnemys();
+  int getCountOfProvinces();
+  list<Provinces*>* getProvinces();
   //Chains
   int findMine();//tha vriskei mono mines pou den exoun upperholding
   int findGoldMineWithoutUpper();
