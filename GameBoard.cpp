@@ -67,10 +67,10 @@ void GameBoard::equipPhase(){
   for(it = players->begin(); it != players->end(); it++){
     if((*it)->getCountOfPlayedPersonalityCards() > 0){
       (*it)->printOptions();
-      cout<<"Choose card to buy or enter 7 to NOT buy any cards"<< endl;
+      cout<<"Choose card to buy or enter 7 to NOT buy any cards: ";
       cin >> inputHand;
-      while(inputHand > 7){//TODO get currHand cardPl
-        cout << "try again" << endl;
+      while(inputHand > (*it)->getCurrHandPl() && inputHand != 7){//TODO get currHand cardPl
+        cout << "try again: ";
         cin >> inputHand;
       }
       switch (inputHand) {
@@ -78,8 +78,12 @@ void GameBoard::equipPhase(){
         cout<<"You did not buy any cards"<<endl;
         break;
         default:
-          cout << "give input about Personality" << endl;
+          cout << "give input about Personality: ";
           cin >> inputArmy;
+          while(inputArmy > (*it)->getCountOfPlayedPersonalityCards()){
+            cout << "try again: ";
+            cin >> inputArmy;
+          }
           (*it)->equipCardToArmy(inputHand, inputArmy);
           break;
       }

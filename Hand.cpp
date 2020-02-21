@@ -1,7 +1,6 @@
 #include "Hand.hpp"
 
 Hand::Hand(list<GreenCard*>* fateDeck){
-  // GreenCard* temp;
   Followers= new list<Follower *>();
   Items= new list<Item *>();
   Personalities = new list<Personality *>();
@@ -83,7 +82,7 @@ void Hand::print(){
 
 int Hand::currPl(){
   int c =0;
-  {//loop gia oles tis listes ektyponontas mono ta onomata gia twra
+  {
   list<Follower *>::iterator it;
   for(it = Followers->begin(); it != Followers->end(); it++)
     c++;

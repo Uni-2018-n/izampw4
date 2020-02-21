@@ -18,4 +18,3 @@ public:
   GreenCard* getCardFromIndex(int cardIndex);
 };
 #endif
-//flex

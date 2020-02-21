@@ -198,3 +198,7 @@ void Player::equipCardToArmy(int cardIndex, int armyIndex){
     }
   }
 }
+
+int Player::getCurrHandPl(){
+  return currHand->currPl();
+}
