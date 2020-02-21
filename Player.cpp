@@ -221,6 +221,7 @@ void Player::printOptionsByEnemys(){
   printHand();
   cout<<"Printing Army : "<< endl;
   printArmy();
+}
 
 
 //////////////////////////////////////////////Chains
