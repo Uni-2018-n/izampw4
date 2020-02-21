@@ -21,6 +21,7 @@ private:
   list<Personality*>* playedPersonalityCards;
   list<Holding*>* playedHoldingCards;
 
+
   int money;
   int honour;
 

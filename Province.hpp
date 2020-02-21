@@ -9,6 +9,8 @@ private:
   int honour;
   int defense;
   int harvest;
+  list<Personality*>* defendingCards;
+  
 public:
   Provinces(BlackCard& baseCard, Stronghold& currStronghold);
   void print();

@@ -1,5 +1,5 @@
 #include "GameBoard.hpp"
-
+#include <list>
 
 using namespace std;
 
@@ -31,7 +31,7 @@ void GameBoard::printGameStatistics(){
 }
 
 void GameBoard::gamePlay(){
-  cout<<"Prepare your anus for the game to start"<<endl;
+  cout<<"-_-_-_-_-_Game is Starting-_-_-_-_-_"<<endl;
   players->sort();
   cout << "######################STARTER PHASE#########################"<< endl;
   starterPhase();
@@ -103,8 +103,10 @@ void GameBoard::battlePhase(){
   int currPlayerI;
   int playerIndex=0;
 
+
   list<Player*>::iterator currPlayer;
   for(currPlayer=players->begin(); currPlayer != players->end(); currPlayer++){
+    list<Personality*>* attackingPersonalityCards= new list<Personality*>();//kartes pou tha xrisimopoithoun gia attack se ena province
     cout << "Player " << playerIndex << ":" << endl;
     if((*currPlayer)->getCountOfPlayedPersonalityCards() >0){
       list<Personality*>* currPersonalities;
@@ -138,41 +140,12 @@ void GameBoard::battlePhase(){
       cout << "Do you want to attack or defend this round attack=1/defense=0: ";
       cin >> atDefInput;
       if(atDefInput){//attack mode
-        int currPersonalityI;
-        bool currPersonalityIsTapped= true;
 
-        list<Personality*>::iterator currPersonality;//get currPlayer's selected Personality Card
-        {
-          int count;
-          list<Personality*>* temp= (*currPlayer)->getPlayedPersonalityCards();
-          cout << "Choose Personality to attack: ";
-          do{
-            cin >> currPersonalityI;//pare to index
-            while(currPersonalityI > (*currPlayer)->getCountOfPlayedPersonalityCards()){
-              cout << "try again: ";
-              cin >> currPersonalityI;
-            }
-            count=0;
-            for(currPersonality = temp->begin(); currPersonality != temp->end(); currPersonality++){
-              if(currPersonalityI == count){
-                break;//an mpeis edw tote to currPersonality exei thn personality poy 8eloyme
-              }else{
-                count++;
-              }
-            }
-            currPersonalityIsTapped = (*currPersonality)->getIsTapped();//check if card is tapped
-            if(currPersonalityIsTapped){
-              cout << "Personality Card Is Tapped Please Choose An Other Card: ";
-            }
-          }while(currPersonalityIsTapped);//if yes repeat the prossess for a diffrent personality card
-        }
-
-
-        cout << "Choose Enemy to attack: ";
+        cout << "Choose Enemy to attack: ";//choose enemy
         int currEnemy;
         cin >> currEnemy;//get Index of Enemy Player
         while(currEnemy > countOfPlayers-1 || currEnemy == currPlayerI){
-          cout << "try again: ";
+          cout << "Try again: ";
           cin >> currEnemy;
         }
         list<Player*>::iterator enemyPlayer;
@@ -187,11 +160,11 @@ void GameBoard::battlePhase(){
         }
 
 
-        cout << "Choose Enemy's province to attack: ";
+        cout << "Choose Enemy's province to attack: ";//choose province to attack
         int currEnemyProvinceI;
         cin >> currEnemyProvinceI;//get Index of Enemy's province
         while(currEnemyProvinceI > (*enemyPlayer)->getCountOfProvinces()-1){
-          cout << "try again: ";
+          cout << "Try again: ";
           cin >> currEnemyProvinceI;
         }
         list<Provinces*>::iterator currEnemyProvince;
@@ -206,19 +179,67 @@ void GameBoard::battlePhase(){
             }
           }
         }
+
+
+        int currPersonalityI;
+        cout << "Choose Personality to attack: ";
+        cin >> currPersonalityI;//pare to index
+        while(true){
+          bool currPersonalityIsTapped= true;
+
+          list<Personality*>::iterator currPersonality;//get currPlayer's selected Personality Card
+          {
+            int count;
+            list<Personality*>* temp= (*currPlayer)->getPlayedPersonalityCards();
+            do{
+              while(currPersonalityI > (*currPlayer)->getCountOfPlayedPersonalityCards()){
+                cout << "Try again: ";
+                cin >> currPersonalityI;
+              }
+              count=0;
+              for(currPersonality = temp->begin(); currPersonality != temp->end(); currPersonality++){
+                if(currPersonalityI == count){
+                  break;//an mpeis edw tote to currPersonality exei thn personality poy 8eloyme
+                }else{
+                  count++;
+                }
+              }
+              currPersonalityIsTapped = (*currPersonality)->getIsTapped();//check if card is tapped
+              if(currPersonalityIsTapped){
+                cout << "Personality Card Is Tapped Please Choose Another Card: ";
+                cin >> currPersonalityI;
+              }
+            }while(currPersonalityIsTapped);//if yes repeat the prossess for a diffrent personality card
+
+            attackingPersonalityCards->push_back((*currPersonality));
+
+
+            cout << "Choose another Personality to attack (-1 to stop): ";
+            cin >> currPersonalityI;//pare to index
+            if(currPersonalityI == -1){
+              cout << "choosing done" << endl;
+              break;
+            }
+          }
+        }
+        //apo edw kai katw exoyme mia lista thn attackingPersonalityCards h opoia exei oles tis kartes poy 8eloume na epite8oume sto syggekrimeno Province
+        int totalAttack=0;
+        list<Personality*>::iterator it;
+        {
+          for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++){
+            totalAttack += (*it)->getAttack();//ez
+          }
+        }//os edo exoume total attack kai ti lista me ola ta personalities pou epitithontai
         //currPersonality(to personality poy 8elei na epite8ei o paikths), enemyPlayer(o antipalos poy 8elei na epite8ei o paikths), currEnemyProvince(to province poy 8elei na epite8ei o paikths)
+        //HERE START ATTACKING OPTIONS
 
 
 
       }else{//defense mode
 
       }
-
-
-
-
     }else{
-      cout << "\t No personalities available Battle Phase Skiped" << endl;
+      cout << "\t No personalities available! Battle Phase Skiped" << endl;
     }
     playerIndex++;
   }
