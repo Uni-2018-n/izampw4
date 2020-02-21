@@ -41,6 +41,9 @@ void GameBoard::gamePlay(){
   cout << "######################EQUIP PHASE#########################"<< endl;
   equipPhase();
 
+  cout << "######################BATTLE PHASE#########################"<< endl;
+  battlePhase();
+
   cout << endl<<endl;
 
 
@@ -73,7 +76,7 @@ void GameBoard::equipPhase(){
         cout << "try again: ";
         cin >> inputHand;
       }
-      switch (inputHand) {
+      switch(inputHand){
         case 7:
         cout<<"You did not buy any cards"<<endl;
         break;
@@ -91,5 +94,42 @@ void GameBoard::equipPhase(){
       cout << "No Personalities in the board, equipPhase skiped" << endl;
     }
     cout << endl;
+  }
+}
+
+/////////////////////////////////////////Battle Phase
+void GameBoard::battlePhase(){
+  int atDefInput;
+  list<Player*>::iterator it;
+  for(it=players->begin(); it != players->end(); it++){
+    cout << "Do you want to attack or defense this round attack=1/defense=0: ";
+    cin >> atDefInput;
+    list<Personality*>* currPlPersonality= (*it)->getPlayedPersonalityCards();
+    {
+      cout << "---Your Personalities: " << endl;
+      list<Personality*>::iterator it;
+      for(it=currPlPersonality->begin(); it != currPlPersonality->end(); it++){
+        (*it)->printStats();
+      }
+    }
+
+    {
+      list<Player*>::iterator it2;
+      int count=0;
+      for(it2=players->begin(); it2 != players->end(); it2++){
+        if(it2 != it){
+          cout << "Player " << count << ": " << endl;
+          (*it)->printOptionsByEnemys();
+        }
+        count++;
+      }
+    }
+
+
+    if(atDefInput){//attack mode
+
+    }else{//defense mode
+
+    }
   }
 }

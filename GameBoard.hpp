@@ -9,6 +9,7 @@ private:
   int countOfPlayers;
   void starterPhase();
   void equipPhase();
+  void battlePhase();
 
 public:
   GameBoard(int countOfP);

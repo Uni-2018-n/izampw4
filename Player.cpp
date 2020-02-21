@@ -202,3 +202,22 @@ void Player::equipCardToArmy(int cardIndex, int armyIndex){
 int Player::getCurrHandPl(){
   return currHand->currPl();
 }
+
+//////////////////////////////////////////////Battle Phase
+list<Personality*>* Player::getPlayedPersonalityCards(){
+  return playedPersonalityCards;
+}
+
+void Player::printProvinces(){
+  list<Provinces*>::iterator it;
+  for(it= provinces->begin(); it != provinces->end(); it++){
+    (*it)->print();
+  }
+}
+
+void Player::printOptionsByEnemys(){
+  cout<<"Printing Provinces : "<<endl;
+  printHand();
+  cout<<"Printing Army : "<< endl;
+  printArmy();
+}

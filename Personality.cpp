@@ -77,3 +77,14 @@ void Personality::setHonor(int x){
 void Personality::setIsDead(bool x){
   isDead = x;
 }
+
+void Personality::printStats(){
+  if(getIsRevealed()){
+    cout << getName() << "(" <<
+    "attack: " << getAttack() <<
+    "defense: " << getDefense() <<
+    "honor: " << getHonor() << ")";
+  }else{
+    cout << "(CARD UNREVEALED)" << "  |  ";
+  }
+}

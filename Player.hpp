@@ -26,6 +26,7 @@ private:
 
   void printHand();
   void printArmy();
+  void printProvinces();
 public:
   Player(DeckBuilder& deck);
   ~Player();
@@ -43,6 +44,9 @@ public:
   int getCountOfPlayedPersonalityCards();
   void equipCardToArmy(int cardIndex, int armyIndex);
   int getCurrHandPl();
+  //Battle Phase
+  list<Personality*>* getPlayedPersonalityCards();
+  void printOptionsByEnemys();
 };
 
 #endif

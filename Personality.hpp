@@ -24,4 +24,5 @@ public:
   void setHonor(int x);
   void setIsDead(bool x);
   void setPossibleGreen(GreenCard& posGreen);
+  void printStats();
 };
