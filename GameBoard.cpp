@@ -102,11 +102,13 @@ void GameBoard::battlePhase(){
   int atDefInput;
   int currPlayerI;
   int playerIndex=0;
-
+  int totalAttack=0,totalDefense=0;
 
   list<Player*>::iterator currPlayer;
   for(currPlayer=players->begin(); currPlayer != players->end(); currPlayer++){
+
     list<Personality*>* attackingPersonalityCards= new list<Personality*>();//kartes pou tha xrisimopoithoun gia attack se ena province
+
     cout << "Player " << playerIndex << ":" << endl;
     if((*currPlayer)->getCountOfPlayedPersonalityCards() >0){
       list<Personality*>* currPersonalities;
@@ -173,6 +175,11 @@ void GameBoard::battlePhase(){
           list<Provinces*>* temp= (*currPlayer)->getProvinces();
           for(currEnemyProvince= temp->begin(); currEnemyProvince != temp->end(); currEnemyProvince++){
             if(currEnemyProvinceI == count){
+              totalDefense=(*currEnemyProvince)->getDefense();//gia na prostheso meta mono ta defense ton paikton
+              list<Personality*>::iterator it;
+              for(it=(*currEnemyProvince)->defendingCards->begin();it!=(*currEnemyProvince)->defendingCards->end();it++){
+                totalDefense +=(*it)->getDefense();
+              }
               break;//an mpeis edw tote to currEnemyProvince einai to province poy 8eloume na epite8oume
             }else{
               count++;
@@ -217,13 +224,13 @@ void GameBoard::battlePhase(){
             cout << "Choose another Personality to attack (-1 to stop): ";
             cin >> currPersonalityI;//pare to index
             if(currPersonalityI == -1){
-              cout << "choosing done" << endl;
+              cout << "Choosing done" << endl;
               break;
             }
           }
         }
         //apo edw kai katw exoyme mia lista thn attackingPersonalityCards h opoia exei oles tis kartes poy 8eloume na epite8oume sto syggekrimeno Province
-        int totalAttack=0;
+
         list<Personality*>::iterator it;
         {
           for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++){
@@ -232,15 +239,19 @@ void GameBoard::battlePhase(){
         }//os edo exoume total attack kai ti lista me ola ta personalities pou epitithontai
         //currPersonality(to personality poy 8elei na epite8ei o paikths), enemyPlayer(o antipalos poy 8elei na epite8ei o paikths), currEnemyProvince(to province poy 8elei na epite8ei o paikths)
         //HERE START ATTACKING OPTIONS
-
-
+        if(totalAttack>totalDefense){
+          (*enemyPlayer)->destroyCards(*currEnemyProvince);
+          (*enemyPlayer)->destroyProvince(currEnemyProvinceI);
+        }
 
       }else{//defense mode
 
       }
     }else{
       cout << "\t No personalities available! Battle Phase Skiped" << endl;
+
     }
     playerIndex++;
   }
 }
+//ekana total defense,destroyProvince

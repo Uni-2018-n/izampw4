@@ -1,5 +1,5 @@
 #include "Player.hpp"
-
+#include "Province.hpp"
 Player::Player(DeckBuilder& deck){
   //setters
   money=a.getMoney();
@@ -238,6 +238,31 @@ int Player::getCountOfProvinces(){
 list<Provinces*>* Player::getProvinces(){
   return provinces;
 }
+
+void Player::destroyProvince(int prov){//not sure it works
+  list<Provinces *>::iterator it;//print ta provinces
+  it=provinces->begin();
+  // Incrementing it by prov number of  positions
+  advance(it,prov-1);
+
+  provinces->erase(it);
+}
+
+void Player::destroyCards(Provinces* prov){
+  // playedPersonalityCards
+  list<Personality*>::iterator it;
+  for(it=playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++){
+    list<Personality*>::iterator it2;
+    for(it2=prov->defendingCards->begin(); it2 != prov->defendingCards->end(); it2++){
+      if((*it) == (*it2)){
+        playedPersonalityCards->erase(it);
+        prov->defendingCards->erase(it2);
+      }
+    }
+  }
+}
+
+
 
 
 //////////////////////////////////////////////Chains

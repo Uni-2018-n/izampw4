@@ -51,6 +51,8 @@ public:
   void printOptionsByEnemys();
   int getCountOfProvinces();
   list<Provinces*>* getProvinces();
+  void destroyProvince(int prov);
+  void destroyCards(Provinces* prov);//tha sigkrino ti lista played cards me ti lista attackes cards kai an einai idies tha kano pop
   //Chains
   int findMine();//tha vriskei mono mines pou den exoun upperholding
   int findGoldMineWithoutUpper();
