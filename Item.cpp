@@ -12,6 +12,7 @@ Item::Item(string nam, items type){
     effectBonus = 1;
     effectCost =2;
     durability = 3;
+    subcategory="KATANA";
   }else if(type == SPEAR){
     cost= 0;
     attackBonus=0;
@@ -20,6 +21,7 @@ Item::Item(string nam, items type){
     effectBonus = 1;
     effectCost =2;
     durability = 3;
+    subcategory="SPEAR";
   }else if(type == BOW){
     cost= 2;
     attackBonus= 2;
@@ -28,6 +30,7 @@ Item::Item(string nam, items type){
     effectBonus = 3;
     effectCost = 4;
     durability = 5;
+    subcategory="BOW";
   }else if(type == NINJATO){
     cost= 4;
     attackBonus= 3;
@@ -36,6 +39,7 @@ Item::Item(string nam, items type){
     effectBonus = 2;
     effectCost = 2;
     durability = 4;
+    subcategory="NIJATO";
   }else if(type == WAKIZASHI){
     cost= 8;
     attackBonus= 5;
@@ -44,6 +48,7 @@ Item::Item(string nam, items type){
     effectBonus = 3;
     effectCost = 3;
     durability = 8;
+    subcategory="WAKIZASHI";
   }
 }
 

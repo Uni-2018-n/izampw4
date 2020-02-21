@@ -11,4 +11,7 @@ private:
 public:
   Holding(string nam, holdings type);
   int getHarvestValue();
+  string getSubcategory();
+  int hasUpperHolding();
+  int hasSubHolding();
 };

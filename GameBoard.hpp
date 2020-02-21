@@ -15,7 +15,7 @@ public:
   GameBoard(int countOfP);
   ~GameBoard();
   void initializeGameBoard();
-  void printGameStatistics();
+  void printGameStatistics();//prolly need to make this virtual
   void gamePlay();
 };
 #endif

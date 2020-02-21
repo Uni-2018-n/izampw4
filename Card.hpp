@@ -12,6 +12,7 @@ enum holdings {PLAIN, MINE, GOLD_MINE, CRYSTAL_MINE, FARMS, SOLO, STRONGHOLD};
 class Card{
 protected:
   string category;
+  string subcategory;
   string name;
   int cost;
   bool isTapped;

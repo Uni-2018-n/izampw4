@@ -203,6 +203,7 @@ int Player::getCurrHandPl(){
   return currHand->currPl();
 }
 
+
 //////////////////////////////////////////////Battle Phase
 list<Personality*>* Player::getPlayedPersonalityCards(){
   return playedPersonalityCards;
@@ -220,4 +221,57 @@ void Player::printOptionsByEnemys(){
   printHand();
   cout<<"Printing Army : "<< endl;
   printArmy();
+
+
+//////////////////////////////////////////////Chains
+int Player::findMine(){
+
+  list<Holding*>::iterator it;
+  int count=0;
+  for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
+    if((*it)->getSubcategory()=="MINE"&&(*it)->hasUpperHolding()==0){
+      return count;
+    }
+    count++;
+  }
+  return -1;
+}
+
+int Player::findGoldMineWithoutSub(){
+
+  list<Holding*>::iterator it;
+  int count=0;
+  for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
+    if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->hasSubHolding()==0){
+      return count;
+    }
+    count++;
+  }
+  return -1;
+}
+
+int Player::findGoldMineWithoutUpper(){
+
+  list<Holding*>::iterator it;
+  int count=0;
+  for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
+    if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->hasUpperHolding()==0){
+      return count;
+    }
+    count++;
+  }
+  return -1;
+}
+
+int Player::findCrystalMine(){
+
+  list<Holding*>::iterator it;
+  int count=0;
+  for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
+    if((*it)->getSubcategory()=="CRYSTAL_MINE"&&(*it)->hasSubHolding()==0){
+      return count;
+    }
+    count++;
+  }
+  return -1;
 }
