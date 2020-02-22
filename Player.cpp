@@ -8,9 +8,9 @@ Player::Player(DeckBuilder& deck){
   deck.deckShuffler(fateDeck);
   dynastyDeck = deck.createDynastyDeck();
   deck.deckShuffler(dynastyDeck);
+  playedPersonalityCards = new list<Personality*>();
 
   //uncomment this if you want to add testing personalities
-  // playedPersonalityCards = new list<Personality*>();
   // Personality* temp= (Personality*)((dynastyDeck->front()));
   // temp->setIsRevealed(true);
   // playedPersonalityCards->push_back(temp);
@@ -27,7 +27,7 @@ Player::Player(DeckBuilder& deck){
   // temp->setIsRevealed(true);
   // playedPersonalityCards->push_back(temp);
   // dynastyDeck->pop_front();
-  
+
   playedHoldingCards = new list<Holding*>();
 
   playedFollowerCards = new list<Follower*>();
