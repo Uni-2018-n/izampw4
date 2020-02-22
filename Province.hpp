@@ -9,15 +9,14 @@ private:
   int honour;
   int defense;
   int harvest;
-
-
+  list<Personality*>* defendingCards;
 public:
-  list<Personality*>* defendingCards;//prepei na gemizoume auti ti lista
   Provinces(BlackCard& baseCard, Stronghold& currStronghold);
   void print();
   int getHonour();
   int getDefense();
   int getHarvest();
+  list<Personality*>* getDefendingCards();
 };
 
 #endif

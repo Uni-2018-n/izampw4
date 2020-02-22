@@ -8,7 +8,9 @@ Player::Player(DeckBuilder& deck){
   deck.deckShuffler(fateDeck);
   dynastyDeck = deck.createDynastyDeck();
   deck.deckShuffler(dynastyDeck);
-  playedPersonalityCards = new list<Personality*>();
+
+  //uncomment this if you want to add testing personalities
+  // playedPersonalityCards = new list<Personality*>();
   // Personality* temp= (Personality*)((dynastyDeck->front()));
   // temp->setIsRevealed(true);
   // playedPersonalityCards->push_back(temp);
@@ -25,6 +27,7 @@ Player::Player(DeckBuilder& deck){
   // temp->setIsRevealed(true);
   // playedPersonalityCards->push_back(temp);
   // dynastyDeck->pop_front();
+  
   playedHoldingCards = new list<Holding*>();
 
   playedFollowerCards = new list<Follower*>();
@@ -159,7 +162,9 @@ void Player::printArmy(){
   int count=0;
   list<Personality*>::iterator it;
   for(it = playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++){
-    cout << count++ << ":" << (*it)->getName() << "   ";
+    cout << "<" << count++ << ">:";
+    (*it)->printStats();
+    cout << endl;
   }
   cout << endl;
 }
@@ -206,17 +211,26 @@ void Player::equipCardToArmy(int cardIndex, int armyIndex){
             currArmy->setDefense(currArmy->getDefense() + currCard->getEffectBonus());
           }
         }
+        cout << "-----SUCCESS" << endl;
+        removeHandCard(cardIndex);
       }else{
         cout << "Cant play card cause honor of army is not enough" << endl;
       }
     }else{
       cout << "Already played a GreenCard for this Personality" << endl;
     }
+  }else{
+    cout << "cant afford the cost of this card" << endl;
   }
+  cout << endl;
 }
 
 int Player::getCurrHandPl(){
   return currHand->currPl();
+}
+
+void Player::removeHandCard(int cardIndex){
+  currHand->removeCard(cardIndex);
 }
 
 
@@ -228,23 +242,22 @@ list<Personality*>* Player::getPlayedPersonalityCards(){
 void Player::printProvinces(){
   int count=0;
   list<Provinces *>::iterator it;//print ta provinces
-  for(it = provinces->begin(); it != provinces->end(); it++)
+  for(it = provinces->begin(); it != provinces->end(); it++){
     if((*it)->getIsRevealed() == true){//2.4 1h par teleytaia protash
       cout << count << ": ";
       (*it)->print();
-      count++;
     }else{
       cout << count << ": (PROVINCE UNREVEALED)  |  ";
-      count++;
     }
+    count++;
+  }
+  cout << endl;
 }
 
 void Player::printOptionsByEnemys(){
   cout<<"Printing Provinces : "<<endl;
   printProvinces();
   cout << endl;
-  // cout<<"Printing Army : "<< endl;
-  // printArmy();
 }
 
 int Player::getCountOfProvinces(){
@@ -255,28 +268,29 @@ list<Provinces*>* Player::getProvinces(){
   return provinces;
 }
 
-void Player::destroyProvince(int prov){//not sure it works
-  list<Provinces *>::iterator it;//print ta provinces
-  it=provinces->begin();
-  // Incrementing it by prov number of  positions
-  advance(it,prov-1);
-
+void Player::destroyProvince(int prov){//had to change it advance didnt work...
+  list<Provinces *>::iterator it;
+  int count=0;
+  for(it=provinces->begin(); it != provinces->end(); it++){
+    if(count == prov){
+      break;
+    }
+    count++;
+  }
   provinces->erase(it);
 }
 
 void Player::destroyCards(Provinces* prov){
-  // playedPersonalityCards
   list<Personality*>::iterator it;
   for(it=playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++){
     list<Personality*>::iterator it2;
-    for(it2=prov->defendingCards->begin(); it2 != prov->defendingCards->end(); it2++){
-      if((*it) == (*it2)){
+    for(it2=prov->getDefendingCards()->begin(); it2 != prov->getDefendingCards()->end(); it2++){
+      if((*it) == (*it2)){//paizei na bgalei problhma ayth h grammh :(
         playedPersonalityCards->erase(it);
-        prov->defendingCards->erase(it2);
+        prov->getDefendingCards()->erase(it2);
       }
     }
   }
-  cout << "mphke edw" << endl;
 }
 
 

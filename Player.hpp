@@ -46,6 +46,7 @@ public:
   int getCountOfPlayedPersonalityCards();
   void equipCardToArmy(int cardIndex, int armyIndex);
   int getCurrHandPl();
+  void removeHandCard(int cardIndex);
   //Battle Phase
   list<Personality*>* getPlayedPersonalityCards();
   void printOptionsByEnemys();

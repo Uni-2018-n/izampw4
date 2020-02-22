@@ -54,27 +54,45 @@ bool Hand::addToHand(BlackCard* new_card){
 void Hand::print(){
   int count=0;
   {//loop gia oles tis listes ektyponontas mono ta onomata gia twra
-  list<Follower *>::iterator it;
-  for(it = Followers->begin(); it != Followers->end(); it++)
-  cout <<count++<<":" << (*it)->getName() << "(), ";
+    list<Follower *>::iterator it;
+    for(it = Followers->begin(); it != Followers->end(); it++)
+      cout << "<"<<count++ <<">:" << (*it)->getName() <<
+      "(cost: " << (*it)->getCost() << ", " <<
+      "attackBonus: " << (*it)->getAttackBonus() << ", " <<
+      "defenceBonus: " << (*it)->getDefenseBonus() << ", " <<
+      "minimumHonour: " << (*it)->getMinimumHonour() << ", " <<
+      "effectBonus: " << (*it)->getEffectBonus() << ", " <<
+      "effectCost: " << (*it)->getEffectCost() << "), " << endl;
   }
 
   {
-  list<Item *>::iterator it;
-  for(it = Items->begin(); it != Items->end(); it++)
-  cout <<count++<<":"<< (*it)->getName() << "(durability: " << (*it)->getDurability() << "), ";
+    list<Item *>::iterator it;
+    for(it = Items->begin(); it != Items->end(); it++)
+      cout << "<"<<count++ <<">:" << (*it)->getName() <<
+      "(cost: " << (*it)->getCost() << ", " <<
+      "attackBonus: " << (*it)->getAttackBonus() << ", " <<
+      "defenceBonus: " << (*it)->getDefenseBonus() << ", " <<
+      "minimumHonour: " << (*it)->getMinimumHonour() << ", " <<
+      "effectBonus: " << (*it)->getEffectBonus() << ", " <<
+      "effectCost: " << (*it)->getEffectCost() << ", " <<
+      "durability: " << (*it)->getDurability()<< "), " << endl;
   }
 
   {
-  list<Personality *>::iterator it;
-  for(it = Personalities->begin(); it != Personalities->end(); it++)
-  cout << count++ << ":" << (*it)->getName() << "(attack: " << (*it)->getAttack() << ", defense: "<< (*it)->getDefense() << ", honor: " << (*it)->getHonor() << "), ";
+    list<Personality *>::iterator it;
+    for(it = Personalities->begin(); it != Personalities->end(); it++)
+    cout << "<"<<count++ <<">:" << (*it)->getName() <<
+    "(attack: " << (*it)->getAttack() << ", " <<
+    "defense: "<< (*it)->getDefense() << ", " <<
+    "honor: " << (*it)->getHonor() << "), " << endl;
+
   }
 
   {
-  list<Holding *>::iterator it;
-  for(it = Holdings->begin(); it != Holdings->end(); it++)
-  cout << count++ << ":" << (*it)->getName() << "(harvestValue: " << (*it)->getHarvestValue() << "), ";
+    list<Holding *>::iterator it;
+    for(it = Holdings->begin(); it != Holdings->end(); it++)
+      cout << "<"<<count++ <<">:" << (*it)->getName() <<
+      "(harvestValue: " << (*it)->getHarvestValue() << "), " << endl;
   }
 
   cout << endl;
@@ -130,4 +148,29 @@ GreenCard* Hand::getCardFromIndex(int cardIndex){
     }
   }
   return NULL;
+}
+
+void Hand::removeCard(int cardIndex){
+  int count=0;
+  {
+    list<Follower*>::iterator it;
+    for(it= Followers->begin(); it != Followers->end(); it++){
+      if(cardIndex == count){
+        Followers->erase(it);
+        return;
+      }
+      count++;
+    }
+  }
+
+  {
+    list<Item*>::iterator it;
+    for(it=Items->begin(); it != Items->end(); it++){
+      if(cardIndex == count){
+        Items->erase(it);
+        return;
+      }
+      count++;
+    }
+  }
 }

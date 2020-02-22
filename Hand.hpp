@@ -16,5 +16,6 @@ public:
   int currPl();
   void print();
   GreenCard* getCardFromIndex(int cardIndex);
+  void removeCard(int cardIndex);
 };
 #endif

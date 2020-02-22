@@ -88,8 +88,8 @@ void Personality::printStats(){
     cout << getName() << "(" <<
     "attack: " << getAttack() <<
     " defense: " << getDefense() <<
-    " honor: " << getHonor() << ")";
+    " honor: " << getHonor() << "),";
   }else{
-    cout << "(CARD UNREVEALED)" << "  |  ";
+    cout << "(CARD UNREVEALED),";
   }
 }

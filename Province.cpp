@@ -30,3 +30,7 @@ int Provinces::getDefense(){
 int Provinces::getHarvest(){
   return harvest;
 }
+
+list<Personality*>* Provinces::getDefendingCards(){
+  return defendingCards;
+}
