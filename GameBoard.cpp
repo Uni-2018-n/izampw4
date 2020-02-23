@@ -385,18 +385,16 @@ void GameBoard::battlePhase(){
           }
         }//apo edw kai katw exoyme mia lista thn (*currProvince)->defendingCards h opoia exei oles tis kartes poy 8eloume na kanoun defense sto syggekrimeno Province
         //currProvince, currProvince->defendingCards(list of the chosen personality cards)
-
-
       }
       //performSeppuku
       list<Personality*>::iterator it;
-      for(it=(*currPlayer)->playedPersonalityCards->begin(); it != (*currPlayer)->playedPersonalityCards->end(); it++){
+      for(it=(*currPlayer)->getPlayedPersonalityCards()->begin(); it != (*currPlayer)->getPlayedPersonalityCards()->end(); it++){
         if((*it)->getHonor()==0){
           cout<<"I am about to do what is called a Pro Gamer Move. *commits suicide*"<<endl;
-          (*currPlayer)->playedPersonalityCards->erase(it);
+          (*currPlayer)->getPlayedPersonalityCards()->erase(it);
         }
         }
-      //###########end of battle phase
+   //###########end of battle phase
     }else{
       cout << "\t No personalities available! Battle Phase Skiped" << endl;
     }
@@ -404,7 +402,6 @@ void GameBoard::battlePhase(){
 }
 
 //added reduce honor
-
 
 
 /////////////////////////////////////////Economy Phase

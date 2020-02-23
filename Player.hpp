@@ -18,7 +18,7 @@ private:
 
   list<Follower*>* playedFollowerCards;
   list<Item*>* playedItemCards;
-  // list<Personality*>* playedPersonalityCards;
+  list<Personality*>* playedPersonalityCards;
   list<Holding*>* playedHoldingCards;
 
 
@@ -29,7 +29,7 @@ private:
   void printArmy();
 
 public:
-    list<Personality*>* playedPersonalityCards;//TODO make public
+
   Player(DeckBuilder& deck);
   ~Player();
   bool operator <(const Player & playerObj) const{
