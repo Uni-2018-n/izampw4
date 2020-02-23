@@ -9,4 +9,5 @@ private:
 public:
   Item(string nam,items type);
   int getDurability();
+  void setDurability(int a);
 };

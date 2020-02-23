@@ -258,25 +258,38 @@ void GameBoard::battlePhase(){
           {
             list<Personality*>::iterator it;
             for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++)//gia na pethanoun oles oi kartes epithesis
-                attackingPersonalityCards->erase(it);
+              attackingPersonalityCards->erase(it);
           }
       }else{
         {
           list<Personality*>::iterator it;
           for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++)//gia na pethanoun oles oi kartes epithesis
-              attackingPersonalityCards->erase(it);
+            attackingPersonalityCards->erase(it);
         }
 
         {
           list<Personality*>::iterator it;
           for(it= (*currEnemyProvince)->getDefendingCards()->begin(); it != (*currEnemyProvince)->getDefendingCards()->end(); it++){//gia na pethanoun oles oi kartes epithesis
-              if((totalDefense-totalAttack)<(*it)->getAttack())
-                (*currEnemyProvince)->getDefendingCards()->erase(it);
-            }
+            if((totalDefense-totalAttack)<(*it)->getAttack())
+              (*currEnemyProvince)->getDefendingCards()->erase(it);
+          }
         }
-
-
       }
+
+      {
+        //adding cards that survived back to played personality cards
+        list<Personality*>::iterator it;
+        for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++){//gia na pethanoun oles oi kartes epithesis
+          (*it)->setIsTapped(true);
+          if((*it)->getPossibleGreen()->getCategory() == "item"){
+            (*it)->getPossibleGreen()->setDurability(((*it)->getPossibleGreen()->getDurability()-1);
+          }else if((*it)->getPossibleGreen()->getCategory() == "follower"){
+            (*it)->getPossibleGreen()->setIsTapped(true);
+          }
+          (*currPlayer)->getPlayedPersonalityCards()->push_back(*it);
+        }
+      }
+
 
       }else{//defense mode
 

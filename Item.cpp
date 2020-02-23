@@ -55,3 +55,6 @@ Item::Item(string nam, items type){
 int Item::getDurability(){
   return durability;
 }
+void Item::setDurability(int a){
+  durability=a;
+}
