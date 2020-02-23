@@ -180,7 +180,7 @@ void GameBoard::battlePhase(){
         }//from here currEnemyProvince is our attacking province
 
         int totalDefense=0;
-        totalDefense=(*currEnemyProvince)->getDefense();//gia na prostheso meta mono ta defense ton paikton
+        //totalDefense=(*currEnemyProvince)->getDefense();//gia na prostheso meta mono ta defense ton paikton
         {
           list<Personality*>::iterator it;
           for(it=(*currEnemyProvince)->getDefendingCards()->begin();it!=(*currEnemyProvince)->getDefendingCards()->end();it++){
@@ -220,6 +220,7 @@ void GameBoard::battlePhase(){
             }while(currPersonalityIsTapped);//if yes repeat the prossess for a diffrent personality card
 
             attackingPersonalityCards->push_back((*currPersonality));
+            attackingPersonalityCards->erase(currPersonality);//tis diagrafo oste ama pethanoun na min prepei na tis diagrafo kai apo tis dio listes kai ama epiviosoun tis ksanaantigrafo
 
             cout << "Choose another Personality to attack (-1 to stop): ";
             cin >> currPersonalityI;
@@ -239,10 +240,43 @@ void GameBoard::battlePhase(){
         }//from here exoume to full attack power apo ola ta personality cards mazemena
 
         //HERE START ATTACKING OPTIONS
-        if(totalAttack>=totalDefense){
+        if(totalAttack-totalDefense>(*currEnemyProvince->getDefense())){//1i periptosi, thelo mono attack prosopikotiton  meion defense aminas kai prosopikotiton
           (*currEnemy)->destroyCards(*currEnemyProvince);
           (*currEnemy)->destroyProvince(currEnemyProvinceI);
+        }else if(totalAttack>totalDefense){
+          (*currEnemy)->destroyCards(*currEnemyProvince);
+          {
+            list<Personality*>::iterator it;
+            for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++){
+              if((totalAttack-totalDefense)<(*it)->getAttack())
+                attackingPersonalityCards->erase(it);
+            }
+          }
+          //TODO oses epiviosoun na tis ksanavalo sto playedPersonalityCards
+        }else if(totalAttack==totalDefense){
+          (*currEnemy)->destroyCards(*currEnemyProvince);
+          {
+            list<Personality*>::iterator it;
+            for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++)//gia na pethanoun oles oi kartes epithesis
+                attackingPersonalityCards->erase(it);
+          }
+      }else{
+        {
+          list<Personality*>::iterator it;
+          for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++)//gia na pethanoun oles oi kartes epithesis
+              attackingPersonalityCards->erase(it);
         }
+
+        {
+          list<Personality*>::iterator it;
+          for(it= (*currEnemyProvince)->getDefendingCards()->begin(); it != (*currEnemyProvince)->getDefendingCards()->end(); it++){//gia na pethanoun oles oi kartes epithesis
+              if((totalDefense-totalAttack)<(*it)->getAttack())
+                (*currEnemyProvince)->getDefendingCards()->erase(it);
+            }
+        }
+
+
+      }
 
       }else{//defense mode
 
