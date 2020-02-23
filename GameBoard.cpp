@@ -102,41 +102,39 @@ void GameBoard::battlePhase(){
   list<Player*>::iterator currPlayer;
   for(currPlayer=players->begin(); currPlayer != players->end(); currPlayer++){
 
-    list<Personality*>* attackingPersonalityCards= new list<Personality*>();//kartes pou tha xrisimopoithoun gia attack se ena province
 
     if((*currPlayer)->getCountOfPlayedPersonalityCards() >0){
-      list<Personality*>* currPersonalities= (*currPlayer)->getPlayedPersonalityCards();
-      {//print currPlayers personalities
-        int currPersonalityCount=0;
-        cout << "---Your Personalities: " << endl;
-
-        list<Personality*>::iterator it;
-        for(it=currPersonalities->begin(); it != currPersonalities->end(); it++){
-          cout << currPersonalityCount << ": ";
-          (*it)->printStats();
-          currPersonalityCount++;
-        }
-        cout << endl << endl;
-      }
-
-      {//print Provinces of players except currPlayer
-        list<Player*>::iterator it;
-        int count=0;
-        for(it=players->begin(); it != players->end(); it++){
-          if(it != currPlayer){
-            cout << "Player " << count << ": " << endl;
-            (*it)->printOptionsByEnemys();
-          }else{
-            currPlayerI=count;
-          }
-          count++;
-        }
-      }
-
       cout << "Do you want to attack or defend this round attack=1/defense=0: ";
       cin >> atDefInput;
       if(atDefInput){//attack mode
+        list<Personality*>* attackingPersonalityCards= new list<Personality*>();//kartes pou tha xrisimopoithoun gia attack se ena province
+        list<Personality*>* currPersonalities= (*currPlayer)->getPlayedPersonalityCards();
+        {//print currPlayers personalities
+          int currPersonalityCount=0;
+          cout << "---Your Personalities: " << endl;
 
+          list<Personality*>::iterator it;
+          for(it=currPersonalities->begin(); it != currPersonalities->end(); it++){
+            cout << currPersonalityCount << ": ";
+            (*it)->printStats();
+            currPersonalityCount++;
+          }
+          cout << endl << endl;
+        }
+
+        {//print Provinces of players except currPlayer
+          list<Player*>::iterator it;
+          int count=0;
+          for(it=players->begin(); it != players->end(); it++){
+            if(it != currPlayer){
+              cout << "Player " << count << ": " << endl;
+              (*it)->printOptionsByEnemys();
+            }else{
+              currPlayerI=count;
+            }
+            count++;
+          }
+        }
         cout << "Choose Enemy to attack: ";//choose enemy
         int currEnemyI;
         cin >> currEnemyI;//get Index of Enemy Player
@@ -217,7 +215,7 @@ void GameBoard::battlePhase(){
             }while(currPersonalityIsTapped);//if yes repeat the prossess for a diffrent personality card
 
             attackingPersonalityCards->push_back((*currPersonality));
-            attackingPersonalityCards->erase(currPersonality);//tis diagrafo oste ama pethanoun na min prepei na tis diagrafo kai apo tis dio listes kai ama epiviosoun tis ksanaantigrafo
+            (*currPlayer)->getPlayedPersonalityCards()->erase(currPersonality);//tis diagrafo oste ama pethanoun na min prepei na tis diagrafo kai apo tis dio listes kai ama epiviosoun tis ksanaantigrafo
 
             cout << "Choose another Personality to attack (-1 to stop): ";
             cin >> currPersonalityI;
@@ -287,18 +285,103 @@ void GameBoard::battlePhase(){
           }
         }
       }else{//defense mode
-        int count=0;
-        int input;//se poio province na paiksei kartes
-        cout<<"Choose province to use cards in Defending Position [0-3]"<<endl;
-        list<Provinces *>::iterator it;
-        for(it=(*currPlayer)->getProvinces()->begin();it!=(*currPlayer)->getProvinces()->end();it++){
-          cout<<" "<<count++<<" : ";
-          (*it)->print();
+        list<Personality*>* currPersonalities= (*currPlayer)->getPlayedPersonalityCards();
+        {//print currPlayers personalities
+          int currPersonalityCount=0;
+          cout << "---Your Personalities: " << endl;
+
+          list<Personality*>::iterator it;
+          for(it=currPersonalities->begin(); it != currPersonalities->end(); it++){
+            cout << currPersonalityCount << ": ";
+            (*it)->printStats();
+            currPersonalityCount++;
+          }
+          cout << endl << endl;
         }
-        do{
-        cin>>input;
-        }while(input<0||input>4);
-        //TODO ektipono prosopikotites, dialegei apo played cards poies thelei kai tis vazo sti lista defendingCards
+
+        list<Provinces*>* currProvinces = (*currPlayer)->getProvinces();
+        {//print currPlayer's provinces
+          int currProvinceCount = 0;
+          cout << "---Your Provinces: " << endl;
+          list<Provinces*>::iterator it;
+          for(it=currProvinces->begin(); it != currProvinces->end(); it++){
+            cout << currProvinceCount << ": ";
+            (*it)->print();
+            currProvinceCount++;
+          }
+          cout << endl << endl;
+        }
+
+        cout << "Choose province to defend: ";
+        int currProvinceI;
+        cin >> currProvinceI;//get Index of province
+        while(currProvinceI > (*currPlayer)->getCountOfProvinces()-1){
+          cout << "Try again: ";
+          cin >> currProvinceI;
+        }
+        list<Provinces*>::iterator currProvince;
+        {
+          int count=0;
+          list<Provinces*>* temp= (*currPlayer)->getProvinces();
+          for(currProvince= temp->begin(); currProvince != temp->end(); currProvince++){
+            if(currProvinceI == count){
+              break;//an mpeis edw tote to currProvince einai to province poy 8eloume na kanoume defense
+            }else{
+              count++;
+            }
+          }
+        }//from here currProvince is our defense province kai currProvinceI einai to index tou province
+
+        int currPersonalityI;
+        cout << "Choose Personality to defend: ";
+        cin >> currPersonalityI;//pare to index
+        while(true){
+          bool currPersonalityIsTapped= true;
+
+          list<Personality*>::iterator currPersonality;//get currPlayer's selected Personality Card
+          {
+            int count;
+            // list<Personality*>* temp= (*currPlayer)->getPlayedPersonalityCards();
+            do{
+              while(currPersonalityI > (*currPlayer)->getCountOfPlayedPersonalityCards()){
+                cout << "Try again: ";
+                cin >> currPersonalityI;
+              }
+              count=0;
+              for(currPersonality = currPersonalities->begin(); currPersonality != currPersonalities->end(); currPersonality++){
+                if(currPersonalityI == count){
+                  break;//an mpeis edw tote to currPersonality exei thn personality poy 8eloyme
+                }else{
+                  count++;
+                }
+              }
+              currPersonalityIsTapped = (*currPersonality)->getIsTapped();//check if card is tapped
+              if(currPersonalityIsTapped){
+                cout << "Personality Card Is Tapped Please Choose Another Card: ";
+                cin >> currPersonalityI;
+              }
+            }while(currPersonalityIsTapped);//if yes repeat the prossess for a diffrent personality card
+            //if you go here currPersonality is the personality the player wants
+
+            (*currProvince)->getDefendingCards()->push_back(*currPersonality);
+            (*currPlayer)->getPlayedPersonalityCards()->erase(currPersonality);
+
+            cout << "Choose another personality to defense? (-1 to stop): ";
+            cin >> currPersonalityI;
+            if(currPersonalityI == -1){
+              cout << "Choosing done" << endl;
+              break;
+            }
+          }
+        }//apo edw kai katw exoyme mia lista thn (*currProvince)->defendingCards h opoia exei oles tis kartes poy 8eloume na kanoun defense sto syggekrimeno Province
+        //currProvince, currProvince->defendingCards(list of the chosen personality cards)
+
+
+
+
+
+
+
       }
     }else{
       cout << "\t No personalities available! Battle Phase Skiped" << endl;

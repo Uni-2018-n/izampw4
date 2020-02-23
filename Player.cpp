@@ -10,22 +10,23 @@ Player::Player(DeckBuilder& deck){
   playedPersonalityCards = new list<Personality*>();
 
   //uncomment this if you want to add testing personalities
-  // Personality* temp= (Personality*)((dynastyDeck->front()));
-  // temp->setIsRevealed(true);
-  // playedPersonalityCards->push_back(temp);
-  // dynastyDeck->pop_front();
-  // temp= (Personality*)((dynastyDeck->front()));
-  // temp->setIsRevealed(true);
-  // playedPersonalityCards->push_back(temp);
-  // dynastyDeck->pop_front();
-  // temp= (Personality*)((dynastyDeck->front()));
-  // temp->setIsRevealed(true);
-  // playedPersonalityCards->push_back(temp);
-  // dynastyDeck->pop_front();
-  // temp= (Personality*)((dynastyDeck->front()));
-  // temp->setIsRevealed(true);
-  // playedPersonalityCards->push_back(temp);
-  // dynastyDeck->pop_front();
+  
+  Personality* temp= (Personality*)((dynastyDeck->front()));
+  temp->setIsRevealed(true);
+  playedPersonalityCards->push_back(temp);
+  dynastyDeck->pop_front();
+  temp= (Personality*)((dynastyDeck->front()));
+  temp->setIsRevealed(true);
+  playedPersonalityCards->push_back(temp);
+  dynastyDeck->pop_front();
+  temp= (Personality*)((dynastyDeck->front()));
+  temp->setIsRevealed(true);
+  playedPersonalityCards->push_back(temp);
+  dynastyDeck->pop_front();
+  temp= (Personality*)((dynastyDeck->front()));
+  temp->setIsRevealed(true);
+  playedPersonalityCards->push_back(temp);
+  dynastyDeck->pop_front();
 
   playedHoldingCards = new list<Holding*>();
 
