@@ -10,7 +10,7 @@ Player::Player(DeckBuilder& deck){
   playedPersonalityCards = new list<Personality*>();
 
   //uncomment this if you want to add testing personalities
-  
+
   Personality* temp= (Personality*)((dynastyDeck->front()));
   temp->setIsRevealed(true);
   playedPersonalityCards->push_back(temp);
@@ -298,6 +298,10 @@ void Player::destroyCards(Provinces* prov){
 }
 
 
+// void Player::reduceHonor(){
+//   honour--;
+// };
+
 
 
 //////////////////////////////////////////////Chains
@@ -351,4 +355,18 @@ int Player::findCrystalMine(){
     count++;
   }
   return -1;
+}
+////////////////////////////////////economy phase
+void Player::printAvailableCards(){
+  int count=0;
+  list<BlackCard*>::iterator it;//print tis kartes poy einai panw apo tis eparxies
+  for(it = availableDynastyCards->begin(); it != availableDynastyCards->end(); it++){
+    if((*it)->getIsRevealed() == true){//mono an einai revealed
+      cout << count <<" : "<< (*it)->getName();
+      count++;
+    }else{
+      cout << "(CARD UNREVEALED)" << "  |  ";//allios rip
+    }
+  }
+  cout << endl << endl;
 }

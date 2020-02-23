@@ -43,6 +43,8 @@ void GameBoard::gamePlay(){
   cout << "######################BATTLE PHASE#########################"<< endl;
   battlePhase();
 
+  cout << "######################BATTLE PHASE#########################"<< endl;
+  economyPhase();
   cout << endl<<endl;
 }
 
@@ -78,7 +80,7 @@ void GameBoard::equipPhase(){
           cout<<"You did not buy any cards"<<endl;
           break;
         }else{
-          cout << "give input about Personality: ";
+          cout << "Choose Personality to attach the card to: ";
           cin >> inputArmy;
           while(inputArmy > (*it)->getCountOfPlayedPersonalityCards()){
             cout << "try again: ";
@@ -243,8 +245,12 @@ void GameBoard::battlePhase(){
           {
             list<Personality*>::iterator it;
             for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++){
-              if((totalAttack-totalDefense)<(*it)->getAttack())
+              if((totalAttack-totalDefense)<(*it)->getAttack()){
               attackingPersonalityCards->erase(it);
+              }
+              else{
+                (*it)->reduceHonor();
+              }
             }
           }
           //TODO oses epiviosoun na tis ksanavalo sto playedPersonalityCards
@@ -265,8 +271,12 @@ void GameBoard::battlePhase(){
           {
             list<Personality*>::iterator it;
             for(it= (*currEnemyProvince)->getDefendingCards()->begin(); it != (*currEnemyProvince)->getDefendingCards()->end(); it++){//gia na pethanoun oles oi kartes epithesis
-              if((totalDefense-totalAttack)<(*it)->getAttack())
+              if((totalDefense-totalAttack)<(*it)->getAttack()){
               (*currEnemyProvince)->getDefendingCards()->erase(it);
+              }
+              else{
+                (*it)->reduceHonor();
+              }
             }
           }
         }
@@ -360,7 +370,7 @@ void GameBoard::battlePhase(){
                 cout << "Personality Card Is Tapped Please Choose Another Card: ";
                 cin >> currPersonalityI;
               }
-            }while(currPersonalityIsTapped);//if yes repeat the prossess for a diffrent personality card
+            }while(currPersonalityIsTapped);//if yes repeat the prossess for a different personality card
             //if you go here currPersonality is the personality the player wants
 
             (*currProvince)->getDefendingCards()->push_back(*currPersonality);
@@ -377,14 +387,38 @@ void GameBoard::battlePhase(){
         //currProvince, currProvince->defendingCards(list of the chosen personality cards)
 
 
-
-
-
-
-
       }
+      //performSeppuku
+      list<Personality*>::iterator it;
+      for(it=(*currPlayer)->playedPersonalityCards->begin(); it != (*currPlayer)->playedPersonalityCards->end(); it++){
+        if((*it)->getHonor()==0){
+          cout<<"I am about to do what is called a Pro Gamer Move. *commits suicide*"<<endl;
+          (*currPlayer)->playedPersonalityCards->erase(it);
+        }
+        }
+      //###########end of battle phase
     }else{
       cout << "\t No personalities available! Battle Phase Skiped" << endl;
     }
+  }
+}
+
+//added reduce honor
+
+
+
+/////////////////////////////////////////Economy Phase
+
+void GameBoard::economyPhase(){
+  int input;
+  list<Player*>::iterator it;
+  for(it=players->begin(); it != players->end(); it++){
+    cout << "Printing Provinces "<<endl;
+    (*it)->printProvinces();
+    cout<< " Printing Available Buy Options :"<<endl;
+    (*it)->printAvailableCards();
+
+    cout<<"Do you want to buy a card ?[0-6=yes/7=no] "<<  endl;
+    cin>>input;
   }
 }

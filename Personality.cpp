@@ -102,3 +102,7 @@ Follower* Personality::getpossibleFollower(){
 Item* Personality::getPossibleItem(){
   return PossibleItem;
 }
+
+void Personality::reduceHonor(){
+  honor--;
+};

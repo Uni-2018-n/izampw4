@@ -30,7 +30,7 @@ public:
   void setIsDead(bool x);
   void setPossibleGreen(Follower* posGreen);
   void setPossibleGreen(Item* posGreen);
-
+  void reduceHonor();
   void printStats();
 };
 
