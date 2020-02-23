@@ -3,11 +3,7 @@
 
 #include <list>
 #include <vector>
-#include <iostream>
 #include <algorithm>
-#include <functional>
-#include <ctime>
-#include <cstdlib>
 
 #include "../Card.hpp"
 #include "../Personality.hpp"
@@ -48,19 +44,18 @@
 #define NO_NINJATO        2
 #define NO_WAKIZASHI      1
 
-class DeckBuilder
-{
-	private:
-		list<GreenCard*>* green;
-		list<BlackCard*>* black;
-	public:
-		DeckBuilder();
-		~DeckBuilder();
-		list<GreenCard *>* createFateDeck();
-	 	list<BlackCard *>* createDynastyDeck();
+class DeckBuilder{
+private:
+	list<GreenCard*>* green;
+	list<BlackCard*>* black;
+public:
+	DeckBuilder();
+	~DeckBuilder();
+	list<GreenCard *>* createFateDeck();
+	list<BlackCard *>* createDynastyDeck();
 
-	 	void deckShuffler(list<BlackCard *> *black);
-		void deckShuffler(list<GreenCard *> *green);
+	void deckShuffler(list<BlackCard *> *black);
+	void deckShuffler(list<GreenCard *> *green);
 };
 
 #endif

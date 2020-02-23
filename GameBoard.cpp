@@ -1,5 +1,4 @@
 #include "GameBoard.hpp"
-#include <list>
 
 using namespace std;
 
@@ -45,8 +44,6 @@ void GameBoard::gamePlay(){
   battlePhase();
 
   cout << endl<<endl;
-
-
 }
 
 /////////////////////////////////////////Starter Phase
@@ -240,7 +237,7 @@ void GameBoard::battlePhase(){
         }//from here exoume to full attack power apo ola ta personality cards mazemena
 
         //HERE START ATTACKING OPTIONS
-        if(totalAttack-totalDefense>(*currEnemyProvince->getDefense())){//1i periptosi, thelo mono attack prosopikotiton  meion defense aminas kai prosopikotiton
+        if(totalAttack-totalDefense>((*currEnemyProvince)->getDefense())){//1i periptosi, thelo mono attack prosopikotiton  meion defense aminas kai prosopikotiton
           (*currEnemy)->destroyCards(*currEnemyProvince);
           (*currEnemy)->destroyProvince(currEnemyProvinceI);
         }else if(totalAttack>totalDefense){
@@ -249,7 +246,7 @@ void GameBoard::battlePhase(){
             list<Personality*>::iterator it;
             for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++){
               if((totalAttack-totalDefense)<(*it)->getAttack())
-                attackingPersonalityCards->erase(it);
+              attackingPersonalityCards->erase(it);
             }
           }
           //TODO oses epiviosoun na tis ksanavalo sto playedPersonalityCards
@@ -258,41 +255,50 @@ void GameBoard::battlePhase(){
           {
             list<Personality*>::iterator it;
             for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++)//gia na pethanoun oles oi kartes epithesis
-              attackingPersonalityCards->erase(it);
-          }
-      }else{
-        {
-          list<Personality*>::iterator it;
-          for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++)//gia na pethanoun oles oi kartes epithesis
             attackingPersonalityCards->erase(it);
+          }
+        }else{
+          {
+            list<Personality*>::iterator it;
+            for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++)//gia na pethanoun oles oi kartes epithesis
+            attackingPersonalityCards->erase(it);
+          }
+
+          {
+            list<Personality*>::iterator it;
+            for(it= (*currEnemyProvince)->getDefendingCards()->begin(); it != (*currEnemyProvince)->getDefendingCards()->end(); it++){//gia na pethanoun oles oi kartes epithesis
+              if((totalDefense-totalAttack)<(*it)->getAttack())
+              (*currEnemyProvince)->getDefendingCards()->erase(it);
+            }
+          }
         }
 
         {
+          //adding cards that survived back to played personality cards
           list<Personality*>::iterator it;
-          for(it= (*currEnemyProvince)->getDefendingCards()->begin(); it != (*currEnemyProvince)->getDefendingCards()->end(); it++){//gia na pethanoun oles oi kartes epithesis
-            if((totalDefense-totalAttack)<(*it)->getAttack())
-              (*currEnemyProvince)->getDefendingCards()->erase(it);
+          for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++){//gia na pethanoun oles oi kartes epithesis
+            (*it)->setIsTapped(true);
+            if((*it)->getPossibleItem() != NULL){
+              (*it)->getPossibleItem()->setDurability(((*it)->getPossibleItem()->getDurability()-1));
+            }else if((*it)->getpossibleFollower()){
+              (*it)->getpossibleFollower()->setIsTapped(true);
+            }
+            (*currPlayer)->getPlayedPersonalityCards()->push_back(*it);
           }
         }
-      }
-
-      {
-        //adding cards that survived back to played personality cards
-        list<Personality*>::iterator it;
-        for(it= attackingPersonalityCards->begin(); it != attackingPersonalityCards->end(); it++){//gia na pethanoun oles oi kartes epithesis
-          (*it)->setIsTapped(true);
-          if((*it)->getPossibleGreen()->getCategory() == "item"){
-            (*it)->getPossibleGreen()->setDurability(((*it)->getPossibleGreen()->getDurability()-1);
-          }else if((*it)->getPossibleGreen()->getCategory() == "follower"){
-            (*it)->getPossibleGreen()->setIsTapped(true);
-          }
-          (*currPlayer)->getPlayedPersonalityCards()->push_back(*it);
-        }
-      }
-
-
       }else{//defense mode
-
+        int count=0;
+        int input;//se poio province na paiksei kartes
+        cout<<"Choose province to use cards in Defending Position [0-3]"<<endl;
+        list<Provinces *>::iterator it;
+        for(it=(*currPlayer)->getProvinces()->begin();it!=(*currPlayer)->getProvinces()->end();it++){
+          cout<<" "<<count++<<" : ";
+          (*it)->print();
+        }
+        do{
+        cin>>input;
+        }while(input<0||input>4);
+        //TODO ektipono prosopikotites, dialegei apo played cards poies thelei kai tis vazo sti lista defendingCards
       }
     }else{
       cout << "\t No personalities available! Battle Phase Skiped" << endl;

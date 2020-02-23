@@ -1,7 +1,4 @@
-#ifndef CARD_HPP
 #include "Card.hpp"
-#define CARD_HPP
-
 //////////////////////////////////////////////////CARD
 Card::Card(){
 
@@ -63,5 +60,3 @@ void BlackCard::setIsRevealed(bool a){
 bool BlackCard::getIsRevealed(){
   return IsRevealed;
 }
-
-#endif

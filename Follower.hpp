@@ -1,6 +1,8 @@
-#ifndef CARD_HPP
+#ifndef _FOLLOWER_HPP_
+#define _FOLLOWER_HPP_
+
+#ifndef _CARD_HPP_
 #include "Card.hpp"
-#define CARD_HPP
 #endif
 
 
@@ -10,3 +12,5 @@ private:
 public:
   Follower(string nam, followers type);
 };
+
+#endif

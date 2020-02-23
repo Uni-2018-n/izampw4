@@ -1,5 +1,4 @@
 #include "Player.hpp"
-#include "Province.hpp"
 Player::Player(DeckBuilder& deck){
   //setters
   money=a.getMoney();
@@ -196,12 +195,16 @@ void Player::equipCardToArmy(int cardIndex, int armyIndex){
   }
 
   if(money >= currCard->getCost()){
-    if(currArmy->getPossibleGreen() == NULL){
+    if((currArmy->getPossibleItem() == NULL) && (currArmy->getpossibleFollower() == NULL)){
       if(currArmy->getHonor() >= currCard->getMinimumHonour()){
         money = money -currCard->getCost();
         currArmy->setAttack(currArmy->getAttack() + currCard->getAttackBonus());
         currArmy->setDefense(currArmy->getDefense() + currCard->getDefenseBonus());
-        currArmy->setPossibleGreen(*currCard);
+        if((currCard->getCategory()) == "item"){
+          currArmy->setPossibleGreen((Item*)currCard);
+        }else{
+          currArmy->setPossibleGreen((Item*)currCard);
+        }
         if(money >= currCard->getEffectCost()){
           cout<<"Do you want to upgrade the card for the cost of "<<currCard->getEffectCost() <<" coins?[0=no/1=yes]"<<endl;
           cin >>response;

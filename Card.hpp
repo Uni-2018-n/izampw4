@@ -1,5 +1,5 @@
-#ifndef CARD_HPP
-#define CARD_HPP
+#ifndef _CARD_HPP_
+#define _CARD_HPP_
 
 #include <iostream>
 using namespace std;

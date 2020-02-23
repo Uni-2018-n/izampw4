@@ -1,8 +1,9 @@
-#ifndef CARD_HPP
-#include "Card.hpp"
-#define CARD_HPP
-#endif
+#ifndef _PERSONALITY_HPP_
+#define _PERSONALITY_HPP_
 
+#include "Card.hpp"
+#include "Follower.hpp"
+#include "Item.hpp"
 
 class Personality:public BlackCard{
 private:
@@ -10,19 +11,27 @@ private:
   int defense;
   int honor;
   bool isDead;
-  GreenCard* possibleGreen;
+  Follower* possibleFollower;
+  Item* PossibleItem;
+
 public:
+
   Personality(string nam, personalities type);
   int getAttack();
   int getDefense();
   int getHonor();
-  GreenCard* getPossibleGreen();
+  Follower* getpossibleFollower();
+  Item* getPossibleItem();
 
   bool getIsDead();
   void setAttack(int x);
   void setDefense(int x);
   void setHonor(int x);
   void setIsDead(bool x);
-  void setPossibleGreen(GreenCard& posGreen);
+  void setPossibleGreen(Follower* posGreen);
+  void setPossibleGreen(Item* posGreen);
+
   void printStats();
 };
+
+#endif

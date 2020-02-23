@@ -1,6 +1,8 @@
-#ifndef CARD_HPP
+#ifndef _HOLDING_HPP_
+#define _HOLDING_HPP_
+
+#ifndef _CARD_HPP_
 #include "Card.hpp"
-#define CARD_HPP
 #endif
 
 class Holding:public BlackCard{
@@ -15,3 +17,5 @@ public:
   int hasUpperHolding();
   int hasSubHolding();
 };
+
+#endif

@@ -2,7 +2,8 @@
 
 Personality::Personality(string nam, personalities type){
   name = nam;
-  possibleGreen= NULL;
+  possibleFollower= NULL;
+  PossibleItem= NULL;
   isTapped = false;
   IsRevealed = false;
   category="personality";
@@ -59,12 +60,12 @@ bool Personality::getIsDead(){
   return isDead;
 }
 
-GreenCard* Personality::getPossibleGreen(){
-  return possibleGreen;
+void Personality::setPossibleGreen(Follower* posGreen){
+  possibleFollower = posGreen;
 }
 
-void Personality::setPossibleGreen(GreenCard& posGreen){
-  possibleGreen = &posGreen;
+void Personality::setPossibleGreen(Item* posGreen){
+  PossibleItem = posGreen;
 }
 
 void Personality::setAttack(int x){
@@ -92,4 +93,12 @@ void Personality::printStats(){
   }else{
     cout << "(CARD UNREVEALED),";
   }
+}
+
+Follower* Personality::getpossibleFollower(){
+  return possibleFollower;
+}
+
+Item* Personality::getPossibleItem(){
+  return PossibleItem;
 }

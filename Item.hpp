@@ -1,6 +1,8 @@
-#ifndef CARD_HPP
+#ifndef _ITEM_HPP_
+#define _ITEM_HPP_
+
+#ifndef _CARD_HPP_
 #include "Card.hpp"
-#define CARD_HPP
 #endif
 
 class Item:public GreenCard{
@@ -11,3 +13,5 @@ public:
   int getDurability();
   void setDurability(int a);
 };
+
+#endif
