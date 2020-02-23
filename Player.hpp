@@ -27,9 +27,8 @@ private:
 
   void printHand();
   void printArmy();
-
+  void printProvinces();
 public:
-
   Player(DeckBuilder& deck);
   ~Player();
   bool operator <(const Player & playerObj) const{
@@ -55,15 +54,11 @@ public:
   list<Provinces*>* getProvinces();
   void destroyProvince(int prov);
   void destroyCards(Provinces* prov);//tha sigkrino ti lista played cards me ti lista attackes cards kai an einai idies tha kano pop
-  void reduceHonor();//reduces honor by 1
   //Chains
   int findMine();//tha vriskei mono mines pou den exoun upperholding
   int findGoldMineWithoutUpper();
   int findGoldMineWithoutSub();
   int findCrystalMine();//tha vriskei crystal miens xoris subholding
-  //economyPhase
-  void printAvailableCards();
-  void printProvinces();
 };
 
 #endif

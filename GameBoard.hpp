@@ -10,7 +10,7 @@ private:
   void starterPhase();
   void equipPhase();
   void battlePhase();
-  void economyPhase();
+
 public:
   GameBoard(int countOfP);
   ~GameBoard();
