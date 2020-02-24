@@ -84,5 +84,7 @@ public:
   }
 };
 
+  list<Provinces*>* getProvinces();
+
 #endif
 //TODO remove code from hpp

@@ -32,6 +32,8 @@ void GameBoard::printGameStatistics(){
 void GameBoard::gamePlay(){
   cout<<"-_-_-_-_-_Game is Starting-_-_-_-_-_"<<endl;
   players->sort();
+
+  do{
   cout << "######################STARTER PHASE#########################"<< endl;
   starterPhase();
 
@@ -46,6 +48,7 @@ void GameBoard::gamePlay(){
   cout << "######################ECONOMY PHASE#########################"<< endl;
   economyPhase();
 
+}while(checkWinningCondition()!=1);
   cout << endl<<endl;
 }
 
@@ -639,3 +642,39 @@ void GameBoard::economyPhase(){
   //loop ola ta played holdings gia na auksisei ta money tou paikti
 
 }
+
+////////////////////////////////////////checkWinningCondition
+int GameBoard::checkWinningCondition(){
+
+  list<Player*>::iterator currPlayer;
+
+  for(currPlayer=players->begin(); currPlayer != players->end(); currPlayer++){
+    if((*currPlayer)->getProvinces()->size()==0){
+      cout<<"Deleting Players"<<endl;
+  }
+}
+
+//return 1 if only one player left
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //end

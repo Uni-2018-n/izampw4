@@ -20,7 +20,7 @@ Player::Player(DeckBuilder& deck){
   // while(dynastyDeck->front()->getCategory() != "personality"){
   //   dynastyDeck->pop_front();list <Holding*>::iterator it;//GOLD_MINE
 
-            
+
   // }
   // temp= (Personality*)((dynastyDeck->front()));
   // temp->setIsRevealed(true);
@@ -374,7 +374,8 @@ int Player::findMine(){
   for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
     if((*it)->getSubcategory()=="MINE"&&(*it)->getHasUpperHolding()==0){
 
-      return count;
+      return count;  int findGoldMineWithoutUpper();
+
     }
     count++;
   }
@@ -411,7 +412,8 @@ int Player::findCrystalMine(){
 
   list<Holding*>::iterator it;
   int count=0;
-  for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
+  for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){  int findGoldMineWithoutUpper();
+
     if((*it)->getSubcategory()=="CRYSTAL_MINE"&&(*it)->getHasSubHolding()==0){
       return count;
     }
@@ -443,4 +445,8 @@ list<Personality*>* Player::getTopOfProvincePersonality(){
 
 void Player::increaseMoney(int a){
   money +=a;
+}
+
+list<Provinces*>* Player::getProvinces(){
+  return provinces;
 }

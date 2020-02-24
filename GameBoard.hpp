@@ -11,11 +11,13 @@ private:
   void equipPhase();
   void battlePhase();
   void economyPhase();
+  int checkWinningCondition();
+
 public:
   GameBoard(int countOfP);
   ~GameBoard();
   void initializeGameBoard();
-  void printGameStatistics();//prolly need to make this virtual
+  void printGameStatistics();
   void gamePlay();
 };
 #endif
