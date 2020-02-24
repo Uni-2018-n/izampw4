@@ -43,6 +43,9 @@ void GameBoard::gamePlay(){
   cout << "######################BATTLE PHASE#########################"<< endl;
   battlePhase();
 
+  cout << "######################ECONOMY PHASE#########################"<< endl;
+  economyPhase();
+
   cout << endl<<endl;
 }
 
@@ -429,4 +432,51 @@ void GameBoard::battlePhase(){
       cout << "\t No personalities available! Battle Phase Skiped" << endl;
     }
   }
+}
+
+////////////////////////////economyPhase
+// TODO molis agorazei mia karta na elegxei gia alisides
+void GameBoard::economyPhase(){
+  int inputBlack,inputGreen;
+  list<Player*>::iterator currPlayer;
+
+  for(currPlayer=players->begin(); currPlayer != players->end(); currPlayer++){
+    while(true){
+    (*currPlayer)->printBuyingOptionsBlack();
+    do{
+      cout<<"Choose card to buy or Enter[-1] to not buy any"<<endl;
+      cin>>inputBlack;
+    }while(inputBlack>=-1&&inputBlack<(*currPlayer)->getAvailableDynastyCards()->size());//gia na min fame segmentation ama dosei noumero megalitero apo oti plithos karton exoume
+    if(inputBlack==-1){
+      break;//not breaking properly
+    }
+    else{
+      
+      //na afairei apo top of province,na metaferei sto played black card kai na travaei kainourgia unrevealed
+
+    }//else
+
+  }//while true
+
+
+while(true){//for green cards
+  (*currPlayer)->printBuyingOptionsGreen();
+  do{
+    cout<<"Choose card to buy or Enter[-1] to not buy any"<<endl;
+    cin>>inputGreen;
+  }while(inputGreen>=-1&&inputGreen<7);//TODO needs fixing. If user gives wrong input has segme
+  if(inputGreen==-1){
+    break;
+  }
+  else{
+    //edo vale na antigrafei tin karta stin antistoixi played list
+    (*currPlayer)->removeHandCard(inputGreen);
+  }
+
+}
+
+
+
+
+}//for currplayer
 }

@@ -363,3 +363,32 @@ int Player::findCrystalMine(){
   }
   return -1;
 }
+
+void Player::printBuyingOptionsBlack(){
+
+  cout << "Printing available Black Cards for purchase:" << endl;
+  {
+    list<BlackCard*>::iterator it;//print tis kartes poy einai panw apo tis eparxies
+    for(it = availableDynastyCards->begin(); it != availableDynastyCards->end(); it++){
+      if((*it)->getIsRevealed() == true){//mono an einai revealed
+        cout << (*it)->getName() << "  |  ";
+      }else{
+        cout << "(CARD UNREVEALED)" << "  |  ";//allios rip
+      }
+    }
+    cout << endl << endl;
+  }
+
+}
+
+void Player::printBuyingOptionsGreen(){
+  cout <<"Printing available Green Cards for purchase: " <<endl;
+  {
+    printHand();
+  }
+}
+
+
+list<BlackCard*>* Player::getAvailableDynastyCards(){
+  return availableDynastyCards;
+}

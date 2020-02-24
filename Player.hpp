@@ -59,6 +59,11 @@ public:
   int findGoldMineWithoutUpper();
   int findGoldMineWithoutSub();
   int findCrystalMine();//tha vriskei crystal miens xoris subholding
+  //economyPhase
+  void printBuyingOptionsBlack();
+  list<BlackCard*>* getAvailableDynastyCards();
+  
+  void printBuyingOptionsGreen();
 };
 
 #endif
