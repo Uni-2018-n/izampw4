@@ -72,3 +72,14 @@ void Holding::printStats(){
     cout << "(CARD UNREVEALED),";
   }
 }
+
+void Holding::printStats(bool a){
+  if(getIsRevealed()){
+    cout << getName() << "(" <<
+    "cost: " << getCost() <<
+    " HarvestValue: " << getHarvestValue() <<
+    "),";
+  }else{
+    cout << "(CARD UNREVEALED),";
+  }
+}

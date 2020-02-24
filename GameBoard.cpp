@@ -468,37 +468,45 @@ void GameBoard::battlePhase(){
 void GameBoard::economyPhase(){
   list<Player*>::iterator currPlayer;
   for(currPlayer=players->begin(); currPlayer != players->end(); currPlayer++){
+    cout << "Player $$: " << (*currPlayer)->getMoney() << endl;
     cout << "Top of provinces: " << endl;
     (*currPlayer)->printTopOfProvince();
+
     int currTopOfProvinceI;
     cout << "Choose top of province to buy: ";
     cin >> currTopOfProvinceI;
-    list <Personality*>::iterator itPersonality;
-    list <Holding*>::iterator itHolding;
+
+    list <Personality*>::iterator itPersonality;//potential personality card chosen
+    list <Holding*>::iterator itHolding;//potential holding card chosen
     bool perOrHolding;//TRUE IF HOLDING IS CHOSEN, FALSE IF PERSONALITY IS CHOSEN
-    {//get chosen top of province
-      bool donePurchase = false;
+    {//get chosen topOfProvince
+      bool donePurchase= true;
       do{
-        while(currTopOfProvinceI < 0 || currTopOfProvinceI > (*currPlayer)->getTopOfProvinceCount()-1){
+        while(currTopOfProvinceI < 0 || currTopOfProvinceI > (*currPlayer)->getTopOfProvinceCount()-1){//fail safe for wrong input
           cout << "Try again: ";
           cin >> currTopOfProvinceI;
         }
 
+        //scan both lists to find currTopOfProvince
         int count=0;
         list <Personality*>::iterator it;
+        bool found = false;
         {
           for(it= (*currPlayer)->getTopOfProvincePersonality()->begin(); it != (*currPlayer)->getTopOfProvincePersonality()->end(); it++){
             if(count == currTopOfProvinceI){
-              break;
+              found = true;
+              break;//if you are here then currTopOfProvinceI is a personality card saved in variable it
             }else{
               count++;
             }
           }
         }
-        if(count != currTopOfProvinceI){
+
+        if(!found){//if card havent found in personality list then check holding list
           list <Holding*>::iterator it;
           for(it= (*currPlayer)->getTopOfProvinceHolding()->begin(); it != (*currPlayer)->getTopOfProvinceHolding()->end(); it++){
             if(count == currTopOfProvinceI){
+              found = true;
               break;
             }else{
               count++;
@@ -510,32 +518,38 @@ void GameBoard::economyPhase(){
           itPersonality = it;
           perOrHolding = false;
         }
-        if(perOrHolding){
+        if(perOrHolding){//check if money is enough to buy
           if((*currPlayer)->getMoney() >= (*itHolding)->getCost()){
-            (*currPlayer)->setMoney((*currPlayer)->getMoney() - (*itHolding)->getCost());
+            (*currPlayer)->setMoney((*currPlayer)->getMoney() - (*itHolding)->getCost());//do everything you need
             (*currPlayer)->getPlayedHoldingCards()->push_back(*itHolding);
             (*currPlayer)->getTopOfProvinceHolding()->erase(itHolding);
             donePurchase=true;
           }else{
+            cout << "Not enough money" << endl;
             donePurchase=false;
           }
         }else{
           if((*currPlayer)->getMoney() >= (*itPersonality)->getCost()){
-            (*currPlayer)->setMoney((*currPlayer)->getMoney() - (*itPersonality)->getCost());
+            (*currPlayer)->setMoney((*currPlayer)->getMoney() - (*itPersonality)->getCost());//do everything you need
             (*currPlayer)->getPlayedPersonalityCards()->push_back(*itPersonality);
             (*currPlayer)->getTopOfProvincePersonality()->erase(itPersonality);
             donePurchase=true;
           }else{
+            cout << "Not enough money" << endl;
             donePurchase=false;
           }
         }
-      }while(donePurchase);
+        if(!donePurchase){
+          cout << "Choose again: ";
+          cin >> currTopOfProvinceI;
+        }
+      }while(!donePurchase);
     }
 
     if(perOrHolding){//EDW AN TO CHOSEN TOP OF CARD EINAI HOLDING
 
     }else{//EDW AN TO CHOSEN TOP OF CARD EINAI PERSONALITY
-
+      
     }
     cout << "##Next Player##" << endl;
   }

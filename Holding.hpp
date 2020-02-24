@@ -17,6 +17,8 @@ public:
   int hasUpperHolding();
   int hasSubHolding();
   void printStats();
+  void printStats(bool a);
+
 };
 
 #endif

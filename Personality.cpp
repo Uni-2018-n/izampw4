@@ -95,6 +95,18 @@ void Personality::printStats(){
   }
 }
 
+void Personality::printStats(bool a){
+  if(getIsRevealed()){
+    cout << getName() << "(" <<
+    "cost: " << getCost() <<
+    " attack: " << getAttack() <<
+    " defense: " << getDefense() <<
+    " honor: " << getHonor() << "),";
+  }else{
+    cout << "(CARD UNREVEALED),";
+  }
+}
+
 Follower* Personality::getpossibleFollower(){
   return possibleFollower;
 }

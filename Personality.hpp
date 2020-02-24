@@ -33,6 +33,8 @@ public:
   void reduceHonor();
 
   void printStats();
+  void printStats(bool a);
+
 };
 
 #endif

@@ -128,7 +128,7 @@ void Player::printTopOfProvince(){
     list<Personality*>::iterator it;
     for(it=topOfProvincePersonality->begin(); it != topOfProvincePersonality->end(); it++){
       cout << count << ": ";
-      (*it)->printStats();
+      (*it)->printStats(true);
       count++;
     }
   }
@@ -137,7 +137,7 @@ void Player::printTopOfProvince(){
     list<Holding*>::iterator it;
     for(it= topOfProvinceHolding->begin(); it != topOfProvinceHolding->end(); it++){
       cout << count << ": ";
-      (*it)->printStats();
+      (*it)->printStats(true);
       count++;
     }
   }
