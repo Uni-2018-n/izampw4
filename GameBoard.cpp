@@ -73,7 +73,7 @@ void GameBoard::equipPhase(){
         (*it)->printOptions();
         cout<<"Choose card to buy or enter 7 to NOT buy any cards: ";
         cin >> inputHand;
-        while(inputHand > (*it)->getCurrHandPl() && inputHand != 7){
+        while(inputHand < 0 || (inputHand > (*it)->getCurrHandPl()-1 && inputHand != 7)){
           cout << "try again: ";
           cin >> inputHand;
         }
@@ -83,7 +83,7 @@ void GameBoard::equipPhase(){
         }else{
           cout << "give input about Personality: ";
           cin >> inputArmy;
-          while(inputArmy > (*it)->getCountOfPlayedPersonalityCards()){
+          while(inputArmy < 0 || inputArmy > (*it)->getCountOfPlayedPersonalityCards()-1){
             cout << "try again: ";
             cin >> inputArmy;
           }
@@ -109,6 +109,10 @@ void GameBoard::battlePhase(){
     if((*currPlayer)->getCountOfPlayedPersonalityCards() >0){
       cout << "Do you want to attack or defend this round attack=1/defense=0: ";
       cin >> atDefInput;
+      while(atDefInput != 0 && atDefInput != 1){
+        cout << "Try again: ";
+        cin >> atDefInput;
+      }
       if(atDefInput){//attack mode
         list<Personality*>* attackingPersonalityCards= new list<Personality*>();//kartes pou tha xrisimopoithoun gia attack se ena province
         list<Personality*>* currPersonalities= (*currPlayer)->getPlayedPersonalityCards();
@@ -141,7 +145,7 @@ void GameBoard::battlePhase(){
         cout << "Choose Enemy to attack: ";//choose enemy
         int currEnemyI;
         cin >> currEnemyI;//get Index of Enemy Player
-        while(currEnemyI > countOfPlayers-1 || currEnemyI == currPlayerI){
+        while(currEnemyI < 0 || currEnemyI > countOfPlayers-1 || currEnemyI == currPlayerI){
           cout << "Try again: ";
           cin >> currEnemyI;
         }
@@ -160,7 +164,7 @@ void GameBoard::battlePhase(){
         cout << "Choose Enemy's province to attack: ";//choose province to attack
         int currEnemyProvinceI;
         cin >> currEnemyProvinceI;//get Index of Enemy's province
-        while(currEnemyProvinceI > (*currEnemy)->getCountOfProvinces()-1){
+        while(currEnemyProvinceI < 0 || currEnemyProvinceI > (*currEnemy)->getCountOfProvinces()-1){
           cout << "Try again: ";
           cin >> currEnemyProvinceI;
         }
@@ -198,28 +202,41 @@ void GameBoard::battlePhase(){
             int count;
             list<Personality*>* temp= (*currPlayer)->getPlayedPersonalityCards();
             do{
-              while(currPersonalityI >= (*currPlayer)->getCountOfPlayedPersonalityCards()){
+              while(currPersonalityI < -1 ||  currPersonalityI >= (*currPlayer)->getCountOfPlayedPersonalityCards()){
                 cout << "Try again: ";
                 cin >> currPersonalityI;
               }
-              count=0;
-              for(currPersonality = temp->begin(); currPersonality != temp->end(); currPersonality++){
-                if(currPersonalityI == count){
-                  break;//an mpeis edw tote to currPersonality exei thn personality poy 8eloyme
-                }else{
-                  count++;
+              if(currPersonalityI != -1){
+                count=0;
+                for(currPersonality = temp->begin(); currPersonality != temp->end(); currPersonality++){
+                  if(currPersonalityI == count){
+                    break;//an mpeis edw tote to currPersonality exei thn personality poy 8eloyme
+                  }else{
+                    count++;
+                  }
                 }
-              }
-              currPersonalityIsTapped = (*currPersonality)->getIsTapped();//check if card is tapped
-              if(currPersonalityIsTapped){
-                cout << "Personality Card Is Tapped Please Choose Another Card: ";
-                cin >> currPersonalityI;
+                currPersonalityIsTapped = (*currPersonality)->getIsTapped();//check if card is tapped
+                if(currPersonalityIsTapped){
+                  cout << "Personality Card Is Tapped Please Choose Another Card: ";
+                  cin >> currPersonalityI;
+                }
+              }else{
+                if(attackingPersonalityCards->size() == 0){
+                  currPersonalityIsTapped = true;
+                  cout << "Try again: ";
+                  cin >> currPersonalityI;
+                }else{
+                  currPersonalityIsTapped = false;
+                }
               }
             }while(currPersonalityIsTapped);//if yes repeat the prossess for a diffrent personality card
 
+            if(currPersonalityI == -1){
+              break;
+            }
+
             attackingPersonalityCards->push_back((*currPersonality));
             (*currPlayer)->getPlayedPersonalityCards()->erase(currPersonality);//tis diagrafo oste ama pethanoun na min prepei na tis diagrafo kai apo tis dio listes kai ama epiviosoun tis ksanaantigrafo
-            cout << "perase edw" << endl;
 
             {//print currPlayers personalities
               int currPersonalityCount=0;
@@ -339,7 +356,7 @@ void GameBoard::battlePhase(){
         cout << "Choose province to defend: ";
         int currProvinceI;
         cin >> currProvinceI;//get Index of province
-        while(currProvinceI > (*currPlayer)->getCountOfProvinces()-1){
+        while(currProvinceI < 0 ||  currProvinceI > (*currPlayer)->getCountOfProvinces()-1){
           cout << "Try again: ";
           cin >> currProvinceI;
         }
@@ -367,26 +384,38 @@ void GameBoard::battlePhase(){
             int count;
             // list<Personality*>* temp= (*currPlayer)->getPlayedPersonalityCards();
             do{
-              while(currPersonalityI >= (*currPlayer)->getCountOfPlayedPersonalityCards()){
+              while(currPersonalityI < -1 ||  currPersonalityI >= (*currPlayer)->getCountOfPlayedPersonalityCards()){
                 cout << "Try again: ";
                 cin >> currPersonalityI;
               }
-              count=0;
-              for(currPersonality = currPersonalities->begin(); currPersonality != currPersonalities->end(); currPersonality++){
-                if(currPersonalityI == count){
-                  break;//an mpeis edw tote to currPersonality exei thn personality poy 8eloyme
-                }else{
-                  count++;
+              if(currPersonalityI != -1){
+                count=0;
+                for(currPersonality = currPersonalities->begin(); currPersonality != currPersonalities->end(); currPersonality++){
+                  if(currPersonalityI == count){
+                    break;//an mpeis edw tote to currPersonality exei thn personality poy 8eloyme
+                  }else{
+                    count++;
+                  }
                 }
-              }
-              currPersonalityIsTapped = (*currPersonality)->getIsTapped();//check if card is tapped
-              if(currPersonalityIsTapped){
-                cout << "Personality Card Is Tapped Please Choose Another Card: ";
-                cin >> currPersonalityI;
+                currPersonalityIsTapped = (*currPersonality)->getIsTapped();//check if card is tapped
+                if(currPersonalityIsTapped){
+                  cout << "Personality Card Is Tapped Please Choose Another Card: ";
+                  cin >> currPersonalityI;
+                }
+              }else{
+                if((*currProvince)->getDefendingCards()->size() == 0){
+                  currPersonalityIsTapped = true;
+                  cout << "Try again: ";
+                  cin >> currPersonalityI;
+                }else{
+                  currPersonalityIsTapped = false;
+                }
               }
             }while(currPersonalityIsTapped);//if yes repeat the prossess for a diffrent personality card
             //if you go here currPersonality is the personality the player wants
-
+            if(currPersonalityI == -1){
+              break;
+            }
             (*currProvince)->getDefendingCards()->push_back(*currPersonality);
             (*currPlayer)->getPlayedPersonalityCards()->erase(currPersonality);
 
@@ -446,12 +475,12 @@ void GameBoard::economyPhase(){
     do{
       cout<<"Choose card to buy or Enter[-1] to not buy any"<<endl;
       cin>>inputBlack;
-    }while(inputBlack>=-1&&inputBlack<(*currPlayer)->getAvailableDynastyCards()->size());//gia na min fame segmentation ama dosei noumero megalitero apo oti plithos karton exoume
+    }while((inputBlack >=-1) && (inputBlack < (int)(*currPlayer)->getAvailableDynastyCards()->size()));//gia na min fame segmentation ama dosei noumero megalitero apo oti plithos karton exoume
     if(inputBlack==-1){
       break;//not breaking properly
     }
     else{
-      
+
       //na afairei apo top of province,na metaferei sto played black card kai na travaei kainourgia unrevealed
 
     }//else
