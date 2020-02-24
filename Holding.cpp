@@ -45,22 +45,12 @@ string Holding::getSubcategory(){
   return subcategory;
 }
 
-int Holding::hasUpperHolding(){
-  if((upperHolding)!=NULL){
-    return 1;
-  }
-  else{
-    return 0;
-  }
+int Holding::getHasUpperHolding(){
+  return hasUpperHolding;
 }
 
-int Holding::hasSubHolding(){
-  if((upperHolding)!=NULL){
-    return 1;
-  }
-  else{
-    return 0;
-  }
+int Holding::getHasSubHolding(){
+  return hasSubHolding;
 }
 
 void Holding::printStats(){
@@ -82,4 +72,16 @@ void Holding::printStats(bool a){
   }else{
     cout << "(CARD UNREVEALED),";
   }
+}
+
+void Holding::changeSubHoldingStatus(){
+  hasSubHolding=1;
+}
+
+void Holding::changeUpperHoldingStatus(){
+  hasUpperHolding=1;
+}
+
+void Holding::increaseHarvestValue(int a){
+  harvestValue +=a;
 }

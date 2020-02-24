@@ -8,17 +8,19 @@
 class Holding:public BlackCard{
 private:
   int harvestValue;
-  Holding* upperHolding;
-  Holding* subHolding;
+  int hasUpperHolding;
+  int hasSubHolding;
 public:
   Holding(string nam, holdings type);
   int getHarvestValue();
   string getSubcategory();
-  int hasUpperHolding();
-  int hasSubHolding();
+  int getHasUpperHolding();
+  void changeUpperHoldingStatus();
+  int getHasSubHolding();
+  void changeSubHoldingStatus();
   void printStats();
   void printStats(bool a);
-
+  void increaseHarvestValue(int a);
 };
 
 #endif

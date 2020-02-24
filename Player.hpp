@@ -71,6 +71,7 @@ public:
   list<Holding*>* getTopOfProvinceHolding();
   list<Personality*>* getTopOfProvincePersonality();
   void printBuyingOptionsGreen();
+  void increaseMoney(int a);
   int getMoney(){
     return money;
   }
@@ -84,3 +85,4 @@ public:
 };
 
 #endif
+//TODO remove code from hpp

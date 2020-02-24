@@ -18,7 +18,9 @@ Player::Player(DeckBuilder& deck){
   // playedPersonalityCards->push_back(temp);
   // dynastyDeck->pop_front();
   // while(dynastyDeck->front()->getCategory() != "personality"){
-  //   dynastyDeck->pop_front();
+  //   dynastyDeck->pop_front();list <Holding*>::iterator it;//GOLD_MINE
+
+            
   // }
   // temp= (Personality*)((dynastyDeck->front()));
   // temp->setIsRevealed(true);
@@ -370,7 +372,7 @@ int Player::findMine(){
   list<Holding*>::iterator it;
   int count=0;
   for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
-    if((*it)->getSubcategory()=="MINE"&&(*it)->hasUpperHolding()==0){
+    if((*it)->getSubcategory()=="MINE"&&(*it)->getHasUpperHolding()==0){
 
       return count;
     }
@@ -384,7 +386,7 @@ int Player::findGoldMineWithoutSub(){
   list<Holding*>::iterator it;
   int count=0;
   for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
-    if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->hasSubHolding()==0){
+    if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->getHasSubHolding()==0){
       return count;
     }
     count++;
@@ -397,7 +399,7 @@ int Player::findGoldMineWithoutUpper(){
   list<Holding*>::iterator it;
   int count=0;
   for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
-    if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->hasUpperHolding()==0){
+    if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->getHasUpperHolding()==0){
       return count;
     }
     count++;
@@ -410,7 +412,7 @@ int Player::findCrystalMine(){
   list<Holding*>::iterator it;
   int count=0;
   for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
-    if((*it)->getSubcategory()=="CRYSTAL_MINE"&&(*it)->hasSubHolding()==0){
+    if((*it)->getSubcategory()=="CRYSTAL_MINE"&&(*it)->getHasSubHolding()==0){
       return count;
     }
     count++;
@@ -437,4 +439,8 @@ list<Holding*>* Player::getTopOfProvinceHolding(){
 
 list<Personality*>* Player::getTopOfProvincePersonality(){
   return topOfProvincePersonality;
+}
+
+void Player::increaseMoney(int a){
+  money +=a;
 }

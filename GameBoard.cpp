@@ -524,6 +524,87 @@ void GameBoard::economyPhase(){
             (*currPlayer)->getPlayedHoldingCards()->push_back(*itHolding);
             (*currPlayer)->getTopOfProvinceHolding()->erase(itHolding);
             donePurchase=true;
+
+
+            //chains
+            cout<<"HarvestValue before creation of chain "<<((*itHolding)->getHarvestValue())<<endl;
+            if((*itHolding)->getCategory()=="MINE"&&(*itHolding)->getHasUpperHolding()==0){//an eimai se mine horis upperholding
+              //psaxno ti lista na vro an iparxei GOLD_MINE xoris subholding
+              list <Holding*>::iterator it;
+
+              for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
+                if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->getHasSubHolding()==0){
+                  (*it)->changeSubHoldingStatus();//make GOLD_MINE int hassubholding=1
+                  (*itHolding)->changeUpperHoldingStatus();//make MINE int hasUpperHolding=1
+                  (*it)->increaseHarvestValue(4);//auksano harvestValue tou GOLD_MINE
+                  (*itHolding)->increaseHarvestValue(2);//auksano harvestValue tou mine
+
+                }
+              }//for end
+              cout<<"Current HarvestValue is : "<<((*itHolding)->getHarvestValue())<<endl;
+            }
+            if((*itHolding)->getSubcategory()=="GOLD_MINE"&&(*itHolding)->getHasSubHolding()==0){//an eimai se GOLD_MINE xoris subholding
+
+              list <Holding*>::iterator it;//MINE
+
+              for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
+                if((*it)->getSubcategory()=="MINE"&&(*it)->getHasUpperHolding()==0){
+                  (*it)->changeUpperHoldingStatus();//make GOLD_MINE int hassubholding=1
+                  (*itHolding)->changeSubHoldingStatus();//make MINE int hasUpperHolding=1
+                  (*it)->increaseHarvestValue(2);//auksano harvestValue tou MINE
+                  (*itHolding)->increaseHarvestValue(4);//auksano harvestValue tou GOLD_MINE
+
+                }
+              }//for end
+            }
+            if((*itHolding)->getCategory()=="GOLD_MINE"&&(*itHolding)->getHasUpperHolding()==0){//an eimai se GOLD_MINE horis upperholding
+              //psaxno ti lista na vro an iparxei CRYSTAL_MINE xoris subholding
+              list <Holding*>::iterator it;//CRYSTAL_MINE
+
+              for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
+                if((*it)->getSubcategory()=="CRYSTAL_MINE"&&(*it)->getHasSubHolding()==0){
+                  (*it)->changeSubHoldingStatus();//make CRYSTAL_MINE int hassubholding=1
+                  (*itHolding)->changeUpperHoldingStatus();//make GOLD_MINE int hasUpperHolding=1
+                  (*it)->increaseHarvestValue((*it)->getHarvestValue());//thelo na diplasiaso to harvestValue opote apla to auksano me ton eauto tou
+                  (*itHolding)->increaseHarvestValue(5);//auksano harvestValue tou GOLD_MINEmine
+
+                }
+                //elegxo an einai telia alisiada tote na triplasiaso to harvestValue tou CRYSTAL_MINE
+                if((*itHolding)->getHasSubHolding()==1&&(*itHolding)->getHasUpperHolding()==1){
+                  (*it)->increaseHarvestValue((*it)->getHarvestValue());//thelo na triplasiaso to harvestValue opote afou to xo diplasiasei idi mia fora sto proto if to prostheto alli mia fora ston eauto tou
+                }
+              }//for end
+
+            }
+            if((*itHolding)->getSubcategory()=="CRYSTAL_MINE"&&(*itHolding)->getHasSubHolding()==0){
+
+              list <Holding*>::iterator it;//GOLD_MINE
+
+              for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
+                if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->getHasUpperHolding()==0){
+                  (*it)->changeUpperHoldingStatus();//make CCrystal_MINE int hassubholding=1
+                  (*itHolding)->changeSubHoldingStatus();//make GOLD_MINE int hasUpperHolding=1
+                  (*it)->increaseHarvestValue(5);//auksano harvestValue tou GOLD_MINE
+                  (*itHolding)->increaseHarvestValue((*itHolding)->getHarvestValue());//auksano harvestValue tou CRYSTAL_MINE
+
+                }
+              }//for end
+
+
+            }
+
+            // loop tis playedHoldingCards gia na auksiso to money tou paikti analoga me to harvestValue ton karton tou
+            cout<<"Player money before harvestValues added : "<<(*currPlayer)->getMoney()<<endl;
+            list <Holding*>::iterator it;//GOLD_MINE
+
+            for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
+              (*currPlayer)->increaseMoney((*it)->getHarvestValue());
+            }
+            cout<<"Player money after harvestValue added : "<< (*currPlayer)->getMoney()<<endl;
+
+              //chains end
+
+
           }else{
             cout << "Not enough money" << endl;
             donePurchase=false;
@@ -548,9 +629,13 @@ void GameBoard::economyPhase(){
 
     if(perOrHolding){//EDW AN TO CHOSEN TOP OF CARD EINAI HOLDING
 
+
+
     }else{//EDW AN TO CHOSEN TOP OF CARD EINAI PERSONALITY
-      
+
     }
     cout << "##Next Player##" << endl;
   }
+  //loop ola ta played holdings gia na auksisei ta money tou paikti
+
 }
