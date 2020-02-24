@@ -25,6 +25,7 @@ void GameBoard::printGameStatistics(){
   list<Player *>::iterator it;
   for(it = players->begin(); it != players->end(); it++){
     (*it)->printCurrState();
+    (*it)->printHoldings();
     cout<<endl;
   }
 }
@@ -48,7 +49,11 @@ void GameBoard::gamePlay(){
   cout << "######################ECONOMY PHASE#########################"<< endl;
   economyPhase();
 
-}while(checkWinningCondition()!=1);
+  cout<<"Printing Game statistics : "<<endl;
+  printGameStatistics();
+
+}while(checkWinningCondition());
+// }while(players->size() > 0);
   cout << endl<<endl;
 }
 
@@ -646,13 +651,26 @@ void GameBoard::economyPhase(){
 ////////////////////////////////////////checkWinningCondition
 int GameBoard::checkWinningCondition(){
 
-  list<Player*>::iterator currPlayer;
-
-  for(currPlayer=players->begin(); currPlayer != players->end(); currPlayer++){
-    if((*currPlayer)->getProvinces()->size()==0){
-      cout<<"Deleting Players"<<endl;
+  int count=0;
+  for(int i=0;i<countOfPlayers; i++){
+    list<Player*>::iterator currPlayer;
+    for(currPlayer=players->begin(); currPlayer != players->end(); currPlayer++){
+      //discardSurplusFateCards already taken care of
+      if((*currPlayer)->getProvinces()->size()==0){
+        cout<<"Deleting Player: " << count << endl;//if number of provinces =0
+        count++;
+        break;
+      }
+      count++;
+    }
+    players->erase(currPlayer);
   }
-}
+  countOfPlayers= (int)players->size();
+  if(countOfPlayers > 0){
+    return 1;
+  }else{
+    return 0;
+  }
 
 //return 1 if only one player left
 }

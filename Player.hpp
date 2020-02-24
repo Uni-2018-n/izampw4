@@ -82,9 +82,11 @@ public:
   list<Holding*>* getPlayedHoldingCards(){
     return playedHoldingCards;
   }
+  void printHoldings();
 };
 
-  list<Provinces*>* getProvinces();
+
+
 
 #endif
 //TODO remove code from hpp

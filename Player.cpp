@@ -146,6 +146,14 @@ void Player::printTopOfProvince(){
   cout << endl;
 }
 
+void Player::printHoldings(){
+  
+  list<Holding*>::iterator it;
+  for(it= playedHoldingCards->begin(); it != playedHoldingCards->end(); it++){
+    (*it)->printStats();
+  }
+}
+
 //////////////////////////////////////////////Starter Phase
 void Player::printCurrState(){
   cout << "//////////Stronghold: ";
@@ -165,9 +173,13 @@ void Player::printCurrState(){
   cout << endl << endl;
 
   cout << "//////////Curr Hand: " << endl;
+
   currHand->print();
 
   cout << endl << endl;
+
+  cout<< "///////////Holdings: "<<endl;
+  printHoldings();
 }
 
 void Player::untapEverything(){
@@ -445,8 +457,4 @@ list<Personality*>* Player::getTopOfProvincePersonality(){
 
 void Player::increaseMoney(int a){
   money +=a;
-}
-
-list<Provinces*>* Player::getProvinces(){
-  return provinces;
 }
