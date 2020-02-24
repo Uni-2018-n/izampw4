@@ -466,46 +466,77 @@ void GameBoard::battlePhase(){
 ////////////////////////////economyPhase
 // TODO molis agorazei mia karta na elegxei gia alisides
 void GameBoard::economyPhase(){
-  int inputBlack,inputGreen;
   list<Player*>::iterator currPlayer;
-
   for(currPlayer=players->begin(); currPlayer != players->end(); currPlayer++){
-    while(true){
-    (*currPlayer)->printBuyingOptionsBlack();
-    do{
-      cout<<"Choose card to buy or Enter[-1] to not buy any"<<endl;
-      cin>>inputBlack;
-    }while((inputBlack >=-1) && (inputBlack < (int)(*currPlayer)->getAvailableDynastyCards()->size()));//gia na min fame segmentation ama dosei noumero megalitero apo oti plithos karton exoume
-    if(inputBlack==-1){
-      break;//not breaking properly
+    cout << "Top of provinces: " << endl;
+    (*currPlayer)->printTopOfProvince();
+    int currTopOfProvinceI;
+    cout << "Choose top of province to buy: ";
+    cin >> currTopOfProvinceI;
+    list <Personality*>::iterator itPersonality;
+    list <Holding*>::iterator itHolding;
+    bool perOrHolding;//TRUE IF HOLDING IS CHOSEN, FALSE IF PERSONALITY IS CHOSEN
+    {//get chosen top of province
+      bool donePurchase = false;
+      do{
+        while(currTopOfProvinceI < 0 || currTopOfProvinceI > (*currPlayer)->getTopOfProvinceCount()-1){
+          cout << "Try again: ";
+          cin >> currTopOfProvinceI;
+        }
+
+        int count=0;
+        list <Personality*>::iterator it;
+        {
+          for(it= (*currPlayer)->getTopOfProvincePersonality()->begin(); it != (*currPlayer)->getTopOfProvincePersonality()->end(); it++){
+            if(count == currTopOfProvinceI){
+              break;
+            }else{
+              count++;
+            }
+          }
+        }
+        if(count != currTopOfProvinceI){
+          list <Holding*>::iterator it;
+          for(it= (*currPlayer)->getTopOfProvinceHolding()->begin(); it != (*currPlayer)->getTopOfProvinceHolding()->end(); it++){
+            if(count == currTopOfProvinceI){
+              break;
+            }else{
+              count++;
+            }
+          }
+          itHolding = it;
+          perOrHolding = true;
+        }else{
+          itPersonality = it;
+          perOrHolding = false;
+        }
+        if(perOrHolding){
+          if((*currPlayer)->getMoney() >= (*itHolding)->getCost()){
+            (*currPlayer)->setMoney((*currPlayer)->getMoney() - (*itHolding)->getCost());
+            (*currPlayer)->getPlayedHoldingCards()->push_back(*itHolding);
+            (*currPlayer)->getTopOfProvinceHolding()->erase(itHolding);
+            donePurchase=true;
+          }else{
+            donePurchase=false;
+          }
+        }else{
+          if((*currPlayer)->getMoney() >= (*itPersonality)->getCost()){
+            (*currPlayer)->setMoney((*currPlayer)->getMoney() - (*itPersonality)->getCost());
+            (*currPlayer)->getPlayedPersonalityCards()->push_back(*itPersonality);
+            (*currPlayer)->getTopOfProvincePersonality()->erase(itPersonality);
+            donePurchase=true;
+          }else{
+            donePurchase=false;
+          }
+        }
+      }while(donePurchase);
     }
-    else{
 
-      //na afairei apo top of province,na metaferei sto played black card kai na travaei kainourgia unrevealed
+    if(perOrHolding){//EDW AN TO CHOSEN TOP OF CARD EINAI HOLDING
 
-    }//else
+    }else{//EDW AN TO CHOSEN TOP OF CARD EINAI PERSONALITY
 
-  }//while true
-
-
-while(true){//for green cards
-  (*currPlayer)->printBuyingOptionsGreen();
-  do{
-    cout<<"Choose card to buy or Enter[-1] to not buy any"<<endl;
-    cin>>inputGreen;
-  }while(inputGreen>=-1&&inputGreen<7);//TODO needs fixing. If user gives wrong input has segme
-  if(inputGreen==-1){
-    break;
+    }
+    cout << "##Next Player##" << endl;
   }
-  else{
-    //edo vale na antigrafei tin karta stin antistoixi played list
-    (*currPlayer)->removeHandCard(inputGreen);
-  }
-
-}
-
-
-
-
-}//for currplayer
 }

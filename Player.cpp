@@ -10,34 +10,34 @@ Player::Player(DeckBuilder& deck){
   playedPersonalityCards = new list<Personality*>();
 
   //uncomment this if you want to add testing personalities
-  while(dynastyDeck->front()->getCategory() != "personality"){
-    dynastyDeck->pop_front();
-  }
-  Personality* temp= (Personality*)((dynastyDeck->front()));
-  temp->setIsRevealed(true);
-  playedPersonalityCards->push_back(temp);
-  dynastyDeck->pop_front();
-  while(dynastyDeck->front()->getCategory() != "personality"){
-    dynastyDeck->pop_front();
-  }
-  temp= (Personality*)((dynastyDeck->front()));
-  temp->setIsRevealed(true);
-  playedPersonalityCards->push_back(temp);
-  dynastyDeck->pop_front();
-  while(dynastyDeck->front()->getCategory() != "personality"){
-    dynastyDeck->pop_front();
-  }
-  temp= (Personality*)((dynastyDeck->front()));
-  temp->setIsRevealed(true);
-  playedPersonalityCards->push_back(temp);
-  dynastyDeck->pop_front();
-  while(dynastyDeck->front()->getCategory() != "personality"){
-    dynastyDeck->pop_front();
-  }
-  temp= (Personality*)((dynastyDeck->front()));
-  temp->setIsRevealed(true);
-  playedPersonalityCards->push_back(temp);
-  dynastyDeck->pop_front();
+  // while(dynastyDeck->front()->getCategory() != "personality"){
+  //   dynastyDeck->pop_front();
+  // }
+  // Personality* temp= (Personality*)((dynastyDeck->front()));
+  // temp->setIsRevealed(true);
+  // playedPersonalityCards->push_back(temp);
+  // dynastyDeck->pop_front();
+  // while(dynastyDeck->front()->getCategory() != "personality"){
+  //   dynastyDeck->pop_front();
+  // }
+  // temp= (Personality*)((dynastyDeck->front()));
+  // temp->setIsRevealed(true);
+  // playedPersonalityCards->push_back(temp);
+  // dynastyDeck->pop_front();
+  // while(dynastyDeck->front()->getCategory() != "personality"){
+  //   dynastyDeck->pop_front();
+  // }
+  // temp= (Personality*)((dynastyDeck->front()));
+  // temp->setIsRevealed(true);
+  // playedPersonalityCards->push_back(temp);
+  // dynastyDeck->pop_front();
+  // while(dynastyDeck->front()->getCategory() != "personality"){
+  //   dynastyDeck->pop_front();
+  // }
+  // temp= (Personality*)((dynastyDeck->front()));
+  // temp->setIsRevealed(true);
+  // playedPersonalityCards->push_back(temp);
+  // dynastyDeck->pop_front();
 
   playedHoldingCards = new list<Holding*>();
 
@@ -55,10 +55,15 @@ Player::Player(DeckBuilder& deck){
 
   //then create the top-of-provinces-cards(einai unrevealed, arxh ka8e gyroy ginontai revealed oses einai katw)
   //aytes tis kartes mporei o pekths na tis agorasei an 8elei(TODO)
-  availableDynastyCards = new list<BlackCard*>();
+  topOfProvincePersonality = new list<Personality*>();
+  topOfProvinceHolding = new list<Holding*>();
+
   for(int i=0;i<4;i++){
-    availableDynastyCards->push_back(dynastyDeck->front());
-    dynastyDeck->pop_front();
+    if(fillTopOfProvince(dynastyDeck->front())){
+      dynastyDeck->pop_front();
+    }else{
+      break;
+    }
   }
 
   //to currhand toy paikth, mporei na exei olwn twn eidwn kartes
@@ -86,23 +91,66 @@ void Player::printDecks(){
   }
 }
 
+bool Player::fillTopOfProvince(BlackCard* card){
+  if(getTopOfProvinceCount() < getCountOfProvinces()){
+    if(card->getCategory() == "holding"){
+      topOfProvinceHolding->push_back((Holding*)card);
+    }else if(card->getCategory() == "personality"){
+      topOfProvincePersonality->push_back((Personality*)card);
+    }
+    return true;
+  }else{
+    return false;
+  }
+}
+
+int Player::getTopOfProvinceCount(){
+  int count=0;
+  {
+    list<Personality*>::iterator it;
+    for(it=topOfProvincePersonality->begin(); it != topOfProvincePersonality->end(); it++){
+      count++;
+    }
+  }
+
+  {
+    list<Holding*>::iterator it;
+    for(it=topOfProvinceHolding->begin(); it != topOfProvinceHolding->end(); it++){
+      count++;
+    }
+  }
+  return count;
+}
+
+void Player::printTopOfProvince(){
+  int count=0;
+  {
+    list<Personality*>::iterator it;
+    for(it=topOfProvincePersonality->begin(); it != topOfProvincePersonality->end(); it++){
+      cout << count << ": ";
+      (*it)->printStats();
+      count++;
+    }
+  }
+
+  {
+    list<Holding*>::iterator it;
+    for(it= topOfProvinceHolding->begin(); it != topOfProvinceHolding->end(); it++){
+      cout << count << ": ";
+      (*it)->printStats();
+      count++;
+    }
+  }
+  cout << endl;
+}
+
 //////////////////////////////////////////////Starter Phase
 void Player::printCurrState(){
   cout << "//////////Stronghold: ";
   a.print();
   cout << endl;
   cout << "//////////Top of provinces:" << endl;
-  {
-    list<BlackCard*>::iterator it;//print tis kartes poy einai panw apo tis eparxies
-    for(it = availableDynastyCards->begin(); it != availableDynastyCards->end(); it++){
-      if((*it)->getIsRevealed() == true){//mono an einai revealed
-        cout << (*it)->getName() << "  |  ";
-      }else{
-        cout << "(CARD UNREVEALED)" << "  |  ";//allios rip
-      }
-    }
-    cout << endl << endl;
-  }
+  printTopOfProvince();
   cout << "//////////Provinces: " << numOfProv << endl;
   {
     list<Provinces *>::iterator it;//print ta provinces
@@ -146,14 +194,19 @@ void Player::untapEverything(){
 
 void Player::revealProvinces(){
   {
-  list<BlackCard *>::iterator it;
-  for(it = availableDynastyCards->begin(); it != availableDynastyCards->end(); it++)
+    list<Personality*>::iterator it;
+    for(it = topOfProvincePersonality->begin(); it != topOfProvincePersonality->end(); it++)
+    (*it)->setIsRevealed(true);
+  }
+  {
+    list<Holding*>::iterator it;
+    for(it = topOfProvinceHolding->begin(); it != topOfProvinceHolding->end(); it++)
     (*it)->setIsRevealed(true);
   }
 
   {
-  list<Provinces *>::iterator it;
-  for(it = provinces->begin(); it != provinces->end(); it++)
+    list<Provinces *>::iterator it;
+    for(it = provinces->begin(); it != provinces->end(); it++)
     (*it)->setIsRevealed(true);
   }
 }
@@ -318,6 +371,7 @@ int Player::findMine(){
   int count=0;
   for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
     if((*it)->getSubcategory()=="MINE"&&(*it)->hasUpperHolding()==0){
+
       return count;
     }
     count++;
@@ -365,20 +419,8 @@ int Player::findCrystalMine(){
 }
 
 void Player::printBuyingOptionsBlack(){
-
   cout << "Printing available Black Cards for purchase:" << endl;
-  {
-    list<BlackCard*>::iterator it;//print tis kartes poy einai panw apo tis eparxies
-    for(it = availableDynastyCards->begin(); it != availableDynastyCards->end(); it++){
-      if((*it)->getIsRevealed() == true){//mono an einai revealed
-        cout << (*it)->getName() << "  |  ";
-      }else{
-        cout << "(CARD UNREVEALED)" << "  |  ";//allios rip
-      }
-    }
-    cout << endl << endl;
-  }
-
+  printTopOfProvince();
 }
 
 void Player::printBuyingOptionsGreen(){
@@ -389,6 +431,10 @@ void Player::printBuyingOptionsGreen(){
 }
 
 
-list<BlackCard*>* Player::getAvailableDynastyCards(){
-  return availableDynastyCards;
+list<Holding*>* Player::getTopOfProvinceHolding(){
+  return topOfProvinceHolding;
+}
+
+list<Personality*>* Player::getTopOfProvincePersonality(){
+  return topOfProvincePersonality;
 }

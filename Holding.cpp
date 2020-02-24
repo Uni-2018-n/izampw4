@@ -62,3 +62,13 @@ int Holding::hasSubHolding(){
     return 0;
   }
 }
+
+void Holding::printStats(){
+  if(getIsRevealed()){
+    cout << getName() << "(" <<
+    "HarvestValue: " << getHarvestValue() <<
+    "),";
+  }else{
+    cout << "(CARD UNREVEALED),";
+  }
+}

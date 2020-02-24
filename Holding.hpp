@@ -16,6 +16,7 @@ public:
   string getSubcategory();
   int hasUpperHolding();
   int hasSubHolding();
+  void printStats();
 };
 
 #endif

@@ -11,7 +11,9 @@ private:
   Stronghold a;
   list<GreenCard*>* fateDeck;
   list<BlackCard*>* dynastyDeck;
-  list<BlackCard*>* availableDynastyCards;
+  list<Personality*>* topOfProvincePersonality;
+  list<Holding*>* topOfProvinceHolding;
+
   list<Provinces*>* provinces;
   int numOfProv;
   Hand* currHand;
@@ -35,6 +37,11 @@ public:
     return honour < playerObj.honour;
   }
   void printDecks();
+
+  //top of provinces
+  bool fillTopOfProvince(BlackCard* card);
+  int getTopOfProvinceCount();
+  void printTopOfProvince();
 
   //Starter Phase
   void untapEverything();
@@ -61,9 +68,19 @@ public:
   int findCrystalMine();//tha vriskei crystal miens xoris subholding
   //economyPhase
   void printBuyingOptionsBlack();
-  list<BlackCard*>* getAvailableDynastyCards();
-  
+  list<Holding*>* getTopOfProvinceHolding();
+  list<Personality*>* getTopOfProvincePersonality();
   void printBuyingOptionsGreen();
+  int getMoney(){
+    return money;
+  }
+  void setMoney(int a){
+    money = a;
+  }
+
+  list<Holding*>* getPlayedHoldingCards(){
+    return playedHoldingCards;
+  }
 };
 
 #endif
