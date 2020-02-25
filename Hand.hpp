@@ -3,7 +3,7 @@
 
 #include "givenFiles/DeckBuilder.hpp"
 
-class Hand{//TODO must hold 1-6 cards
+class Hand{//TODO must hold 1-6 cards (check if this is already done)
 private:
   list<Follower*>* Followers;
   list<Item*>* Items;

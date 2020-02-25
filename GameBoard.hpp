@@ -7,17 +7,18 @@ class GameBoard{
 private:
   list<Player*>* players;
   int countOfPlayers;
+
+  void printArena();
   void starterPhase();
   void equipPhase();
   void battlePhase();
   void economyPhase();
-  int checkWinningCondition();
-
+  void checkWinningCondition();
+  
 public:
   GameBoard(int countOfP);
   ~GameBoard();
   void initializeGameBoard();
-  void printGameStatistics();
   void gamePlay();
 };
 #endif

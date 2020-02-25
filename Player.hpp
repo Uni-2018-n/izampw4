@@ -18,7 +18,7 @@ private:
   int numOfProv;
   Hand* currHand;
 
-  list<Follower*>* playedFollowerCards;
+  list<Follower*>* playedFollowerCards; //TODO check mhpws einai useless
   list<Item*>* playedItemCards;
   list<Personality*>* playedPersonalityCards;
   list<Holding*>* playedHoldingCards;
@@ -28,15 +28,21 @@ private:
   int honour;
 
   void printHand();
-  void printArmy();
   void printProvinces();
+  void printPersonalities();
 public:
   Player(DeckBuilder& deck);
   ~Player();
   bool operator <(const Player & playerObj) const{
     return honour < playerObj.honour;
   }
-  void printDecks();
+
+  // void printDecks();
+  void printArmy();
+
+  list<BlackCard*>* getDynastyDeck(){
+    return dynastyDeck;
+  }
 
   //top of provinces
   bool fillTopOfProvince(BlackCard* card);
@@ -89,4 +95,4 @@ public:
 
 
 #endif
-//TODO remove code from hpp
+//TODO remove code from hpp :(
