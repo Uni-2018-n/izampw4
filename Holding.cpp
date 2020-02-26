@@ -2,6 +2,7 @@
 
 Holding::Holding(string nam,holdings type){
   name = nam;
+  harvestValue=5;
   category="holding";
   isTapped = false;
   IsRevealed = false;

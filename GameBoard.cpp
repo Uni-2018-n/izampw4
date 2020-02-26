@@ -58,8 +58,11 @@ void GameBoard::gamePlay(){
     cout << "//##//##//All statistics for players//##//##//" << endl;
     {//print printCurrState for players
       list<Player*>::iterator it;
+      int count=0;
       for(it= players->begin(); it != players->end(); it++){
+        cout << "###Player" << count++ << ": " << endl;
         (*it)->printCurrState();
+        cout << endl;
       }
     }
     checkWinningCondition();
@@ -570,6 +573,28 @@ void GameBoard::economyPhase(){
         }
       }while(!donePurchase);
       if(currTopOfProvinceI == -1){
+        {//eprepe na baloume goto :(
+          // loop tis playedHoldingCards gia na auksiso to money tou paikti analoga me to harvestValue ton karton tou
+          int totalHarvest=0;
+          cout<<"Player money before harvestValues added : "<<(*currPlayer)->getMoney()<<endl;
+          list <Holding*>::iterator it;//GOLD_MINE
+          (*currPlayer)->increaseMoney(5);//money from stronghold
+          totalHarvest += 5;
+          for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
+            totalHarvest+=(*it)->getHarvestValue();
+            cout<<"HarvestValue is : "<<(*it)->getHarvestValue()<<endl;
+            (*currPlayer)->increaseMoney((*it)->getHarvestValue());
+          }
+          cout<<"Total Money harvested = "<< totalHarvest <<endl;
+          cout<<"Player money after harvestValue added : "<< (*currPlayer)->getMoney()<<endl;
+
+          cout << endl;
+          while((*currPlayer)->getTopOfProvinceCount() < (*currPlayer)->getCountOfProvinces()){//if topOfProvince bought replace it with a new black card
+            if((*currPlayer)->fillTopOfProvince((*currPlayer)->getDynastyDeck()->front())){
+              (*currPlayer)->getDynastyDeck()->pop_front();
+            }
+          }
+        }
         continue;
       }
     }
@@ -628,21 +653,31 @@ void GameBoard::economyPhase(){
           }
         }//for end
       }
-      // loop tis playedHoldingCards gia na auksiso to money tou paikti analoga me to harvestValue ton karton tou
-      cout<<"Player money before harvestValues added : "<<(*currPlayer)->getMoney()<<endl;
-      list <Holding*>::iterator it;//GOLD_MINE
-      for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
-        (*currPlayer)->increaseMoney((*it)->getHarvestValue());
-      }
-      cout<<"Player money after harvestValue added : "<< (*currPlayer)->getMoney()<<endl;
       //chains end
     }else{//EDW AN TO CHOSEN TOP OF CARD EINAI PERSONALITY
 
     }
-    cout << endl;
-    while((*currPlayer)->getTopOfProvinceCount() < (*currPlayer)->getCountOfProvinces()){//if topOfProvince bought replace it with a new black card
-      if((*currPlayer)->fillTopOfProvince((*currPlayer)->getDynastyDeck()->front())){
-        (*currPlayer)->getDynastyDeck()->pop_front();
+    //eprepe na baloume edw to goto :(
+    {
+      // loop tis playedHoldingCards gia na auksiso to money tou paikti analoga me to harvestValue ton karton tou
+      int totalHarvest=0;
+      cout<<"Player money before harvestValues added : "<<(*currPlayer)->getMoney()<<endl;
+      list <Holding*>::iterator it;//GOLD_MINE
+      (*currPlayer)->increaseMoney(5);//money from stronghold
+      totalHarvest += 5;
+      for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
+        totalHarvest+=(*it)->getHarvestValue();
+        cout<<"HarvestValue is : "<<(*it)->getHarvestValue()<<endl;
+        (*currPlayer)->increaseMoney((*it)->getHarvestValue());
+      }
+      cout<<"Total Money harvested = "<< totalHarvest <<endl;
+      cout<<"Player money after harvestValue added : "<< (*currPlayer)->getMoney()<<endl;
+
+      cout << endl;
+      while((*currPlayer)->getTopOfProvinceCount() < (*currPlayer)->getCountOfProvinces()){//if topOfProvince bought replace it with a new black card
+        if((*currPlayer)->fillTopOfProvince((*currPlayer)->getDynastyDeck()->front())){
+          (*currPlayer)->getDynastyDeck()->pop_front();
+        }
       }
     }
   }
