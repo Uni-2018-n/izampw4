@@ -36,7 +36,7 @@ void GameBoard::gamePlay(){
   cout<<"-_-_-_-_-_Game is Starting-_-_-_-_-_"<<endl;
   players->sort();
 
-  while(countOfPlayers > 0){
+  while(countOfPlayers > 1){
     cout << "######################STARTER PHASE#########################"<< endl;
     starterPhase();
 
@@ -99,6 +99,7 @@ void GameBoard::equipPhase(){//users buy green cards from hand and use them in A
   list<Player*>::iterator it;
   for(it = players->begin(); it != players->end(); it++){
     cout << "###Player " << plCounter++ << ": " << endl;
+    cout << "Player $$: " << (*it)->getMoney() << endl;
     if((*it)->getCountOfPlayedPersonalityCards() > 0){
       do{
         (*it)->printOptions();//print hand cards and army
@@ -371,6 +372,9 @@ void GameBoard::battlePhase(){//users choose to attack or defense and they choos
         {//print currPlayer's provinces
           int currProvinceCount = 0;
           cout << "---Your Provinces: " << endl;
+          if(currProvinces->size() == 0){
+            continue;
+          }
           list<Provinces*>::iterator it;
           for(it=currProvinces->begin(); it != currProvinces->end(); it++){
             cout << currProvinceCount << ": ";
@@ -501,7 +505,7 @@ void GameBoard::economyPhase(){
     (*currPlayer)->printTopOfProvince();
 
     int currTopOfProvinceI;//index
-    cout << "Choose top of province to buy: ";//get input about topOfProvince to buy
+    cout << "Choose top of province to buy(-1 to skip): ";//get input about topOfProvince to buy
     cin >> currTopOfProvinceI;
 
     list <Personality*>::iterator itPersonality;//potential personality card chosen
