@@ -68,7 +68,7 @@ void GameBoard::gamePlay(){
     checkWinningCondition();
 
     cout << "######################ROUND DONE#########################"<< endl;
-    cout << "Next Round(write anything)" << endl;
+    cout << "Next Round(press enter)" << endl;
     getchar();
     getchar();
   }
@@ -577,7 +577,7 @@ void GameBoard::economyPhase(){
           // loop tis playedHoldingCards gia na auksiso to money tou paikti analoga me to harvestValue ton karton tou
           int totalHarvest=0;
           cout<<"Player money before harvestValues added : "<<(*currPlayer)->getMoney()<<endl;
-          list <Holding*>::iterator it;//GOLD_MINE
+          list <Holding*>::iterator it;
           (*currPlayer)->increaseMoney(5);//money from stronghold
           totalHarvest += 5;
           for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
@@ -606,7 +606,7 @@ void GameBoard::economyPhase(){
         //psaxno ti lista na vro an iparxei GOLD_MINE xoris subholding
         list <Holding*>::iterator it;
         for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
-          if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->getHasSubHolding()==0){
+          if((*it)->getSubCategory()=="GOLD_MINE"&&(*it)->getHasSubHolding()==0){
             (*it)->changeSubHoldingStatus();//make GOLD_MINE int hassubholding=1
             (*itHolding)->changeUpperHoldingStatus();//make MINE int hasUpperHolding=1
             (*it)->increaseHarvestValue(4);//auksano harvestValue tou GOLD_MINE
@@ -615,10 +615,10 @@ void GameBoard::economyPhase(){
         }//for end
         cout<<"Current HarvestValue is : "<<((*itHolding)->getHarvestValue())<<endl;
       }
-      if((*itHolding)->getSubcategory()=="GOLD_MINE"&&(*itHolding)->getHasSubHolding()==0){//an eimai se GOLD_MINE xoris subholding
+      if((*itHolding)->getSubCategory()=="GOLD_MINE"&&(*itHolding)->getHasSubHolding()==0){//an eimai se GOLD_MINE xoris subholding
         list <Holding*>::iterator it;//MINE
         for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
-          if((*it)->getSubcategory()=="MINE"&&(*it)->getHasUpperHolding()==0){
+          if((*it)->getSubCategory()=="MINE"&&(*it)->getHasUpperHolding()==0){
             (*it)->changeUpperHoldingStatus();//make GOLD_MINE int hassubholding=1
             (*itHolding)->changeSubHoldingStatus();//make MINE int hasUpperHolding=1
             (*it)->increaseHarvestValue(2);//auksano harvestValue tou MINE
@@ -630,7 +630,7 @@ void GameBoard::economyPhase(){
         //psaxno ti lista na vro an iparxei CRYSTAL_MINE xoris subholding
         list <Holding*>::iterator it;//CRYSTAL_MINE
         for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
-          if((*it)->getSubcategory()=="CRYSTAL_MINE"&&(*it)->getHasSubHolding()==0){
+          if((*it)->getSubCategory()=="CRYSTAL_MINE"&&(*it)->getHasSubHolding()==0){
             (*it)->changeSubHoldingStatus();//make CRYSTAL_MINE int hassubholding=1
             (*itHolding)->changeUpperHoldingStatus();//make GOLD_MINE int hasUpperHolding=1
             (*it)->increaseHarvestValue((*it)->getHarvestValue());//thelo na diplasiaso to harvestValue opote apla to auksano me ton eauto tou
@@ -642,10 +642,10 @@ void GameBoard::economyPhase(){
           }
         }//for end
       }
-      if((*itHolding)->getSubcategory()=="CRYSTAL_MINE"&&(*itHolding)->getHasSubHolding()==0){
+      if((*itHolding)->getSubCategory()=="CRYSTAL_MINE"&&(*itHolding)->getHasSubHolding()==0){
         list <Holding*>::iterator it;//GOLD_MINE
         for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
-          if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->getHasUpperHolding()==0){
+          if((*it)->getSubCategory()=="GOLD_MINE"&&(*it)->getHasUpperHolding()==0){
             (*it)->changeUpperHoldingStatus();//make CCrystal_MINE int hassubholding=1
             (*itHolding)->changeSubHoldingStatus();//make GOLD_MINE int hasUpperHolding=1
             (*it)->increaseHarvestValue(5);//auksano harvestValue tou GOLD_MINE
@@ -662,7 +662,7 @@ void GameBoard::economyPhase(){
       // loop tis playedHoldingCards gia na auksiso to money tou paikti analoga me to harvestValue ton karton tou
       int totalHarvest=0;
       cout<<"Player money before harvestValues added : "<<(*currPlayer)->getMoney()<<endl;
-      list <Holding*>::iterator it;//GOLD_MINE
+      list <Holding*>::iterator it;
       (*currPlayer)->increaseMoney(5);//money from stronghold
       totalHarvest += 5;
       for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){

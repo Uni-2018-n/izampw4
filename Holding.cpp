@@ -42,10 +42,6 @@ int Holding::getHarvestValue(){
   return harvestValue;
 }
 
-string Holding::getSubcategory(){
-  return subcategory;
-}
-
 int Holding::getHasUpperHolding(){
   return hasUpperHolding;
 }

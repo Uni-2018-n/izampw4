@@ -12,6 +12,10 @@ string Card::getCategory(){
   return category;
 }
 
+string Card::getSubCategory(){
+  return subcategory;
+}
+
 string Card::getName(){
   return name;
 }

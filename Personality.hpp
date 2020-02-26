@@ -15,23 +15,23 @@ private:
   Item* PossibleItem;
 
 public:
-
   Personality(string nam, personalities type);
   int getAttack();
   int getDefense();
   int getHonor();
   Follower* getpossibleFollower();
   Item* getPossibleItem();
-
   bool getIsDead();
+
   void setAttack(int x);
   void setDefense(int x);
   void setHonor(int x);
   void setIsDead(bool x);
   void setPossibleGreen(Follower* posGreen);
   void setPossibleGreen(Item* posGreen);
-  void reduceHonor();
 
+  void reduceHonor();
+  
   void printStats();
   void printStats(bool a);
 

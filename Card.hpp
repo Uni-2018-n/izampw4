@@ -20,6 +20,7 @@ public:
   Card();
   void setIsTapped(bool a);
   string getCategory();
+  string getSubCategory();
   string getName();
   int getCost();
   bool getIsTapped();

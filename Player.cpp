@@ -43,21 +43,6 @@ Player::~Player(){
   cout << "Destructor Player" << endl;
 }
 
-// void Player::printDecks(){
-//   cout<<"######### NOW PRINTING FATE DECK ##########"<<endl;
-//   {
-//     list<GreenCard *>::iterator it;
-//     for(it = fateDeck->begin(); it != fateDeck->end(); it++)
-//       cout << (*it)->getName() << endl;
-//   }
-//   cout<<"######### NOW PRINTING DYNASTY DECK #########"<<endl;
-//   {
-//     list<BlackCard *>::iterator it;
-//     for(it = dynastyDeck->begin(); it != dynastyDeck->end(); it++)
-//       cout << (*it)->getName() << endl;
-//   }
-// }
-
 bool Player::fillTopOfProvince(BlackCard* card){//fills an empty space for topOfProvinces used card
   if(getTopOfProvinceCount() < getCountOfProvinces()){
     if(card->getCategory() == "holding"){
@@ -353,7 +338,7 @@ int Player::findMine(){
   list<Holding*>::iterator it;
   int count=0;
   for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
-    if((*it)->getSubcategory()=="MINE"&&(*it)->getHasUpperHolding()==0){
+    if((*it)->getSubCategory()=="MINE"&&(*it)->getHasUpperHolding()==0){
 
       return count;  int findGoldMineWithoutUpper();
 
@@ -368,7 +353,7 @@ int Player::findGoldMineWithoutSub(){
   list<Holding*>::iterator it;
   int count=0;
   for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
-    if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->getHasSubHolding()==0){
+    if((*it)->getSubCategory()=="GOLD_MINE"&&(*it)->getHasSubHolding()==0){
       return count;
     }
     count++;
@@ -381,7 +366,7 @@ int Player::findGoldMineWithoutUpper(){
   list<Holding*>::iterator it;
   int count=0;
   for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){
-    if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->getHasUpperHolding()==0){
+    if((*it)->getSubCategory()=="GOLD_MINE"&&(*it)->getHasUpperHolding()==0){
       return count;
     }
     count++;
@@ -395,7 +380,7 @@ int Player::findCrystalMine(){
   int count=0;
   for(it= playedHoldingCards->begin(); it !=playedHoldingCards->end(); it++){  int findGoldMineWithoutUpper();
 
-    if((*it)->getSubcategory()=="CRYSTAL_MINE"&&(*it)->getHasSubHolding()==0){
+    if((*it)->getSubCategory()=="CRYSTAL_MINE"&&(*it)->getHasSubHolding()==0){
       return count;
     }
     count++;

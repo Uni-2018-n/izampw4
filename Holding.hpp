@@ -13,14 +13,14 @@ private:
 public:
   Holding(string nam, holdings type);
   int getHarvestValue();
-  string getSubcategory();
   int getHasUpperHolding();
   void changeUpperHoldingStatus();
   int getHasSubHolding();
   void changeSubHoldingStatus();
+
+  void increaseHarvestValue(int a);
   void printStats();
   void printStats(bool a);
-  void increaseHarvestValue(int a);
 };
 
 #endif
