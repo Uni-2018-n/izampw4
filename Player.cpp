@@ -10,9 +10,6 @@ Player::Player(DeckBuilder& deck){
   playedPersonalityCards = new list<Personality*>();
   playedHoldingCards = new list<Holding*>();
 
-  playedFollowerCards = new list<Follower*>();
-  playedItemCards = new list<Item*>();
-
   //create provinces, push_back a new province with a black card and stronghold as arguments
   provinces = new list<Provinces *>();
   for(int i=0;i<4;i++){
@@ -140,26 +137,16 @@ void Player::printCurrState(){//prints every statistic about player
   printPersonalities();
 }
 
-void Player::untapEverything(){//untaps every player's card
+void Player::untapEverything(){//untaps player's every card
   {
   list<Personality *>::iterator it;
   for(it = playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++)
-    (*it)->setIsTapped(false);
-  }
-  {
-  list<Follower *>::iterator it;
-  for(it = playedFollowerCards->begin(); it != playedFollowerCards->end(); it++)
     (*it)->setIsTapped(false);
   }
 
   {
   list<Holding *>::iterator it;
   for(it = playedHoldingCards->begin(); it != playedHoldingCards->end(); it++)
-    (*it)->setIsTapped(false);
-  }
-  {
-  list<Item *>::iterator it;
-  for(it = playedItemCards->begin(); it != playedItemCards->end(); it++)
     (*it)->setIsTapped(false);
   }
 }

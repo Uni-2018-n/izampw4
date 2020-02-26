@@ -7,13 +7,10 @@ class Hand{//TODO must hold 1-6 cards (check if this is already done)
 private:
   list<Follower*>* Followers;
   list<Item*>* Items;
-  list<Personality*>* Personalities;//TODO
-  list<Holding*>* Holdings;
 public:
   Hand(list<GreenCard*>* fateDeck);
 
   bool addToHand(GreenCard* new_card);
-  bool addToHand(BlackCard* new_card);
 
   int currPl();
   void print();

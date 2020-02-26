@@ -3,8 +3,6 @@
 Hand::Hand(list<GreenCard*>* fateDeck){
   Followers= new list<Follower *>();
   Items= new list<Item *>();
-  Personalities = new list<Personality *>();
-  Holdings= new list<Holding *>();
 
   for(int i=0;i<4;i++){//pros8ese 4 arxikes kartes sto xeri
     if(addToHand(fateDeck->front())){
@@ -24,25 +22,6 @@ bool Hand::addToHand(GreenCard* new_card){
   }else if(new_card->getCategory() == "item"){
     if(currPl() <6){
       Items->push_back((Item*)new_card);
-      return true;
-    }else{
-      return false;
-    }
-  }
-  return false;
-}
-
-bool Hand::addToHand(BlackCard* new_card){
-  if(new_card->getCategory() == "personality"){
-    if(currPl() <6){
-      Personalities->push_back((Personality*)new_card);
-      return true;
-    }else{
-      return false;
-    }
-  }else if(new_card->getCategory() == "holding"){
-    if(currPl() <6){
-      Holdings->push_back((Holding*)new_card);
       return true;
     }else{
       return false;
@@ -77,24 +56,6 @@ void Hand::print(){
       "effectCost: " << (*it)->getEffectCost() << ", " <<
       "durability: " << (*it)->getDurability()<< "), " << endl;
   }
-
-  {
-    list<Personality *>::iterator it;
-    for(it = Personalities->begin(); it != Personalities->end(); it++)
-    cout << "<"<<count++ <<">:" << (*it)->getName() <<
-    "(attack: " << (*it)->getAttack() << ", " <<
-    "defense: "<< (*it)->getDefense() << ", " <<
-    "honor: " << (*it)->getHonor() << "), " << endl;
-
-  }
-
-  {
-    list<Holding *>::iterator it;
-    for(it = Holdings->begin(); it != Holdings->end(); it++)
-      cout << "<"<<count++ <<">:" << (*it)->getName() <<
-      "(harvestValue: " << (*it)->getHarvestValue() << "), " << endl;
-  }
-
   cout << endl;
 }
 
@@ -109,18 +70,6 @@ int Hand::currPl(){
   {
   list<Item *>::iterator it;
   for(it = Items->begin(); it != Items->end(); it++)
-    c++;
-  }
-
-  {
-  list<Personality *>::iterator it;
-  for(it = Personalities->begin(); it != Personalities->end(); it++)
-    c++;
-  }
-
-  {
-  list<Holding *>::iterator it;
-  for(it = Holdings->begin(); it != Holdings->end(); it++)
     c++;
   }
   return c;

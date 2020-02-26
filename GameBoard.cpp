@@ -12,7 +12,7 @@ GameBoard::~GameBoard(){
 }
 
 /////////////Prints
-void GameBoard::printArena(){
+void GameBoard::printArena(){//prints only played cards for every player
   int count=0;
   list<Player*>::iterator it;
   for(it=players->begin();it != players->end(); it++){
@@ -29,7 +29,6 @@ void GameBoard::initializeGameBoard(){
   for(counter=0;counter<countOfPlayers;counter++){
     players->push_back(new Player(*deck));
   }
-  //TODO orismos plithos diaforon katigorion
 }
 
 
@@ -79,8 +78,10 @@ void GameBoard::gamePlay(){
 
 /////////////////////////////////////////Starter Phase
 void GameBoard::starterPhase(){
+  int plCounter=0;
   list<Player*>::iterator it;
   for(it = players->begin(); it != players->end(); it++){
+    cout << "###Player " << plCounter++ << ": " << endl;
     (*it)->untapEverything();
     (*it)->drawFateCard();
     (*it)->revealProvinces();
@@ -94,8 +95,10 @@ void GameBoard::starterPhase(){
 void GameBoard::equipPhase(){//users buy green cards from hand and use them in Army
   int inputHand;
   int inputArmy;
+  int plCounter=0;
   list<Player*>::iterator it;
   for(it = players->begin(); it != players->end(); it++){
+    cout << "###Player " << plCounter++ << ": " << endl;
     if((*it)->getCountOfPlayedPersonalityCards() > 0){
       do{
         (*it)->printOptions();//print hand cards and army
@@ -129,9 +132,10 @@ void GameBoard::equipPhase(){//users buy green cards from hand and use them in A
 void GameBoard::battlePhase(){//users choose to attack or defense and they choose the cards they want to attack/defend with
   int atDefInput;
   int currPlayerI;
-
+  int plCounter=0;
   list<Player*>::iterator currPlayer;
   for(currPlayer=players->begin(); currPlayer != players->end(); currPlayer++){
+    cout << "###Player " << plCounter++ << ": " << endl;
     if((*currPlayer)->getCountOfPlayedPersonalityCards() >0){
       cout << "Do you want to attack or defend this round attack=1/defense=0: ";//get input from user
       cin >> atDefInput;
@@ -405,9 +409,8 @@ void GameBoard::battlePhase(){//users choose to attack or defense and they choos
           list<Personality*>::iterator currPersonality;//get currPlayer's selected Personality Card
           {
             int count;
-            // list<Personality*>* temp= (*currPlayer)->getPlayedPersonalityCards();
             do{
-              while(currPersonalityI < -1 ||  currPersonalityI >= (*currPlayer)->getCountOfPlayedPersonalityCards()){
+              while(currPersonalityI < -1 || currPersonalityI >= (*currPlayer)->getCountOfPlayedPersonalityCards()){
                 cout << "Try again: ";
                 cin >> currPersonalityI;
               }
@@ -445,7 +448,7 @@ void GameBoard::battlePhase(){//users choose to attack or defense and they choos
             {//print currPlayers personalities
               int currPersonalityCount=0;
               cout << "---Your Personalities: " << endl;
-              if(currPersonalities->size() == 0){
+              if(currPersonalities->size() == 0){//incase no personalities exist
                 cout << "You have no personalities to choose from" << endl;
                 cout << "Choosing done" << endl;
                 break;
@@ -475,7 +478,7 @@ void GameBoard::battlePhase(){//users choose to attack or defense and they choos
         list<Personality*>::iterator it;
         for(it=(*currPlayer)->getPlayedPersonalityCards()->begin(); it != (*currPlayer)->getPlayedPersonalityCards()->end(); it++){
           if((*it)->getHonor()==0){
-            cout<<"I am about to do what is called a Pro Gamer Move. *commits suicide*"<<endl;
+            cout<<"Im about to perform Seppuku :("<<endl;
             (*currPlayer)->getPlayedPersonalityCards()->erase(it);
           }
         }

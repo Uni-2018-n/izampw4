@@ -18,8 +18,6 @@ private:
   int numOfProv;
   Hand* currHand;
 
-  list<Follower*>* playedFollowerCards; //TODO check mhpws einai useless
-  list<Item*>* playedItemCards;
   list<Personality*>* playedPersonalityCards;
   list<Holding*>* playedHoldingCards;
 
@@ -36,8 +34,6 @@ public:
   bool operator <(const Player & playerObj) const{
     return honour < playerObj.honour;
   }
-
-  // void printDecks();
   void printArmy();
 
   list<BlackCard*>* getDynastyDeck(){
