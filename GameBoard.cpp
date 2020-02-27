@@ -69,7 +69,8 @@ void GameBoard::gamePlay(){
     cout << "######################ROUND DONE#########################"<< endl;
     cout << "Next Round(press enter)" << endl;
     getchar();
-    getchar();
+    while(getchar() != '\n');
+
   }
   cout << "Game finished, winner player: " << endl;
   players->front()->printCurrState();
