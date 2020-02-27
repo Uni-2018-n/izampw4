@@ -12,7 +12,7 @@ GameBoard::~GameBoard(){
 }
 
 /////////////Prints
-void GameBoard::printArena(){//prints only played cards for every player
+void GameBoard::printArena(){
   int count=0;
   list<Player*>::iterator it;
   for(it=players->begin();it != players->end(); it++){
@@ -29,6 +29,7 @@ void GameBoard::initializeGameBoard(){
   for(counter=0;counter<countOfPlayers;counter++){
     players->push_back(new Player(*deck));
   }
+  //TODO orismos plithos diaforon katigorion
 }
 
 
@@ -57,32 +58,28 @@ void GameBoard::gamePlay(){
     cout << "//##//##//All statistics for players//##//##//" << endl;
     {//print printCurrState for players
       list<Player*>::iterator it;
-      int count=0;
       for(it= players->begin(); it != players->end(); it++){
-        cout << "###Player" << count++ << ": " << endl;
         (*it)->printCurrState();
-        cout << endl;
       }
     }
     checkWinningCondition();
 
     cout << "######################ROUND DONE#########################"<< endl;
-    cout << "Next Round(press enter)" << endl;
+    cout << "Next Round(write anything)" << endl;
     getchar();
-    while(getchar() != '\n');
-
+    getchar();
   }
+  cout<<"**************************************"<<endl;
   cout << "Game finished, winner player: " << endl;
+  cout<<"**************************************"<<endl;
   players->front()->printCurrState();
   cout << endl<<endl;
 }
 
 /////////////////////////////////////////Starter Phase
 void GameBoard::starterPhase(){
-  int plCounter=0;
   list<Player*>::iterator it;
   for(it = players->begin(); it != players->end(); it++){
-    cout << "###Player " << plCounter++ << ": " << endl;
     (*it)->untapEverything();
     (*it)->drawFateCard();
     (*it)->revealProvinces();
@@ -96,11 +93,8 @@ void GameBoard::starterPhase(){
 void GameBoard::equipPhase(){//users buy green cards from hand and use them in Army
   int inputHand;
   int inputArmy;
-  int plCounter=0;
   list<Player*>::iterator it;
   for(it = players->begin(); it != players->end(); it++){
-    cout << "###Player " << plCounter++ << ": " << endl;
-    cout << "Player $$: " << (*it)->getMoney() << endl;
     if((*it)->getCountOfPlayedPersonalityCards() > 0){
       do{
         (*it)->printOptions();//print hand cards and army
@@ -134,10 +128,9 @@ void GameBoard::equipPhase(){//users buy green cards from hand and use them in A
 void GameBoard::battlePhase(){//users choose to attack or defense and they choose the cards they want to attack/defend with
   int atDefInput;
   int currPlayerI;
-  int plCounter=0;
+
   list<Player*>::iterator currPlayer;
   for(currPlayer=players->begin(); currPlayer != players->end(); currPlayer++){
-    cout << "###Player " << plCounter++ << ": " << endl;
     if((*currPlayer)->getCountOfPlayedPersonalityCards() >0){
       cout << "Do you want to attack or defend this round attack=1/defense=0: ";//get input from user
       cin >> atDefInput;
@@ -373,9 +366,6 @@ void GameBoard::battlePhase(){//users choose to attack or defense and they choos
         {//print currPlayer's provinces
           int currProvinceCount = 0;
           cout << "---Your Provinces: " << endl;
-          if(currProvinces->size() == 0){
-            continue;
-          }
           list<Provinces*>::iterator it;
           for(it=currProvinces->begin(); it != currProvinces->end(); it++){
             cout << currProvinceCount << ": ";
@@ -414,8 +404,9 @@ void GameBoard::battlePhase(){//users choose to attack or defense and they choos
           list<Personality*>::iterator currPersonality;//get currPlayer's selected Personality Card
           {
             int count;
+            // list<Personality*>* temp= (*currPlayer)->getPlayedPersonalityCards();
             do{
-              while(currPersonalityI < -1 || currPersonalityI >= (*currPlayer)->getCountOfPlayedPersonalityCards()){
+              while(currPersonalityI < -1 ||  currPersonalityI >= (*currPlayer)->getCountOfPlayedPersonalityCards()){
                 cout << "Try again: ";
                 cin >> currPersonalityI;
               }
@@ -453,7 +444,7 @@ void GameBoard::battlePhase(){//users choose to attack or defense and they choos
             {//print currPlayers personalities
               int currPersonalityCount=0;
               cout << "---Your Personalities: " << endl;
-              if(currPersonalities->size() == 0){//incase no personalities exist
+              if(currPersonalities->size() == 0){
                 cout << "You have no personalities to choose from" << endl;
                 cout << "Choosing done" << endl;
                 break;
@@ -483,7 +474,7 @@ void GameBoard::battlePhase(){//users choose to attack or defense and they choos
         list<Personality*>::iterator it;
         for(it=(*currPlayer)->getPlayedPersonalityCards()->begin(); it != (*currPlayer)->getPlayedPersonalityCards()->end(); it++){
           if((*it)->getHonor()==0){
-            cout<<"Im about to perform Seppuku :("<<endl;
+            cout<<"I am about to do what is called a Pro Gamer Move. *commits suicide*"<<endl;
             (*currPlayer)->getPlayedPersonalityCards()->erase(it);
           }
         }
@@ -495,6 +486,7 @@ void GameBoard::battlePhase(){//users choose to attack or defense and they choos
 }
 
 ////////////////////////////economyPhase
+// TODO molis agorazei mia karta na elegxei gia alisides
 void GameBoard::economyPhase(){
   list<Player*>::iterator currPlayer;
   int plCount=0;
@@ -505,7 +497,7 @@ void GameBoard::economyPhase(){
     (*currPlayer)->printTopOfProvince();
 
     int currTopOfProvinceI;//index
-    cout << "Choose top of province to buy(-1 to skip): ";//get input about topOfProvince to buy
+    cout << "Choose top of province to buy: ";//get input about topOfProvince to buy
     cin >> currTopOfProvinceI;
 
     list <Personality*>::iterator itPersonality;//potential personality card chosen
@@ -580,28 +572,6 @@ void GameBoard::economyPhase(){
         }
       }while(!donePurchase);
       if(currTopOfProvinceI == -1){
-        {//eprepe na baloume goto :(
-          // loop tis playedHoldingCards gia na auksiso to money tou paikti analoga me to harvestValue ton karton tou
-          int totalHarvest=0;
-          cout<<"Player money before harvestValues added : "<<(*currPlayer)->getMoney()<<endl;
-          list <Holding*>::iterator it;
-          (*currPlayer)->increaseMoney(5);//money from stronghold
-          totalHarvest += 5;
-          for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
-            totalHarvest+=(*it)->getHarvestValue();
-            cout<<"HarvestValue is : "<<(*it)->getHarvestValue()<<endl;
-            (*currPlayer)->increaseMoney((*it)->getHarvestValue());
-          }
-          cout<<"Total Money harvested = "<< totalHarvest <<endl;
-          cout<<"Player money after harvestValue added : "<< (*currPlayer)->getMoney()<<endl;
-
-          cout << endl;
-          while((*currPlayer)->getTopOfProvinceCount() < (*currPlayer)->getCountOfProvinces()){//if topOfProvince bought replace it with a new black card
-            if((*currPlayer)->fillTopOfProvince((*currPlayer)->getDynastyDeck()->front())){
-              (*currPlayer)->getDynastyDeck()->pop_front();
-            }
-          }
-        }
         continue;
       }
     }
@@ -613,7 +583,7 @@ void GameBoard::economyPhase(){
         //psaxno ti lista na vro an iparxei GOLD_MINE xoris subholding
         list <Holding*>::iterator it;
         for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
-          if((*it)->getSubCategory()=="GOLD_MINE"&&(*it)->getHasSubHolding()==0){
+          if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->getHasSubHolding()==0){
             (*it)->changeSubHoldingStatus();//make GOLD_MINE int hassubholding=1
             (*itHolding)->changeUpperHoldingStatus();//make MINE int hasUpperHolding=1
             (*it)->increaseHarvestValue(4);//auksano harvestValue tou GOLD_MINE
@@ -622,10 +592,10 @@ void GameBoard::economyPhase(){
         }//for end
         cout<<"Current HarvestValue is : "<<((*itHolding)->getHarvestValue())<<endl;
       }
-      if((*itHolding)->getSubCategory()=="GOLD_MINE"&&(*itHolding)->getHasSubHolding()==0){//an eimai se GOLD_MINE xoris subholding
+      if((*itHolding)->getSubcategory()=="GOLD_MINE"&&(*itHolding)->getHasSubHolding()==0){//an eimai se GOLD_MINE xoris subholding
         list <Holding*>::iterator it;//MINE
         for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
-          if((*it)->getSubCategory()=="MINE"&&(*it)->getHasUpperHolding()==0){
+          if((*it)->getSubcategory()=="MINE"&&(*it)->getHasUpperHolding()==0){
             (*it)->changeUpperHoldingStatus();//make GOLD_MINE int hassubholding=1
             (*itHolding)->changeSubHoldingStatus();//make MINE int hasUpperHolding=1
             (*it)->increaseHarvestValue(2);//auksano harvestValue tou MINE
@@ -637,7 +607,7 @@ void GameBoard::economyPhase(){
         //psaxno ti lista na vro an iparxei CRYSTAL_MINE xoris subholding
         list <Holding*>::iterator it;//CRYSTAL_MINE
         for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
-          if((*it)->getSubCategory()=="CRYSTAL_MINE"&&(*it)->getHasSubHolding()==0){
+          if((*it)->getSubcategory()=="CRYSTAL_MINE"&&(*it)->getHasSubHolding()==0){
             (*it)->changeSubHoldingStatus();//make CRYSTAL_MINE int hassubholding=1
             (*itHolding)->changeUpperHoldingStatus();//make GOLD_MINE int hasUpperHolding=1
             (*it)->increaseHarvestValue((*it)->getHarvestValue());//thelo na diplasiaso to harvestValue opote apla to auksano me ton eauto tou
@@ -649,10 +619,10 @@ void GameBoard::economyPhase(){
           }
         }//for end
       }
-      if((*itHolding)->getSubCategory()=="CRYSTAL_MINE"&&(*itHolding)->getHasSubHolding()==0){
+      if((*itHolding)->getSubcategory()=="CRYSTAL_MINE"&&(*itHolding)->getHasSubHolding()==0){
         list <Holding*>::iterator it;//GOLD_MINE
         for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
-          if((*it)->getSubCategory()=="GOLD_MINE"&&(*it)->getHasUpperHolding()==0){
+          if((*it)->getSubcategory()=="GOLD_MINE"&&(*it)->getHasUpperHolding()==0){
             (*it)->changeUpperHoldingStatus();//make CCrystal_MINE int hassubholding=1
             (*itHolding)->changeSubHoldingStatus();//make GOLD_MINE int hasUpperHolding=1
             (*it)->increaseHarvestValue(5);//auksano harvestValue tou GOLD_MINE
@@ -660,31 +630,21 @@ void GameBoard::economyPhase(){
           }
         }//for end
       }
+      // loop tis playedHoldingCards gia na auksiso to money tou paikti analoga me to harvestValue ton karton tou
+      cout<<"Player money before harvestValues added : "<<(*currPlayer)->getMoney()<<endl;
+      list <Holding*>::iterator it;//GOLD_MINE
+      for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
+        (*currPlayer)->increaseMoney((*it)->getHarvestValue());
+      }
+      cout<<"Player money after harvestValue added : "<< (*currPlayer)->getMoney()<<endl;
       //chains end
     }else{//EDW AN TO CHOSEN TOP OF CARD EINAI PERSONALITY
 
     }
-    //eprepe na baloume edw to goto :(
-    {
-      // loop tis playedHoldingCards gia na auksiso to money tou paikti analoga me to harvestValue ton karton tou
-      int totalHarvest=0;
-      cout<<"Player money before harvestValues added : "<<(*currPlayer)->getMoney()<<endl;
-      list <Holding*>::iterator it;
-      (*currPlayer)->increaseMoney(5);//money from stronghold
-      totalHarvest += 5;
-      for(it= (*currPlayer)->getPlayedHoldingCards()->begin(); it != (*currPlayer)->getPlayedHoldingCards()->end(); it++){
-        totalHarvest+=(*it)->getHarvestValue();
-        cout<<"HarvestValue is : "<<(*it)->getHarvestValue()<<endl;
-        (*currPlayer)->increaseMoney((*it)->getHarvestValue());
-      }
-      cout<<"Total Money harvested = "<< totalHarvest <<endl;
-      cout<<"Player money after harvestValue added : "<< (*currPlayer)->getMoney()<<endl;
-
-      cout << endl;
-      while((*currPlayer)->getTopOfProvinceCount() < (*currPlayer)->getCountOfProvinces()){//if topOfProvince bought replace it with a new black card
-        if((*currPlayer)->fillTopOfProvince((*currPlayer)->getDynastyDeck()->front())){
-          (*currPlayer)->getDynastyDeck()->pop_front();
-        }
+    cout << endl;
+    while((*currPlayer)->getTopOfProvinceCount() < (*currPlayer)->getCountOfProvinces()){//if topOfProvince bought replace it with a new black card
+      if((*currPlayer)->fillTopOfProvince((*currPlayer)->getDynastyDeck()->front())){
+        (*currPlayer)->getDynastyDeck()->pop_front();
       }
     }
   }
@@ -700,7 +660,7 @@ void GameBoard::checkWinningCondition(){
       if((*currPlayer)->getProvinces()->size()==0){//check if player must die
         cout<<"Deleting Player: " << count << endl;//if yes delete him
         count++;
-        players->erase(currPlayer);
+        players->erase(currPlayer);//TODO Check if this is correct paizei na bgalei segme, prepei na to treksoume kai na teleiwsei to paixnidi gia to 100%
         break;//and stop the loop
       }//else go to the next one
       count++;
