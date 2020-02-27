@@ -31,15 +31,10 @@ private:
 public:
   Player(DeckBuilder& deck);
   ~Player();
-  bool operator <(const Player & playerObj) const{
-    return honour < playerObj.honour;
-  }
+  bool operator <(const Player & playerObj) const;
   void printArmy();
 
-  list<BlackCard*>* getDynastyDeck(){
-    return dynastyDeck;
-  }
-
+  list<BlackCard*>* getDynastyDeck();
   //top of provinces
   bool fillTopOfProvince(BlackCard* card);
   int getTopOfProvinceCount();
@@ -74,16 +69,9 @@ public:
   list<Personality*>* getTopOfProvincePersonality();
   void printBuyingOptionsGreen();
   void increaseMoney(int a);
-  int getMoney(){
-    return money;
-  }
-  void setMoney(int a){
-    money = a;
-  }
-
-  list<Holding*>* getPlayedHoldingCards(){
-    return playedHoldingCards;
-  }
+  int getMoney();
+  void setMoney(int a);
+  list<Holding*>* getPlayedHoldingCards();
   void printHoldings();
 };
 
@@ -91,4 +79,3 @@ public:
 
 
 #endif
-//TODO remove code from hpp :(

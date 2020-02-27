@@ -495,7 +495,6 @@ void GameBoard::battlePhase(){//users choose to attack or defense and they choos
 }
 
 ////////////////////////////economyPhase
-// TODO molis agorazei mia karta na elegxei gia alisides
 void GameBoard::economyPhase(){
   list<Player*>::iterator currPlayer;
   int plCount=0;
@@ -701,7 +700,7 @@ void GameBoard::checkWinningCondition(){
       if((*currPlayer)->getProvinces()->size()==0){//check if player must die
         cout<<"Deleting Player: " << count << endl;//if yes delete him
         count++;
-        players->erase(currPlayer);//TODO Check if this is correct paizei na bgalei segme, prepei na to treksoume kai na teleiwsei to paixnidi gia to 100%
+        players->erase(currPlayer);
         break;//and stop the loop
       }//else go to the next one
       count++;

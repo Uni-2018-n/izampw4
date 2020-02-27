@@ -40,6 +40,25 @@ Player::~Player(){
   cout << "Destructor Player" << endl;
 }
 
+bool Player::operator <(const Player & playerObj) const{
+  return honour < playerObj.honour;
+}
+
+list<BlackCard*>* Player::getDynastyDeck(){
+  return dynastyDeck;
+}
+
+int Player::getMoney(){
+  return money;
+}
+void Player::setMoney(int a){
+  money = a;
+}
+
+list<Holding*>* Player::getPlayedHoldingCards(){
+  return playedHoldingCards;
+}
+
 bool Player::fillTopOfProvince(BlackCard* card){//fills an empty space for topOfProvinces used card
   if(getTopOfProvinceCount() < getCountOfProvinces()){
     if(card->getCategory() == "holding"){
@@ -151,7 +170,6 @@ void Player::untapEverything(){//untaps player's every card
   }
 }
 
-//TODO reveal topOfProvinces too if needed(agorase neo topOfProvince kai sto starter phase prepei na ginetai unrevealed, eimai arketa sigouros oti ginetai mono untaped)
 void Player::revealProvinces(){//reveals player's provinces
   {
     list<Personality*>::iterator it;
@@ -269,7 +287,7 @@ void Player::printProvinces(){
   int count=0;
   list<Provinces *>::iterator it;//print ta provinces
   for(it = provinces->begin(); it != provinces->end(); it++){
-    if((*it)->getIsRevealed() == true){//TODO 2.4 1h par teleytaia protash
+    if((*it)->getIsRevealed() == true){
       cout << count << ": ";
       (*it)->print();
     }else{
@@ -311,7 +329,7 @@ void Player::destroyCards(Provinces* prov){//destroy cards used to defend the pr
   for(it=playedPersonalityCards->begin(); it != playedPersonalityCards->end(); it++){
     list<Personality*>::iterator it2;
     for(it2=prov->getDefendingCards()->begin(); it2 != prov->getDefendingCards()->end(); it2++){
-      if((*it) == (*it2)){//TODO paizei na bgalei problhma ayth h grammh :(
+      if((*it) == (*it2)){
         playedPersonalityCards->erase(it);
         prov->getDefendingCards()->erase(it2);
       }
